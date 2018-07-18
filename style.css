@@ -138,3 +138,27 @@ form {float:left}
 	top:1px;
 }
 /* This button was generated using CSSButtonGenerator.com */
+
+body {
+	margin: 0px;
+}
+
+.header {
+	height: 10%;
+	background-color: #b9c9e2;
+	padding: 20px 20px;
+	display: flex;
+}
+
+.header img {
+	height: 100%;
+	float: right;
+	margin-left: 15px;
+}
+#title {
+	float:left;
+	flex-grow: 100;
+}
+#title h1 {
+	border-bottom: 2px solid black;
+}

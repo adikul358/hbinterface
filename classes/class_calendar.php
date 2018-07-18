@@ -13,7 +13,7 @@ function __construct($link) {
 
 
 // Time Related Variables
-public $booking_start_time          = "8:00";			// The time of the first slot in 24 hour H:M format  
+public $booking_stabooking_diaryrt_time          = "8:00";			// The time of the first slot in 24 hour H:M format  
 public $booking_end_time            = "19:00"; 			// The time of the last slot in 24 hour H:M format  
 public $booking_frequency           = 60;   			// The slot frequency per hour, expressed in minutes.  	
 
@@ -24,11 +24,11 @@ public $day_format					= 2;				// Day format of the table header.  Possible valu
 															// 2 = Show First 3 letters, eg: "Mon"
 															// 3 = Full Day, eg: "Monday"
 	
-//public $day_closed					= array("Saturday", "Sunday"); 	// If you don't want any 'closed' days, remove the day so it becomes: = array();
-//public $day_closed_text				= "CLOSED"; 		// If you don't want any any 'closed' remove the text so it becomes: = "";
+public $day_closed					= array("Saturday", "Sunday"); 	// If you don't want any 'closed' days, remove the day so it becomes: = array();
+public $day_closed_text				= "CLOSED"; 		// If you don't want any any 'closed' remove the text so it becomes: = "";
 
-public $day_closed					= array(); 	// If you don't want any 'closed' days, remove the day so it becomes: = array();
-public $day_closed_text				= ""; 		// If you don't want any any 'closed' remove the text so it becomes: = "";
+// public $day_closed					= array(); 	// If you don't want any 'closed' days, remove the day so it becomes: = array();
+// public $day_closed_text				= ""; 		// If you don't want any any 'closed' remove the text so it becomes: = "";
 
 
 // Cost Related Variables

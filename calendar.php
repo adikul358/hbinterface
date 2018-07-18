@@ -1,11 +1,14 @@
 <html><head><title>SNS_WCH_Booking</title></head>
 <body>
-<table width="100%">
-<tr><td width="25%">
-<img src="images/sns_logo.png" align="left" height="100" width="200"></td>
-<td width="75%" valign="middle"><font color="blue"><H1>WCH BOOKING CALENDAR</H1></font></td>
-</tr>
-</table><br><br>
+
+<div class="header">
+	<div id="title">
+		<h1>WCH Booking Interface</h1>
+	</div>
+	<img src="images\SNS_Logo.png" alt="Shiv Nadar School logo">
+	
+</div>
+
 </BODY>
 </HTML>
 <?php
