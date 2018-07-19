@@ -13,7 +13,7 @@ function __construct($link) {
 
 
 // Time Related Variables
-public $booking_stabooking_diaryrt_time          = "8:00";			// The time of the first slot in 24 hour H:M format  
+public $booking_start_time          = "8:00";			// The time of the first slot in 24 hour H:M format  
 public $booking_end_time            = "19:00"; 			// The time of the last slot in 24 hour H:M format  
 public $booking_frequency           = 60;   			// The slot frequency per hour, expressed in minutes.  	
 
@@ -269,29 +269,31 @@ function make_cells($table = '') {
 	foreach($this->days as $i => $r) { // Loop through the date array
 
 		$j = $i + 1; $tag = 0;	 		
-
-		// If the the current day is found in the day_closed array, bookings are not allowed on this day  
-		if(in_array($r['dayname'], $this->day_closed)) {			
-			echo "\r\n<td width='21' valign='top' class='closed'>" . $this->day_closed_text . "</td>";		
-			$tag = 1;
-		}
-		
-
 		// Past days are greyed out
 		if (mktime(0, 0, 0, $this->month, sprintf("%02s", $r['daynumber']) + 1, $this->year) < strtotime("now") && $tag != 1) {		
 			
-			echo "\r\n<td width='21' valign='top' class='past'>";			
+			echo "\r\n<td width='13%' valign='top' class='past'>";			
 				// Output day number 
 				if($r['daynumber'] != 'blank') echo $r['daynumber']; 
 
 			echo "</td>";		
 			$tag = 1;
 		}
+
+		// If the the current day is found in the day_closed array, bookings are not allowed on this day  
+		if(in_array($r['dayname'], $this->day_closed) && 
+		mktime(0, 0, 0, $this->month, sprintf("%02s", $r['daynumber']) + 1, $this->year) > strtotime("now") &&
+		$tag = 1) {			
+			echo "\r\n<td width='13%' valign='top' class='closed'>" . $this->day_closed_text . "</td>";		
+			$tag = 1;
+		}
+		
+
 		
 
 		// If the element is set as 'blank', insert blank day
 		if($r['dayname'] == 'blank' && $tag != 1) {		
-			echo "\r\n<td width='21' valign='top' class='unavailable'></td>";	
+			echo "\r\n<td width='13%' valign='top' class='unavailable'></td>";	
 			$tag = 1;
 		}
 				
@@ -305,14 +307,14 @@ function make_cells($table = '') {
 
 				if($current_day_slots_booked < $this->slots_per_day) {
 				
-					echo "\r\n<td width='21' valign='top'>
+					echo "\r\n<td width='13%' valign='top'>
 					<a href='calendar.php?month=" .  $this->month . "&amp;year=" .  $this->year . "&amp;day=" . sprintf("%02s", $r['daynumber']) . "' class='part_booked' title='This day is part booked'>" . 
 					$r['daynumber'] . "</a></td>"; 
 					$tag = 1;
 				
 				} else {
 				
-					echo "\r\n<td width='21' valign='top'>
+					echo "\r\n<td width='13%' valign='top'>
 					<a href='calendar.php?month=" .  $this->month . "&amp;year=" .  $this->year . "&amp;day=" . sprintf("%02s", $r['daynumber']) . "' class='fully_booked' title='This day is fully booked'>" . 
 					$r['daynumber'] . "</a></td>"; 
 					$tag = 1;			
@@ -324,7 +326,7 @@ function make_cells($table = '') {
 		
 		if($tag == 0) {
 		
-			echo "\r\n<td width='21' valign='top'>
+			echo "\r\n<td width='13%' valign='top'>
 			<a href='calendar.php?month=" .  $this->month . "&amp;year=" .  $this->year . "&amp;day=" . sprintf("%02s", $r['daynumber']) . "' class='green' title='Please click to view bookings'>" . 
 			$r['daynumber'] . "</a></td>";			
 		
