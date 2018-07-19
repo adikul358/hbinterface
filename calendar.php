@@ -1,4 +1,4 @@
-<html><head><title>SNS_WCH_Booking</title></head>
+<html><head><title>WCH Booking Interface - Shiv Nadar School, Noida</title></head>
 <body>
 
 <div class="header">
