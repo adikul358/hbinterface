@@ -123,6 +123,8 @@ var Calendar = function(o) {
     html += '</tr>';
   
     //this.f = 'X';
+    var Currd = new Date();
+    var cd = Currd.getMonth();
   
     var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
   
@@ -154,7 +156,7 @@ var Calendar = function(o) {
   
           cellvalue = lastDateOfLastMonth - firstDayOfCurrentMonth + p++;
   
-          html += '<td id="prevmonthdates" onclick>' + 
+          html += '<td id="prevmonthdates">' + 
                 (cellvalue)
                  + 
               '</td>';
@@ -165,12 +167,12 @@ var Calendar = function(o) {
           html += '<td id="nextmonthdates">' + (p++) + '</td>';
   
         // Current month dates
-        } else if (d == this.CurrentDate && ) {
-          html += '<td id="currentdate">' + (d) + '</td>';
+        } else if (d == this.CurrentDate && m == cd) {
+          html += '<td id="currentdate">' + (d) + '</td></a>';
   
           p = 1;
         } else {
-          html += '<td id="currentmonthdates">' + (d) + '</td>';
+          html += '<td id="currentmonthdates">' + (d) + '</td></a>';
   
           p = 1;
         }
@@ -227,12 +229,18 @@ var Calendar = function(o) {
     getId('btnPrev').onclick = function(){
       c.previousMonth();
     };
+    getId('prevmonthdates').onclick = function(){
+      c.previousMonth();
+    };
   
     getId('btnPrevYr').onclick = function(){
       c.previousYear();
     };
   
     getId('btnNext').onclick = function(){
+      c.nextMonth();
+    };
+    getId('nextmonthdates').onclick = function(){
       c.nextMonth();
     };
   

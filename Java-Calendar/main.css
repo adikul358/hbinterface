@@ -10,14 +10,12 @@ body {
 table {
   border-collapse: collapse;
   /* font-family: Georgia, Times, serif; */
-  opacity: 0.6;
   height: 85%;
   margin-left: auto;
   margin-right: auto;
 }
 
 th {
-  border: 1px solid rgba(71, 71, 71, 0.507);
   top: 50%;
   padding:5px 0px;
 }
@@ -25,7 +23,6 @@ th {
 td {
   padding: 10px;
   width: 160px; 
-  border: 1px solid rgba(255, 255, 255, 0.507);
   vertical-align: top;
 }
 
@@ -50,6 +47,15 @@ td {
 #calendarmonthcontrols div, #calendarmonthcontrols > a {
   display: inline;
 }    
+
+#nextmonthdates:hover, #prevmonthdates:hover, #currentmonthdates:hover {
+  background-color: rgba(58, 57, 57, 0.5);
+  color: white;
+}
+#nextmonthdates:active, #prevmonthdates:active, #currentmonthdates:active {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
 
 #btnPrevYr {
   text-decoration: none;
@@ -111,26 +117,34 @@ td {
   /*background: #00FFCC;*/
 }        
 
+td a {
+  text-decoration: none;
+  display: block;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
 #divcalendartable {
   clear: both;
 }
 
 .daysheader {
-  background: #C0C0C0;
+  background: rgba(192, 192, 192, 0.877);
   height: auto;
   text-align: center;
 }
 
 #prevmonthdates {
-  background-color: #E0E0E0;
+  background-color: rgba(180, 180, 180, 0.7);
 }
 
 #nextmonthdates {
-  background-color: #E0E0E0;
+  background-color: rgba(180, 180, 180, 0.7);
 }
 
 #currentmonthdates {
-  background-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 #currentdate {
   background-color: rgba(2, 61, 255, 0.507);
