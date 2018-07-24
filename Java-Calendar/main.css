@@ -1,0 +1,162 @@
+html, body { margin: 0px; padding: 0; }
+
+body {
+  background-repeat: no-repeat no-repeat;
+  background-image: url("Harvey\ Mike.jpg");
+  background-position: center center;
+  background-size: cover;
+}
+
+table {
+  border-collapse: collapse;
+  /* font-family: Georgia, Times, serif; */
+  opacity: 0.6;
+  height: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  border: 1px solid rgba(71, 71, 71, 0.507);
+  top: 50%;
+  padding:5px 0px;
+}
+
+td {
+  padding: 10px;
+  width: 160px; 
+  border: 1px solid rgba(255, 255, 255, 0.507);
+  vertical-align: top;
+}
+
+.divcalendar {
+  padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 18px;
+  background-color: rgba(175, 199, 250, 0.692);
+}
+
+/* Wrapper div. That makes the inner div into an inline element that can be centered with text-align.*/
+#calendaroverallcontrols {
+  text-align: center;
+}
+
+/* This is a fluid div as width will be changing */
+#calendarmonthcontrols {
+  display: inline;
+}
+
+#calendarmonthcontrols div, #calendarmonthcontrols > a {
+  display: inline;
+}    
+
+#btnPrevYr {
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  /*background: #00FFCC;*/      
+}
+
+#btnPrev {
+  text-decoration: none;
+  font-size: 35px;
+  margin-left: 20px;
+  vertical-align: middle;
+  /* background: #00FFCC; */
+}    
+
+/*.yearspan {
+  font-size: 20px;
+  font-weight: bold;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.monthspan {
+  font-size: 20px;
+  font-weight: bold;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+}*/
+
+#monthandyearspan {
+  width: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-right: 20px;
+  vertical-align: middle;
+  /*background: #00FFCC;*/
+}    
+
+#monthandyear {
+  vertical-align: middle;
+}
+
+#btnNext {
+  text-decoration: none;
+  font-size: 35px;
+  margin-right: 20px;
+  vertical-align: middle;
+  /*background: #00FFCC;*/
+}
+
+#btnNextYr {
+  text-decoration: none;
+  font-size: 35px;
+  vertical-align: middle;
+  /*background: #00FFCC;*/
+}        
+
+#divcalendartable {
+  clear: both;
+}
+
+.daysheader {
+  background: #C0C0C0;
+  height: auto;
+  text-align: center;
+}
+
+#prevmonthdates {
+  background-color: #E0E0E0;
+}
+
+#nextmonthdates {
+  background-color: #E0E0E0;
+}
+
+#currentmonthdates {
+  background-color: #FFFFFF;
+}
+#currentdate {
+  background-color: rgba(2, 61, 255, 0.507);
+  color: white;
+}
+
+#cellvaluelist {
+  background: #FFCC00;
+}        
+
+.swim {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 80%;
+  text-align: center;
+  background: #445511;
+  color: #F5F5F5;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.chrono {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 80%;
+  text-align: center;
+  background: #778899;
+  color: #F5F5F5;
+  margin-bottom: 5px;
+  padding: 5px;
+}
