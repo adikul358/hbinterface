@@ -1,134 +1,135 @@
 var Calendar = function (o) {
-	//Store div id
-	this.divId = o.ParentID;
+  //Store div id
+  this.divId = o.ParentID;
 
-	// Days of week, starting on Sunday
-	this.DaysOfWeek = o.DaysOfWeek;
+  // Days of week, starting on Sunday
+  this.DaysOfWeek = o.DaysOfWeek;
 
-	// Months, stating on January
-	this.Months = o.Months;
+  // Months, stating on January
+  this.Months = o.Months;
 
-	// Set the current month, year
-	var d = new Date();
+  // Set the current month, year
+  var d = new Date();
 
-	this.CurrentDate = d.getDate();
+  this.CurrentDate = d.getDate();
 
-	this.CurrentMonth = d.getMonth();
+  this.CurrentMonth = d.getMonth();
 
-	this.CurrentYear = d.getFullYear();
+  this.CurrentYear = d.getFullYear();
 
-	var f = o.Format;
+  var f = o.Format;
 
-	//this.f = typeof(f) == 'string' ? f.charAt(0).toUpperCase() : 'M';
+  //this.f = typeof(f) == 'string' ? f.charAt(0).toUpperCase() : 'M';
 
-	if (typeof (f) == 'string') {
-		this.f = f.charAt(0).toUpperCase();
-	} else {
-		this.f = 'M';
-	}
+  if (typeof (f) == 'string') {
+    this.f = f.charAt(0).toUpperCase();
+  } else {
+    this.f = 'M';
+  }
 
 };
 
 // Goes to next month
 Calendar.prototype.nextMonth = function () {
 
-	if (this.CurrentMonth == 11) {
+  if (this.CurrentMonth == 11) {
 
-		this.CurrentMonth = 0;
+    this.CurrentMonth = 0;
 
-		this.CurrentYear = this.CurrentYear + 1;
+    this.CurrentYear = this.CurrentYear + 1;
 
-	} else {
+  } else {
 
-		this.CurrentMonth = this.CurrentMonth + 1;
+    this.CurrentMonth = this.CurrentMonth + 1;
 
-	}
+  }
 
-	this.showCurrent();
+  this.showCurrent();
 };
 
 // Goes to previous month
 Calendar.prototype.previousMonth = function () {
 
-	if (this.CurrentMonth == 0) {
+  if (this.CurrentMonth == 0) {
 
-		this.CurrentMonth = 11;
+    this.CurrentMonth = 11;
 
-		this.CurrentYear = this.CurrentYear - 1;
+    this.CurrentYear = this.CurrentYear - 1;
 
-	} else {
+  } else {
 
-		this.CurrentMonth = this.CurrentMonth - 1;
+    this.CurrentMonth = this.CurrentMonth - 1;
 
-	}
+  }
 
-	this.showCurrent();
+  this.showCurrent();
 };
 
 // 
 Calendar.prototype.previousYear = function () {
 
-	this.CurrentYear = this.CurrentYear - 1;
+  this.CurrentYear = this.CurrentYear - 1;
 
-	this.showCurrent();
+  this.showCurrent();
 }
 
 // 
 Calendar.prototype.nextYear = function () {
 
-	this.CurrentYear = this.CurrentYear + 1;
+  this.CurrentYear = this.CurrentYear + 1;
 
-	this.showCurrent();
+  this.showCurrent();
 }
 
 // Show current month
 Calendar.prototype.showCurrent = function () {
-	this.Calendar(this.CurrentYear, this.CurrentMonth);
+  this.Calendar(this.CurrentYear, this.CurrentMonth);
 };
 
 // Show month (year, month)
 Calendar.prototype.Calendar = function (y, m) {
-	typeof (y) == 'number' ? this.CurrentYear = y: null;
+  typeof (y) == 'number' ? this.CurrentYear = y: null;
 
-	typeof (y) == 'number' ? this.CurrentMonth = m: null;
+  typeof (y) == 'number' ? this.CurrentMonth = m: null;
 
-	// 1st day of the selected month
-	var firstDayOfCurrentMonth = new Date(y, m, 1).getDay();
+  // 1st day of the selected month
+  var firstDayOfCurrentMonth = new Date(y, m, 1).getDay();
 
-	// Last date of the selected month
-	var lastDateOfCurrentMonth = new Date(y, m + 1, 0).getDate();
+  // Last date of the selected month
+  var lastDateOfCurrentMonth = new Date(y, m + 1, 0).getDate();
 
-	// Last day of the previous month
+  // Last day of the previous month
 
-	var lastDateOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+  var lastDateOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
-	// Write selected month and year. This HTML goes into <div id="year"></div>
-	//var yearhtml = '<span class="yearspan">' + y + '</span>';
+  // Write selected month and year. This HTML goes into <div id="year"></div>
+  //var yearhtml = '<span class="yearspan">' + y + '</span>';
 
-	// Write selected month and year. This HTML goes into <div id="month"></div>
-	//var monthhtml = '<span class="monthspan">' + this.Months[m] + '</span>';
+  // Write selected month and year. This HTML goes into <div id="month"></div>
+  //var monthhtml = '<span class="monthspan">' + this.Months[m] + '</span>';
 
-	// Write selected month and year. This HTML goes into <div id="month"></div>
-	var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
+  // Write selected month and year. This HTML goes into <div id="month"></div>
+  var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
 
-	var html = '<table>';
+  var html = '<table>';
 
-	// Write the header of the days of the week
-	html += '<tr>';
+  // Write the header of the days of the week
+  html += '<tr>';
 
-	for (var i = 0; i < 7; i++) {
-		html += '<th class="daysheader">' + this.DaysOfWeek[i] + '</th>';
-	}
+  for (var i = 0; i < 7; i++) {
+    html += '<th class="daysheader">' + this.DaysOfWeek[i] + '</th>';
+  }
 
-	html += '</tr>';
+  html += '</tr>';
 
-	//this.f = 'X';
-	var Currd = new Date();
-	var cd = Currd.getMonth();
+  //this.f = 'X';
+  var Currd = new Date();
+  var cm = Currd.getMonth();
+  var cy = Currd.getFullYear();
 
-	var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
+  var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
 
-	/*var p, dm;
+  /*var p, dm;
   
     if(this.f =='M') {
       dm = 1;
@@ -142,123 +143,114 @@ Calendar.prototype.Calendar = function (y, m) {
       }
     }*/
 
-	var cellvalue;
+  var cellvalue;
 
-	for (var d, i = 0, z0 = 0; z0 < 6; z0++) {
-		html += '<tr>';
+  for (var d, i = 0, z0 = 0; z0 < 6; z0++) {
+    html += '<tr>';
 
-		for (var z0a = 0; z0a < 7; z0a++) {
+    for (var z0a = 0; z0a < 7; z0a++) {
 
-			d = i + dm - firstDayOfCurrentMonth;
+      d = i + dm - firstDayOfCurrentMonth;
 
-			// Dates from prev month
-			if (d < 1) {
+      // Dates from prev month
+      if (d < 1) {
 
-				cellvalue = lastDateOfLastMonth - firstDayOfCurrentMonth + p++;
+        cellvalue = lastDateOfLastMonth - firstDayOfCurrentMonth + p++;
 
-				html += '<td class="prevmonthdates">' +
-					(cellvalue) +
-					'</td>';
+        html += '<td>' +
+          
+          '</td>';
 
-				// Dates from next month
-			} else if (d > lastDateOfCurrentMonth) {
+        // Dates from next month
+      } else if (d > lastDateOfCurrentMonth) {
+        
+        p++
+        
+        // Current month dates
+      } else if (d < this.CurrentDate || checkMonth()) {
+        html += '<td id="prevdates">' + (p++) + '</td>';
+        
+      } else if (d == this.CurrentDate && m == cm && y == cy) {
+        html += '<td id="currentdate">' + (d) + '</td></a>';
+        
+        p = 1;
+      } else {
+        html += '<td id="currentmonthdates">' + (d) + '</td></a>';
+        
+        p = 1;
+      }
+      
+      if (i % 7 == 6 && d >= lastDateOfCurrentMonth) {
+        
+        z0 = 10; // no more rows
+      }
+      i++;
+      
+    }
+    
+    html += '</tr>';
+  }
+        function checkMonth(m) {
+          
+        }
 
-				html += '<td class="nextmonthdates">' + (p++) + '</td>';
+  // Closes table
+  html += '</table>';
 
-				// Current month dates
-			} else if (d == this.CurrentDate && m == cd) {
-				html += '<td class="currentdate">' + (d) + '</td></a>';
+  // Write HTML to the div
+  //document.getElementById("year").innerHTML = yearhtml;
 
-				p = 1;
-			} else {
-				html += '<td class="currentmonthdates">' + (d) + '</td></a>';
+  //document.getElementById("month").innerHTML = monthhtml;
 
-				p = 1;
-			}
+  document.getElementById("monthandyear").innerHTML = monthandyearhtml;
 
-			if (i % 7 == 6 && d >= lastDateOfCurrentMonth) {
-
-				z0 = 10; // no more rows
-			}
-			i++;
-
-		}
-
-		html += '</tr>';
-	}
-
-	// Closes table
-	html += '</table>';
-
-	// Write HTML to the div
-	//document.getElementById("year").innerHTML = yearhtml;
-
-	//document.getElementById("month").innerHTML = monthhtml;
-
-	document.getElementById("monthandyear").innerHTML = monthandyearhtml;
-
-	document.getElementById(this.divId).innerHTML = html;
+  document.getElementById(this.divId).innerHTML = html;
 };
 
 // On Load of the window
 window.onload = function () {
 
-	// Start calendar
-	var c = new Calendar({
-		ParentID: "divcalendartable",
+  // Start calendar
+  var c = new Calendar({
+    ParentID: "divcalendartable",
 
-		DaysOfWeek: [
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-			'Sunday'
-		],
+    DaysOfWeek: [
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun'
+    ],
 
-		Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
-		Format: 'dd/mm/yyyy'
-	});
+    Format: 'dd/mm/yyyy'
+  });
 
-	c.showCurrent();
+  c.showCurrent();
 
-	// Bind next and previous button clicks
-	getId('btnPrev').onclick = function () {
-		c.previousMonth();
-	};
+  // Bind next and previous button clicks
+  getId('btnPrev').onclick = function () {
+    c.previousMonth();
+  };
 
-	getId('btnPrevYr').onclick = function () {
-		c.previousYear();
-	};
 
-	getId('btnNext').onclick = function () {
-		c.nextMonth();
-	};
-	
-	getId('btnNextYr').onclick = function () {
-		c.nextYear();
-	};
-	
-	// var nextElements = document.getElementsByClassName("nextmonthdates");
-	// var ni;
-	
-	// for (ni = 0; ni < nextElements.length; ni++) {
-	// 	nextElements[ni].onclick = function () {
-	// 		c.nextMonth();
-	// 	};
-	// }
-	
-	// var prevElements = document.getElementsByClassName("prevmonthdates");
-	// var pi;
-	// for (pi = 0; pi < prevElements.length; pi++) {
-	// 	prevElements[pi].onclick = function () {
-	// 		c.previousMonth();
-	// 	};
-	// }
+  getId('btnPrevYr').onclick = function () {
+    c.previousYear();
+  };
+
+  getId('btnNext').onclick = function () {
+    c.nextMonth();
+  };
+
+  getId('btnNextYr').onclick = function () {
+    c.nextYear();
+  };
 }
+
 // Get element by id
 function getId(id) {
-	return document.getElementById(id);
-};
+  return document.getElementById(id);
+}
