@@ -159,9 +159,11 @@ Calendar.prototype.Calendar = function (y, m) {
       } else if (checkMonth()) {
         html += '<td id="prevdates">' + (p++) + '</td>';
 
+      } else if (checkWeekDay()) {
+        html += '<td id="prevdates">' + d + '</td>';
+        p = 1;
       } else {
-        html += '<td id="currentmonthdates"><a href="book.php?d=' + (d) + "&m=" + (m) + "$y=" + (y) + '">'+ d + '</a></td>';
-
+        html += '<td id="currentmonthdates"><a class="datelink" href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+ d + '</a></td>';
         p = 1;
       }
 
@@ -177,12 +179,20 @@ Calendar.prototype.Calendar = function (y, m) {
   }
 
   function checkMonth() {
-    var da = new Date(y, m, d);
-    if (y < cy || da.getDay() == 6 || da.getDay() == 0) {
+    if (y < cy) {
       return true;
     } else if (m< cm && y == cy)  {
       return true;
     } else if (d < cd && m == cm && y == cy) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  function checkWeekDay() {
+    var da = new Date(y, m, d);
+    if (da.getDay() == 6 || da.getDay() == 0) {
       return true;
     } else {
       return false;
@@ -248,4 +258,12 @@ window.onload = function () {
 // Get element by id
 function getId(id) {
   return document.getElementById(id);
+}
+
+function launchForm() {
+  document.getElementById('booking-form').style.display = 'block';
+}
+
+function removeForm () {
+  document.getElementById('booking-form').style.display = 'none';
 }

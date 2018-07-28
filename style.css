@@ -2,7 +2,7 @@
 	font-family: arial;
 	font-size: 12px;
 	text-align: center;
-	margin-left:auto;
+	margin-left: auto;
 	margin-right: auto;
 }
 
@@ -126,8 +126,6 @@
 	text-align: center;
 }
 
-
-
 /* Holds both the calendar and the basket */
 
 #outer_calendar {
@@ -141,7 +139,8 @@
 
 #outer_booking {
 	font-family: 'Carrois Gothic', sans-serif;
-	margin-left:auto;margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 20px;
 	padding-top: 18px;
 	margin-top: 20px;
@@ -188,14 +187,16 @@
 
 #outer_price {
 	width: 200px;
-	margin-left:auto;margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	height: 22px;
 	margin-top: 6px
 }
 
 #outer_basket {
 	display: none;
-	margin-left:auto;margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: 'Carrois Gothic', sans-serif;
 	padding: 25px;
 	margin-top: 20px;
@@ -432,10 +433,11 @@ body {
 	background-color: #00194e;
 	padding: 20px 20px;
 	display: flex;
+	margin-bottom: 15px;
 }
 
 .header img {
-	height: 100%;
+	height: 90%;
 	float: right;
 	margin-left: 15px;
 }
@@ -450,9 +452,79 @@ body {
 	/* border-bottom: 2px solid white; */
 	color: white;
 }
+
 a.calcon span {
 	padding: 5px;
 }
+
 a.calcon span:hover {
 	background: rgba(255, 255, 255, 0.4);
+}
+
+#addico {
+	vertical-align: middle;
+	height: 30px;
+	transition: all 1s ease;
+}
+
+#addico:hover {
+	transform: scale(1.5) rotate(90deg);
+}
+
+div#content {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#content * {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#schlo:hover {
+	animation: fade 2.5s;
+}
+
+@keyframes fade {
+	40% {
+		background: rgba(255, 255, 255, 0.4);
+	}
+}
+@keyframes slide-in {
+	from {
+		top: 0%;
+		opacity: 0;
+	}
+	to {
+		top: 30%;
+		opacity:1;
+	}
+}
+
+/* https://www.w3schools.com/howto/howto_css_overlay.asp */
+#booking-form {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2;
+	cursor: pointer;
+}
+/* https://www.w3schools.com/howto/howto_css_overlay.asp */
+#form{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	animation: slide-in 1s;
 }

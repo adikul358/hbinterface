@@ -2,6 +2,7 @@
 
 <head>
 	<link href="style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="Java-Calendar/main.css">
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
 </head>
 
@@ -15,7 +16,6 @@
 
 	</div>
 	<script src="Java-Calendar/main.js"></script>
-	<link rel="stylesheet" href="Java-Calendar/main.css">
 	</head>
 
 	<body>
