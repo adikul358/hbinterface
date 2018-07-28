@@ -126,22 +126,9 @@ Calendar.prototype.Calendar = function (y, m) {
   var Currd = new Date();
   var cm = Currd.getMonth();
   var cy = Currd.getFullYear();
+  var cd = Currd.getDate();
 
   var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
-
-  /*var p, dm;
-  
-    if(this.f =='M') {
-      dm = 1;
-  
-      p = dm;
-    } else {
-      if(firstDayOfCurrentMonth == 0) {
-        firstDayOfCurrentMonth == -5;
-      } else {
-        firstDayOfCurrentMonth == 2;
-      }
-    }*/
 
   var cellvalue;
 
@@ -169,13 +156,9 @@ Calendar.prototype.Calendar = function (y, m) {
         p++
 
         // Current month dates
-     } else if (d < this.CurrentDate || checkMonth(m)) {
+      } else if (checkMonth()) {
         html += '<td id="prevdates">' + (p++) + '</td>';
 
-      } else if (d == this.CurrentDate && m == cm && y == cy) {
-        html += '<td id="currentdate">' + (d) + '</td></a>';
-
-        p = 1;
       } else {
         html += '<td id="currentmonthdates">' + (d) + '</td></a>';
 
@@ -193,12 +176,16 @@ Calendar.prototype.Calendar = function (y, m) {
     html += '</tr>';
   }
 
-  function checkMonth(m) {
-    var no_mon = this.Months.splice(m, 1);
-    if (no_mon.includes(this.Months[m])) {
+  function checkMonth() {
+    if (y < cy) {
       return true;
-    };
-    return false;
+    } else if (m< cm && y == cy)  {
+      return true;
+    } else if (d < cd && m == cm && y == cy) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Closes table
