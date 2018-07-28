@@ -160,7 +160,7 @@ Calendar.prototype.Calendar = function (y, m) {
         html += '<td id="prevdates">' + (p++) + '</td>';
 
       } else {
-        html += '<td id="currentmonthdates">' + (d) + '</td></a>';
+        html += '<td id="currentmonthdates"><a href="book.php?d=' + (d) + "&m=" + (m) + "$y=" + (y) + '">'+ d + '</a></td>';
 
         p = 1;
       }
@@ -177,7 +177,8 @@ Calendar.prototype.Calendar = function (y, m) {
   }
 
   function checkMonth() {
-    if (y < cy) {
+    var da = new Date(y, m, d);
+    if (y < cy || da.getDay() == 6 || da.getDay() == 0) {
       return true;
     } else if (m< cm && y == cy)  {
       return true;
