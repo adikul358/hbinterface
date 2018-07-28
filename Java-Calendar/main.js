@@ -158,41 +158,48 @@ Calendar.prototype.Calendar = function (y, m) {
         cellvalue = lastDateOfLastMonth - firstDayOfCurrentMonth + p++;
 
         html += '<td>' +
-          
+
           '</td>';
 
         // Dates from next month
       } else if (d > lastDateOfCurrentMonth) {
-        
+        html += '<td>' +
+
+          '</td>';
         p++
-        
+
         // Current month dates
-      } else if (d < this.CurrentDate || checkMonth()) {
+     } else if (d < this.CurrentDate || checkMonth(m)) {
         html += '<td id="prevdates">' + (p++) + '</td>';
-        
+
       } else if (d == this.CurrentDate && m == cm && y == cy) {
         html += '<td id="currentdate">' + (d) + '</td></a>';
-        
+
         p = 1;
       } else {
         html += '<td id="currentmonthdates">' + (d) + '</td></a>';
-        
+
         p = 1;
       }
-      
+
       if (i % 7 == 6 && d >= lastDateOfCurrentMonth) {
-        
+
         z0 = 10; // no more rows
       }
       i++;
-      
+
     }
-    
+
     html += '</tr>';
   }
-        function checkMonth(m) {
-          
-        }
+
+  function checkMonth(m) {
+    var no_mon = this.Months.splice(m, 1);
+    if (no_mon.includes(this.Months[m])) {
+      return true;
+    };
+    return false;
+  }
 
   // Closes table
   html += '</table>';
