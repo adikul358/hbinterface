@@ -1,3 +1,23 @@
+<form action="" method="POST">
+					<label>Event</label><br>
+					<input type="text">
+					<div id="twotime">
+						<div id="one">
+							<label>Start Time</label><br>
+							<option>
+								<?php
+
+										$slots_per_day = 0;	
+										for($i = strtotime("09:00"); $i<= strtotime("15:25"); $i = $i + $booking_frequency * 60) {
+											$slots_per_day ++;
+										}	
+
+								?>
+							</option>
+						</div>
+						
+					</div>
+				</form>
 <?php
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");

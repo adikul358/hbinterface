@@ -163,7 +163,7 @@ Calendar.prototype.Calendar = function (y, m) {
         html += '<td id="prevdates">' + d + '</td>';
         p = 1;
       } else {
-        html += '<td id="currentmonthdates"><a class="datelink" href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+ d + '</a></td>';
+        html += '<div id=sloid' + d + '-' + m + '-' + y + '><td id="currentmonthdates"><a class="datelink" href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+ d + '</a></td></div>';
         p = 1;
       }
 
@@ -264,6 +264,48 @@ function launchForm() {
   document.getElementById('booking-form').style.display = 'block';
 }
 
-function removeForm () {
+function removeForm() {
+  document.getElementById('mbf').style.animation = 'slide-out 1s';
+  setTimeout(hide,900);
+}
+
+function hide() {
+  document.getElementById('mbf').style.opacity = 0;
   document.getElementById('booking-form').style.display = 'none';
+  document.location.reload();
+}
+
+function cp() {
+    // var slist = document.getElementById('s');
+    // var elist = document.getElementById('e');
+    // var s = slist.option[slist.selectedIndex].value;
+    // var e = ["09:00", "09:35", "10:10", "10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50"];
+    // var er = e.splice(0, s+1);
+
+    // while (modelList.options.length) {
+    //   modelList.remove(0);
+    // }
+
+    // var i;
+    // for (i=-1; i<er.length; i++) {
+    //   var eo = new Option(er[i+1], i+1);
+    //   elist.options.add(eo);
+    // }
+
+    var eitems = {};
+
+    var slist = document.getElementById("s");
+    var elist = document.getElementById("e");
+    var selstime = slist.selectedIndex;
+    while (elist.options.length) {
+      elist.remove(0);
+    }
+    var slots = eitems[selstime];
+    if (slots) {
+      var i;
+      for (i = 0; i < slots.length; i++) {
+        var car = new Option(slots[i], i);
+        elist.options.add(car);
+      }
+    }
 }
