@@ -265,47 +265,59 @@ function launchForm() {
 }
 
 function removeForm() {
-  document.getElementById('mbf').style.animation = 'slide-out 1s';
-  setTimeout(hide,900);
+  window.location = "confirm.php";
 }
 
-function hide() {
-  document.getElementById('mbf').style.opacity = 0;
-  document.getElementById('booking-form').style.display = 'none';
-  document.location.reload();
+function conpop(name, email, phone) {
+  document.getElementById('mainconinfo').style.display = 'block';
+  document.getElementById('ne').style.animation = 'slide-in 1s';
+  document.getElementById('ne').style.opacity = 1;
+  document.getElementById('contitle').innerHTML = name;
+  document.getElementById('conemail').innerHTML = email;
+  document.getElementById('conphone').innerHTML = phone;
 }
 
-// function cp() {
-//     // var slist = document.getElementById('s');
-//     // var elist = document.getElementById('e');
-//     // var s = slist.option[slist.selectedIndex].value;
-//     // var e = ["09:00", "09:35", "10:10", "10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50"];
-//     // var er = e.splice(0, s+1);
+function condown() {
+  document.getElementById('ne').style.animation = 'slide-out 1s';
+  setTimeout(hide2,900);
+}
 
-//     // while (modelList.options.length) {
-//     //   modelList.remove(0);
-//     // }
+function hide2() {
+  document.getElementById('ne').style.opacity = 0;
+  document.getElementById('mainconinfo').style.display = 'none';
+}
 
-//     // var i;
-//     // for (i=-1; i<er.length; i++) {
-//     //   var eo = new Option(er[i+1], i+1);
-//     //   elist.options.add(eo);
-//     // }
+function cp() {
+    // var slist = document.getElementById('s');
+    // var elist = document.getElementById('e');
+    // var s = slist.option[slist.selectedIndex].value;
+    // var e = ["09:00", "09:35", "10:10", "10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50"];
+    // var er = e.splice(0, s+1);
 
-//     var eitems = {};
+    // while (modelList.options.length) {
+    //   modelList.remove(0);
+    // }
 
-//     var slist = document.getElementById("s");
-//     var elist = document.getElementById("e");
-//     var selstime = slist.selectedIndex;
-//     while (elist.options.length) {
-//       elist.remove(0);
-//     }
-//     var slots = eitems[selstime];
-//     if (slots) {
-//       var i;
-//       for (i = 0; i < slots.length; i++) {
-//         var car = new Option(slots[i], i);
-//         elist.options.add(car);
-//       }
-//     }
-// }
+    // var i;
+    // for (i=-1; i<er.length; i++) {
+    //   var eo = new Option(er[i+1], i+1);
+    //   elist.options.add(eo);
+    // }
+
+    var eitems = {};
+
+    var slist = document.getElementById("s");
+    var elist = document.getElementById("e");
+    var selstime = slist.selectedIndex;
+    while (elist.options.length) {
+      elist.remove(0);
+    }
+    var slots = eitems[selstime];
+    if (slots) {
+      var i;
+      for (i = 0; i < slots.length; i++) {
+        var car = new Option(slots[i], i);
+        elist.options.add(car);
+      }
+    }
+}

@@ -1,7 +1,8 @@
 body {
 	height: 100%;
 	margin: 0px;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	background: rgba(28, 100, 255, 0.726);
 
 }
 
@@ -15,7 +16,7 @@ a#contact:hover {
 
 .header {
 	height: 70px;
-	background-color: #00194e;
+	background-color: #002679;
 	padding: 20px 20px;
 	display: flex;
 	margin-bottom: 15px;
@@ -45,6 +46,13 @@ a.calcon span {
 a.calcon span:hover {
 	background: rgba(255, 255, 255, 0.4);
 }
+
+
+#noro {
+	font-size: 20px;
+	color: rgba(0, 152, 0, 1);
+}
+
 
 #addico {
 	vertical-align: middle;
@@ -89,6 +97,16 @@ div#content *, div#add * {
 		opacity:1;
 	}
 }
+@keyframes slide-in2 {
+	from {
+		top: 0%;
+		opacity: 0;
+	}
+	to {
+		top: 45%;
+		opacity:1;
+	}
+}
 @keyframes slide-out {
 	from {
 		top: 40%;
@@ -120,17 +138,45 @@ div#content *, div#add * {
     left: 50%;
     transform: translate(-50%,-50%);
 	-ms-transform: translate(-50%,-50%);
+	animation: slide-in2 1s;
+	top: 45%;
+}
+
+#mainconinfo {
+    background: rgba(0, 0, 0, 0.502);
+    height: 100%;
+    width:100%;
+    position: fixed;
+    z-index: 2;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0px;
+    display: none;
+}
+
+#ne{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
 	animation: slide-in 1s;
 	top: 40%;
 }
-
-#noro {
-	font-size: 20px;
-	color: rgba(94, 255, 88, 0.8);
+#coninfo {
+    background: rgba(56, 175, 255, 1);
+    width: 440px;
+    border-bottom: 5px solid rgba(0, 152, 0, 1);
+    border-left: 5px solid rgba(0, 152, 0, 1);
+    border-top: 5px solid #00194e;
+    border-right: 5px solid #00194e;
+    padding: 30px;
 }
 
+
 #form{
-	background: rgba(51, 156, 255, 0.7);
+	background: rgba(56, 175, 255, 1);
 	border-bottom: 5px solid rgba(0, 152, 0, 1);
     border-left: 5px solid rgba(0, 152, 0, 1);
     border-top: 5px solid #00194e;
@@ -155,12 +201,15 @@ input[name=email] {
 input[type=text], input[type=number], input[type=email], select {
 	padding: 6px 10px;
 	margin-top: 12px;
-	background: rgba(18, 199, 2, 0.664);
+	background: rgb(0, 152, 0);
 	border: none;
 }
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, select:focus {
+	background: rgb(0, 220, 0);
+}
 
-input[type=submit] {
-	background-color:rgba(18, 199, 2, 0.664);
+input[type=submit], input[type=button] {
+	background-color:rgba(0, 191, 0, 0.6);
 	border:none;
 	cursor:pointer;
 	color:#000000;
@@ -169,10 +218,10 @@ input[type=submit] {
 	padding:18px 24px;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, input[type=button]:hover {
 	background-color:rgba(18, 199, 2, 1);
 }
-input[type=submit]:active {
+input[type=submit]:active, input[type=button]:active {
 	background-color:rgb(10, 126, 0);
 }
 
@@ -182,6 +231,37 @@ select {
 h5 {
 	margin: 0;
 	font-size: 10px;
+}
+
+#coninfo h1 {
+    text-align: left;
+    margin-top: 0;
+    width: 100%;
+    font-size: 25px;
+}
+
+.first {
+    display: flex;
+}
+
+.first * {
+    display: block;
+}
+
+#firstt {
+    flex:15%;
+}
+#firsti {
+    flex:80%;
+}
+
+label {
+    height:25px;
+    padding: 5px 10px;
+}
+
+label.tag {
+    font-weight: bold;
 }
 
 #bofoma {
@@ -201,7 +281,3 @@ h5 {
     justify-content: center;
     align-items: center;
 }
-/* #k {
-	position: absolute;
-	top: 50%;
-} */

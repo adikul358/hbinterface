@@ -2,7 +2,6 @@ html, body { margin: 0px; padding: 0; }
 
 body {
   background-repeat: no-repeat no-repeat;
-  background-color: rgb(4, 133, 255);
   background-position: center center;
   background-size: cover;
 }
@@ -60,10 +59,6 @@ td.bkdslts {
   display: inline;
 }    
 
-#currentmonthdates:hover {
-  /* background-color: rgba(58, 57, 57, 0.5); */
-  color: white;
-}
 #currentmonthdates:active {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -159,7 +154,7 @@ td.bkdslts {
   background-color: #4e71bb;
 }
 
-#currentmonthdates:hover + #currentmonthdates * {
+#currentmonthdates:hover {
   color: white;
 }
 

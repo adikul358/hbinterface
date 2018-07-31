@@ -10,8 +10,6 @@
 
 	<?php
 
-		$hide = "";
-
 		$m = $_GET['m'];
 		$m++; 
 		$currdate = date("Y\-m\-d", mktime(0,0,0,$m, $_GET['d'], $_GET['y']));
@@ -28,28 +26,16 @@
 			$bookings[] = $row;
 		}
 		$r = mysqli_num_rows($result);
-		
-		if (isset($_POST['submit'])) {
-			$name = mysqli_real_escape_string($link, $_POST['name']);
-			$email = mysqli_real_escape_string($link, $_POST['email']);
-			$phone = mysqli_real_escape_string($link, $_POST['phone']);
-			$event = mysqli_real_escape_string($link, $_POST['event']);
-			$start = mysqli_real_escape_string($link, $_POST['start']);
-			$end = mysqli_real_escape_string($link, $_POST['end']);
-			$hide = "<script>
-			document.getElementById('em').onclick = function () {removeForm();};
-			</script>";
-			
-			$event_query = "INSERT INTO bookings (event, date, start, end, name, phone, email)
-			VALUES ('$event', '$currdate', '$start', '$end', '$name', '$phone', '$email')";
-			$eresult = mysqli_query($link, $event_query);
 
-			if(!$eresult) {
-				exit("Failed to fetch:<br>" . mysqli_error($link));
+		function coninfo($name) {
+			$con_query = "SELECT DISTINCT name, phone, email FROM bookings WHERE name='$name'";
+			$conresult = mysqli_query($link, $con_query);
+			$con = array();
+			while($row = mysqli_fetch_assoc($conresult)) {
+				$con[] = $row;
 			}
-
-
-		}		
+		}
+		
 	?>
 </head>
 
@@ -67,10 +53,10 @@
 
 	<body>
 		<div id="bofoma">
-		<div id="content">
-			<div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">Booked Slots</div>
-			<div id="bkdslts">
-				<?php 
+			<div id="content">
+				<div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">Booked Slots</div>
+				<div id="bkdslts">
+					<?php 
 						$counter = 1;
 
 						switch ($r) {
@@ -92,10 +78,10 @@
 							foreach ($bookings as $row) {
 								$html = '<tr>';
 								$html .= '<td class="bkdslts" style="width:80px">' . $counter . '</td>';
-								$html .= '<td class="bkdslts" style="text-align:left; width:400px">' . $row['event'] . '</td>';
+								$html .= '<td class="bkdslts" style="text-align:left; width:350px">' . $row['event'] . '</td>';
 								$html .= '<td class="bkdslts" style="width:100px">' . $row['start'] . '</td>';
 								$html .= '<td class="bkdslts" style="width:100px">' . $row['end'] . '</td>';
-								$html .= '<td class="bkdslts" style="width:150px">' . $row['name'] . '<h5><a id="contact" onclick="conpop()" href="#">Contact Info</a></h5></td>';
+								$html .= '<td class="bkdslts" style="width:200px">' . $row['name'] . '<h5><a id="contact" onclick="conpop(' . "'" . $row['name'] . "'" . ",'" . $row['email'] . "','" . $row['phone'] . "'" . ')" href="#">Contact Info</a></h5></td>';
 								$html .= '</tr>';
 								$counter++;
 								echo $html;
@@ -103,122 +89,127 @@
 								break;
 						}
 					?>
-				</table>
+					</table>
+				</div>
+			</div>
+			<div id="add">
+				<div id=k style="margin:15px">
+					<span id="titlespan" style="margin-right: 15px">Book a Slot</span>
+					<a href="#" id="add" onclick="launchForm()">
+						<img src="images/add.svg" id="addico">
+					</a>
+				</div>
 			</div>
 		</div>
-		<div id="add">
-			<div id=k style="margin:15px">
-				<span id="titlespan" style="margin-right: 15px">Book a Slot</span>
-				<a href="#" id="add" onclick="launchForm()">
-					<img src="images/add.svg" id="addico">
-				</a>
-			</div>
-		</div>
-					</div>
 		<div id="booking-form">
 			<div id=mbf>
-				<form method="POST" action="">
+				<form method="POST" action="confirm.php">
 					<div id="form">
 
 						<label>Event Name</label>
 						<br>
-						<input type=text name="event" required>
+						<input type=text name="event" >
 						<br>
 						<br>
 
 						<div id="times">
+							
 							<div style="width: 50%; float: left">
 								<label>Start Time</label>
 								<br>
-								<select name="start" id=s onchange="cp()" required>
+								<select name="start" id=s onchange="cp()" >
 									<?php
 
-								$slots = array();
-								for($i = strtotime("09:00"); $i<= strtotime("14:50"); $i= $i+35*60) {
-									$slots[] = date("h:i", $i); 
-									$server_slots[] = date("H:i:s", $i); 
-								}
-								$c = 0;
-								foreach ($slots as $s) {
-									echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
-									$c++;
-								}
-							?>
+										$slots = array();
+										for($i = strtotime("09:00"); $i<= strtotime("14:50"); $i= $i+35*60) {
+											$slots[] = date("h:i", $i); 
+											$server_slots[] = date("H:i:s", $i); 
+										}
+										$c = 0;
+										foreach ($slots as $s) {
+											echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
+											$c++;
+										}
+
+								?>
 								</select>
 								<br>
 							</div>
+							
 							<div>
 								<label>End Time</label>
 								<br>
-								<select name="end" id=e required>
-								<?php
+								<select name="end" id=e >
+									<?php
 
-									$slots = array();
-									for($i = strtotime("09:35"); $i<= strtotime("15:25"); $i= $i+35*60) {
-										$slots[] = date("h:i", $i); 
-										$server_slots[] = date("H:i:s", $i); 
-									}
-									$c = 0;
-									foreach ($slots as $s) {
-										echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
-										$c++;
-									}
+										$slots = array();
+										for($i = strtotime("09:35"); $i<= strtotime("15:25"); $i= $i+35*60) {
+											$slots[] = date("h:i", $i); 
+											$server_slots[] = date("H:i:s", $i); 
+										}
+										$c = 0;
+										foreach ($slots as $s) {
+											echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
+											$c++;
+										}
+
 									?>
 								</select>
 								<br>
 							</div>
+							
 							<br>
 							<br>
-
 							<label>Name of Person Booking</label>
 							<br>
-							<input type="text" name="name" required>
+							<input type="text" name="name" >
 							<br>
 							<br>
+
 							<label>Contact No.</label>
 							<br>
-							<input type="number" name="phone" required>
+							<input type="number" name="phone" >
 							<br>
 							<br>
+
 							<label>Email</label>
 							<br>
-							<input type="email" name="email" required>
+							<input type="email" name="email" >
 							<br>
 							<br>
-
-
-
 						</div>
 					</div>
 					<br>
 					<div>
 						<input type="submit" value="Book Hall" style="float:right" id="em">
-						<?php echo $hide?>
 					</div>
 				</form>
 			</div>
-									<div id=a>
-									<div id="mainconinfo" onclick="condown()">
-									<div id="coninfo">
-									<h1>Aditya Kulshrestha</h1>
-									
-									<div class="first">
-									
-									<div id="firstt">
-									<label id=tag>Email:</label>
-									<label id=tag>Phone:</label>
-									</div>
-									
-									<div id="firsti">
-									<label id=info>adi.kul358@gmail.com</label>
-									<label id=info>7840869129</label>
-									</div>
-									
-									</div>
-									
-									</div>
-									</div>
-			
+		</div>
+				<div id="mainconinfo">
+				<div id="ne">
+					<div id="coninfo">
+						<h1 id="contitle"></h1>
+
+						<div class="first">
+
+							<div id="firstt">
+								<label class=tag>Email:</label>
+								<label class=tag>Phone:</label>
+							</div>
+
+							<div id="firsti">
+								<label class=info id="conemail">adi.kul358@gmail.com</label>
+								<label class=info id="conphone">7840869129</label>
+							</div>
+						</div>
+					</div>
+					<br>
+						<div>
+							<input type="button" value="Ok" onclick="condown()" style="float:right" id="conm">
+						</div>
+				</div>
+			</div>
 	</body>
 
 </html>
