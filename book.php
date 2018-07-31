@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="Java-Calendar/main.css">
 	<link rel="stylesheet" href="pop.css">
 	<script src="Java-Calendar/main.js"></script>
-	<?php require "php/connect.php"?>
+	<?php require "connect.php"?>
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
 
 	<?php
@@ -103,7 +103,7 @@
 		</div>
 		<div id="booking-form">
 			<div id=mbf>
-				<form method="POST" action="confirm.php">
+				<form method="POST" action=>
 					<div id="form">
 
 						<label>Event Name</label>
