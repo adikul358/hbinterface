@@ -27,6 +27,7 @@ tr {
 td {
   padding: 10px;
   width: 150px; 
+  height: inherit;
   vertical-align: top;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -60,7 +61,7 @@ td.bkdslts {
 }    
 
 #currentmonthdates:hover {
-  background-color: rgba(58, 57, 57, 0.5);
+  /* background-color: rgba(58, 57, 57, 0.5); */
   color: white;
 }
 #currentmonthdates:active {
@@ -140,40 +141,26 @@ td.bkdslts {
   color: white;
 }
 
-.nextmonthdates {
-  background-color: rgba(180, 180, 180, 0.7);
+#currentmonthdates {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0px;
 }
 
-.currentmonthdates {
-  background-color: rgba(255, 255, 255, 0.7);
+.sloid{
+  padding: 10px;
+  /* display: block; */
+  height: 100%;
+  vertical-align: bottom;
 }
-.currentdate {
-  background-color: rgba(0, 35, 151, 0.507);
+
+#currentmonthdates:hover {
+  /* animation: height .5s; */
+  transform: scale(1.1);
+  background-color: #4e71bb;
+}
+
+#currentmonthdates:hover + #currentmonthdates * {
   color: white;
-}
-
-#cellvaluelist {
-  background: #FFCC00;
-}        
-
-.swim {
-  /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 80%;
-  text-align: center;
-  background: #445511;
-  color: #F5F5F5;
-  margin-bottom: 5px;
-  padding: 5px;
-}
-
-.chrono {
-  /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 80%;
-  text-align: center;
-  background: #778899;
-  color: #F5F5F5;
-  margin-bottom: 5px;
-  padding: 5px;
 }
 
 td a { 
