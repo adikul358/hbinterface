@@ -3,11 +3,14 @@
 <head>
 	<link href="style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="Java-Calendar/main.css">
+	<link rel="stylesheet" href="pop.css">
 	<script src="Java-Calendar/main.js"></script>
 	<?php require "php/connect.php"?>
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
 
 	<?php
+
+		$hide = "";
 
 		$m = $_GET['m'];
 		$m++; 
@@ -33,6 +36,9 @@
 			$event = mysqli_real_escape_string($link, $_POST['event']);
 			$start = mysqli_real_escape_string($link, $_POST['start']);
 			$end = mysqli_real_escape_string($link, $_POST['end']);
+			$hide = "<script>
+			document.getElementById('em').onclick = function () {removeForm();};
+			</script>";
 			
 			$event_query = "INSERT INTO bookings (event, date, start, end, name, phone, email)
 			VALUES ('$event', '$currdate', '$start', '$end', '$name', '$phone', '$email')";
@@ -89,7 +95,7 @@
 								$html .= '<td class="bkdslts" style="text-align:left; width:400px">' . $row['event'] . '</td>';
 								$html .= '<td class="bkdslts" style="width:100px">' . $row['start'] . '</td>';
 								$html .= '<td class="bkdslts" style="width:100px">' . $row['end'] . '</td>';
-								$html .= '<td class="bkdslts" style="width:150px">' . $row['name'] . '<h5><a id="contact" onclick="coninfo()" href="#">Contact Info</a></h5></td>';
+								$html .= '<td class="bkdslts" style="width:150px">' . $row['name'] . '<h5><a id="contact" onclick="conpop()" href="#">Contact Info</a></h5></td>';
 								$html .= '</tr>';
 								$counter++;
 								echo $html;
@@ -111,12 +117,12 @@
 					</div>
 		<div id="booking-form">
 			<div id=mbf>
-				<form method="POST">
+				<form method="POST" action="">
 					<div id="form">
 
 						<label>Event Name</label>
 						<br>
-						<input type=text name="event" require>
+						<input type=text name="event" required>
 						<br>
 						<br>
 
@@ -124,7 +130,7 @@
 							<div style="width: 50%; float: left">
 								<label>Start Time</label>
 								<br>
-								<select name="start" id=s onchange="cp()">
+								<select name="start" id=s onchange="cp()" required>
 									<?php
 
 								$slots = array();
@@ -144,7 +150,7 @@
 							<div>
 								<label>End Time</label>
 								<br>
-								<select name="end" id=e>
+								<select name="end" id=e required>
 								<?php
 
 									$slots = array();
@@ -166,29 +172,53 @@
 
 							<label>Name of Person Booking</label>
 							<br>
-							<input type="text" name="name"  require>
+							<input type="text" name="name" required>
 							<br>
 							<br>
 							<label>Contact No.</label>
 							<br>
-							<input type="number" name="phone"  require>
+							<input type="number" name="phone" required>
 							<br>
 							<br>
 							<label>Email</label>
 							<br>
-							<input type="email" name="email"  require>
+							<input type="email" name="email" required>
 							<br>
 							<br>
+
 
 
 						</div>
 					</div>
 					<br>
 					<div>
-						<input type="submit" value="Book Hall" onclick="removeForm()" style="float:right">
+						<input type="submit" value="Book Hall" style="float:right" id="em">
+						<?php echo $hide?>
 					</div>
 				</form>
 			</div>
+									<div id=a>
+									<div id="mainconinfo" onclick="condown()">
+									<div id="coninfo">
+									<h1>Aditya Kulshrestha</h1>
+									
+									<div class="first">
+									
+									<div id="firstt">
+									<label id=tag>Email:</label>
+									<label id=tag>Phone:</label>
+									</div>
+									
+									<div id="firsti">
+									<label id=info>adi.kul358@gmail.com</label>
+									<label id=info>7840869129</label>
+									</div>
+									
+									</div>
+									
+									</div>
+									</div>
+			
 	</body>
 
 </html>

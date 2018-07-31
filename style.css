@@ -131,7 +131,10 @@ div#content *, div#add * {
 
 #form{
 	background: rgba(51, 156, 255, 0.7);
-	border: 5px solid #00194e;
+	border-bottom: 5px solid rgba(0, 152, 0, 1);
+    border-left: 5px solid rgba(0, 152, 0, 1);
+    border-top: 5px solid #00194e;
+    border-right: 5px solid #00194e;
 	padding: 15px;
 	width:480px;
 }
