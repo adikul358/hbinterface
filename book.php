@@ -27,15 +27,16 @@
 		while($row = mysqli_fetch_assoc($result)) {
 			$bookings[] = $row;
 		}
-		$timing_query = "SELECT start FROM bookings WHERE date='$currdate'  ORDER BY start";
-		$result = mysqli_query($link, $timing_query);
+		$timing_query = "SELECT DISTINCT start FROM bookings WHERE date='$currdate'  ORDER BY start";
+		$tresult = mysqli_query($link, $timing_query);
 
-		if (!$result) {
+		if (!$tresult) {
 			exit("Failed to fetch:<br>" . mysqli_error($link));
 		}
+		$tn = mysqli_num_rows($tresult);
 		
 		$timings = array();
-		while($row = mysqli_fetch_assoc($result)) {
+		while($row = mysqli_fetch_assoc($tresult)) {
 			$timings[] = $row;
 		}
 		$r = mysqli_num_rows($result);
@@ -119,9 +120,9 @@
 				<form method="POST" action="<?php echo 'confirm.php?date=' . $currdate?>">
 					<div id="form">
 
-						<label>Event Name</label required>
+						<label>Event Name</label>
 						<br>
-						<input type=text name="event" >
+						<input type=text name="event" required>
 						<br>
 						<br>
 
@@ -139,18 +140,27 @@
 											$server_slots[] = date("H:i:s", $i); 
 										}
 										$c = 0;
+
+										// $c = 0;
+										// foreach ($slots as $s) {
+										// 	echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
+										// 	$c++;
+										// }
 										foreach ($server_slots as $s) {
+											if ($tn == 0) {
+												echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
+											} else {
 											foreach ($timings as $t) {
 												if ($t['start'] == $s) {
 													echo '';
 												} else {
 													echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
 												}
-											}
+											}}
 											$c++;
 										}
-
-								?>
+										
+										?>
 								</select>
 								<br>
 							</div>
