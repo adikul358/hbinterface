@@ -3,16 +3,18 @@
 <head>
 	<link href="style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="Java-Calendar/main.css">
-	<link rel="stylesheet" href="pop.css">
 	<script src="Java-Calendar/main.js"></script>
 	<?php require "connect.php"?>
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
 
 	<?php
 
+		session_start();
+
 		$m = $_GET['m'];
 		$m++; 
 		$currdate = date("Y\-m\-d", mktime(0,0,0,$m, $_GET['d'], $_GET['y']));
+		$_SESSION['date'] = $currdate;
 
 		$booking_query = "SELECT * FROM bookings WHERE date='$currdate'  ORDER BY start";
 		$result = mysqli_query($link, $booking_query);
@@ -25,6 +27,17 @@
 		while($row = mysqli_fetch_assoc($result)) {
 			$bookings[] = $row;
 		}
+		$timing_query = "SELECT start FROM bookings WHERE date='$currdate'  ORDER BY start";
+		$result = mysqli_query($link, $timing_query);
+
+		if (!$result) {
+			exit("Failed to fetch:<br>" . mysqli_error($link));
+		}
+		
+		$timings = array();
+		while($row = mysqli_fetch_assoc($result)) {
+			$timings[] = $row;
+		}
 		$r = mysqli_num_rows($result);
 
 		function coninfo($name) {
@@ -35,7 +48,7 @@
 				$con[] = $row;
 			}
 		}
-		
+
 	?>
 </head>
 
@@ -103,10 +116,10 @@
 		</div>
 		<div id="booking-form">
 			<div id=mbf>
-				<form method="POST" action=>
+				<form method="POST" action="<?php echo 'confirm.php?date=' . $currdate?>">
 					<div id="form">
 
-						<label>Event Name</label>
+						<label>Event Name</label required>
 						<br>
 						<input type=text name="event" >
 						<br>
@@ -117,7 +130,7 @@
 							<div style="width: 50%; float: left">
 								<label>Start Time</label>
 								<br>
-								<select name="start" id=s onchange="cp()" >
+								<select name="start" id=s onchange="cp()">
 									<?php
 
 										$slots = array();
@@ -126,8 +139,14 @@
 											$server_slots[] = date("H:i:s", $i); 
 										}
 										$c = 0;
-										foreach ($slots as $s) {
-											echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
+										foreach ($server_slots as $s) {
+											foreach ($timings as $t) {
+												if ($t['start'] == $s) {
+													echo '';
+												} else {
+													echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
+												}
+											}
 											$c++;
 										}
 
@@ -162,19 +181,19 @@
 							<br>
 							<label>Name of Person Booking</label>
 							<br>
-							<input type="text" name="name" >
+							<input type="text" name="name" required>
 							<br>
 							<br>
 
 							<label>Contact No.</label>
 							<br>
-							<input type="number" name="phone" >
+							<input type="number" name="phone" required>
 							<br>
 							<br>
 
 							<label>Email</label>
 							<br>
-							<input type="email" name="email" >
+							<input type="email" name="email" required>
 							<br>
 							<br>
 						</div>
@@ -199,8 +218,8 @@
 							</div>
 
 							<div id="firsti">
-								<label class=info id="conemail">adi.kul358@gmail.com</label>
-								<label class=info id="conphone">7840869129</label>
+								<label class=info id="conemail"></label>
+								<label class=info id="conphone"></label>
 							</div>
 						</div>
 					</div>
