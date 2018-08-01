@@ -66,6 +66,29 @@
 	</div>
 
 	<body>
+	<div class="divcalendar">
+
+<div id="calendaroverallcontrols">
+	<!-- <div id="year"></div> -->
+
+	<div id="calendarmonthcontrols">
+		<a class="calcon" id="btnPrevDay" href="#" title="Previous Day" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
+			<span>
+				<img src="Java-Calendar/arrows/left_single.svg"></img>
+			</span>
+		</a>
+
+		<div id="bookedday"><div id=monthandyearspan><?php echo $_GET['d'] . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
+
+
+		<a class="calcon" id="btnNextDay" href="#" title="Next Day" onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
+			<span>
+				<img src="Java-Calendar/arrows/right_single.svg"></img>
+			</span>
+		</a>
+	</div>
+</div>
+</div>
 		<div id="bofoma">
 			<div id="content">
 				<div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">Booked Slots</div>
@@ -93,8 +116,8 @@
 								$html = '<tr>';
 								$html .= '<td class="bkdslts" style="width:80px">' . $counter . '</td>';
 								$html .= '<td class="bkdslts" style="text-align:left; width:350px">' . $row['event'] . '</td>';
-								$html .= '<td class="bkdslts" style="width:100px">' . $row['start'] . '</td>';
-								$html .= '<td class="bkdslts" style="width:100px">' . $row['end'] . '</td>';
+								$html .= '<td class="bkdslts" style="width:100px">' . date('h:i A', strtotime($row['start'])) . '</td>';
+								$html .= '<td class="bkdslts" style="width:100px">' . date('h:i A', strtotime($row['end'])) . '</td>';
 								$html .= '<td class="bkdslts" style="width:200px">' . $row['name'] . '<h5><a id="contact" onclick="conpop(' . "'" . $row['name'] . "'" . ",'" . $row['email'] . "','" . $row['phone'] . "'" . ')" href="#">Contact Info</a></h5></td>';
 								$html .= '</tr>';
 								$counter++;

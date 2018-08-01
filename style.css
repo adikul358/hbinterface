@@ -269,7 +269,7 @@ label.tag {
 }
 #content {
 	flex: 70%;
-	height: 75%;
+	max-height: 75%;
 	overflow-y: auto;
 	overflow-x: hidden;
 }

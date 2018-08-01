@@ -109,6 +109,7 @@ Calendar.prototype.Calendar = function (y, m) {
   //var monthhtml = '<span class="monthspan">' + this.Months[m] + '</span>';
 
   // Write selected month and year. This HTML goes into <div id="month"></div>
+  var cdc = getSearchParameters();
   var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
 
   var html = '<table>';
@@ -127,6 +128,7 @@ Calendar.prototype.Calendar = function (y, m) {
   var cm = Currd.getMonth();
   var cy = Currd.getFullYear();
   var cd = Currd.getDate();
+
 
   var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
 
@@ -181,7 +183,7 @@ Calendar.prototype.Calendar = function (y, m) {
   function checkMonth() {
     if (y < cy) {
       return true;
-    } else if (m< cm && y == cy)  {
+    } else if (m < cm && y == cy) {
       return true;
     } else if (d < cd && m == cm && y == cy) {
       return true;
@@ -189,7 +191,7 @@ Calendar.prototype.Calendar = function (y, m) {
       return false;
     }
   }
-  
+
   function checkWeekDay() {
     var da = new Date(y, m, d);
     if (da.getDay() == 6 || da.getDay() == 0) {
@@ -252,12 +254,78 @@ window.onload = function () {
 
   getId('btnNextYr').onclick = function () {
     c.nextYear();
-  };
-}
 
+  };
+
+}
 // Get element by id
 function getId(id) {
   return document.getElementById(id);
+}
+
+function daysInMonth(month, year) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function currdate(d,m,y) {
+  var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  document.getElementById('bookedday').innerHTML = '<span id="monthandyearspan">' + d + " " + Months[m] + ' ' + y + '</span>';
+
+}
+
+function nextDay(d, m, y) {
+
+  if (d == daysInMonth(m, y) && m < 11) {
+
+    d = 1;
+    m = m + 1;
+
+  } else if (d == daysInMonth(m, y) && m == 11) {
+
+    d = 1;
+    m = 0;
+    y = y + 1;
+
+  } else {
+    d = d + 1;
+  }
+
+  location.href = "book.php?d=" + d + "&m=" + m + "&y=" + y;
+}
+
+function prevDay(d, m, y) {
+  if (d == 1 && m > 0) {
+
+    d = daysInMonth(m - 1, y);
+    m = m - 1;
+
+  } else if (d == 1 && m == 0) {
+
+    d = daysInMonth(11, y - 1);
+    m = 11;
+    y = y - 1;
+
+  } else {
+    d = d - 1;
+  }
+
+  location.href = "book.php?d=" + d + "&m=" + m + "&y=" + y;
+}
+
+function getSearchParameters() {
+  var prmstr = window.location.search.substr(1);
+  return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+}
+
+function transformToAssocArray(prmstr) {
+  var params = {};
+  var prmarr = prmstr.split("&");
+  for (var i = 0; i < prmarr.length; i++) {
+    var tmparr = prmarr[i].split("=");
+    params[tmparr[0]] = tmparr[1];
+  }
+  return params;
 }
 
 function launchForm() {
@@ -279,7 +347,7 @@ function conpop(name, email, phone) {
 
 function condown() {
   document.getElementById('ne').style.animation = 'slide-out 1s';
-  setTimeout(hide2,900);
+  setTimeout(hide2, 900);
 }
 
 function hide2() {
@@ -288,47 +356,47 @@ function hide2() {
 }
 
 function cp() {
-    var eitems = {};
-    eitems["09:00"] = ["09:35","10:10","10:45","11:20","11:55","12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["09:35"] = ["10:10","10:45","11:20","11:55","12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["10:10"] = ["10:45","11:20","11:55","12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["10:45"] = ["11:20","11:55","12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["11:20"] = ["11:55","12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["11:55"] = ["12:30","01:05","01:40","02:15","02:50","03:25"];
-    eitems["12:30"] = ["01:05","01:40","02:15","02:50","03:25"];
-    eitems["01:05"] = ["01:40","02:15","02:50","03:25"];
-    eitems["01:40"] = ["02:15","02:50","03:25"];
-    eitems["02:15"] = ["02:50","03:25"];
-    eitems["02:50"] = ["03:25"];
+  var eitems = {};
+  eitems["09:00"] = ["09:35", "10:10", "10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["09:35"] = ["10:10", "10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["10:10"] = ["10:45", "11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["10:45"] = ["11:20", "11:55", "12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["11:20"] = ["11:55", "12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["11:55"] = ["12:30", "01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["12:30"] = ["01:05", "01:40", "02:15", "02:50", "03:25"];
+  eitems["01:05"] = ["01:40", "02:15", "02:50", "03:25"];
+  eitems["01:40"] = ["02:15", "02:50", "03:25"];
+  eitems["02:15"] = ["02:50", "03:25"];
+  eitems["02:50"] = ["03:25"];
 
-    var evals = {};
-    evals["09:00"] = ["09:35:00","10:10:00","10:45:00","11:20:00","11:55:00","12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["09:35"] = ["10:10:00","10:45:00","11:20:00","11:55:00","12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["10:10"] = ["10:45:00","11:20:00","11:55:00","12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["10:45"] = ["11:20:00","11:55:00","12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["11:20"] = ["11:55:00","12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["11:55"] = ["12:30:00","13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["12:30"] = ["13:05:00","13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["01:05"] = ["13:40:00","14:15:00","14:50:00","15:25:00"];
-    evals["01:40"] = ["14:15:00","14:50:00","15:25:00"];
-    evals["02:15"] = ["14:50:00","15:25:00"];
-    evals["02:50"] = ["15:25:00"];
+  var evals = {};
+  evals["09:00"] = ["09:35:00", "10:10:00", "10:45:00", "11:20:00", "11:55:00", "12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["09:35"] = ["10:10:00", "10:45:00", "11:20:00", "11:55:00", "12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["10:10"] = ["10:45:00", "11:20:00", "11:55:00", "12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["10:45"] = ["11:20:00", "11:55:00", "12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["11:20"] = ["11:55:00", "12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["11:55"] = ["12:30:00", "13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["12:30"] = ["13:05:00", "13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["01:05"] = ["13:40:00", "14:15:00", "14:50:00", "15:25:00"];
+  evals["01:40"] = ["14:15:00", "14:50:00", "15:25:00"];
+  evals["02:15"] = ["14:50:00", "15:25:00"];
+  evals["02:50"] = ["15:25:00"];
 
-    var slist = document.getElementById("s");
-    var elist = document.getElementById("e");
-    var k = slist.selectedIndex;
-    var selstime = slist.options[k].text;
-    while (elist.options.length) {
-      elist.remove(0);
+  var slist = document.getElementById("s");
+  var elist = document.getElementById("e");
+  var k = slist.selectedIndex;
+  var selstime = slist.options[k].text;
+  while (elist.options.length) {
+    elist.remove(0);
+  }
+  var slots = eitems[selstime];
+  var keys = evals[selstime];
+
+  if (slots) {
+    var i;
+    for (i = 0; i < slots.length; i++) {
+      var ei = new Option(slots[i], keys[i]);
+      elist.options.add(ei);
     }
-    var slots = eitems[selstime];
-    var keys = evals[selstime];
-
-    if (slots) {
-      var i;
-      for (i = 0; i < slots.length; i++) {
-        var ei = new Option(slots[i], keys[i]);
-        elist.options.add(ei);
-      }
-    }
+  }
 }

@@ -71,7 +71,7 @@ td.bkdslts {
   /*background: #00FFCC;*/      
 }
 
-#btnPrev {
+#btnPrev, #btnPrevDay{
   text-decoration: none;
   font-size: 35px;
   margin-left: 20px;
@@ -93,16 +93,15 @@ td.bkdslts {
   width: 250px;
   font-size: 25px;
   font-weight: bold;
-  margin-left: 20px;
   margin-right: 140px;
   vertical-align: middle;
 }    
 
-#monthandyear {
+#monthandyear, #bookedday {
   vertical-align: middle;
 }
 
-#btnNext {
+#btnNext, #btnNextDay {
   text-decoration: none;
   font-size: 35px;
   margin-right: 20px;
