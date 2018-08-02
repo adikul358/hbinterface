@@ -13,11 +13,13 @@
         $name = mysqli_real_escape_string($link, $_POST['name']);
         $event = mysqli_real_escape_string($link, $_POST['event']);
         $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $start = $_POST['start'];
-        $end = $_POST['end'];
-        $date = $_SESSION['date'];
-        
+		$phone = $_POST['phone'];
+		$start = $_POST['start'];
+		$end = $_POST['end'];
+        $startd = date("h:i A", strtotime($_POST['start']));
+        $endd = date("h:i A", strtotime($_POST['end']));
+		$date = $_SESSION['date'];
+		
         $event_query = "INSERT INTO bookings (event, date, start, end, name, phone, email)
         VALUES ('$event', '$date', '$start', '$end', '$name', '$phone', '$email')";
         $eresult = mysqli_query($link, $event_query);
@@ -61,7 +63,7 @@
 							<div style="width: 50%; float: left">
 								<label>Start Time</label>
 								<br>
-								<input type=text name="start" id=s readonly value="<?php echo $start?>">
+								<input type=text name="start" id=s readonly value="<?php echo $startd?>">
 								</select>
 								<br>
 							</div>
@@ -69,7 +71,7 @@
 							<div>
 								<label>End Time</label>
 								<br>    
-								<input type=text name="end" id=e readonly value="<?php echo $end?>">
+								<input type=text name="end" id=e readonly value="<?php echo $endd?>">
 								</select>
 								<br>
 							</div>

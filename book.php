@@ -159,7 +159,7 @@
 
 										$slots = array();
 										for($i = strtotime("09:00"); $i<= strtotime("14:50"); $i= $i+35*60) {
-											$slots[] = date("h:i", $i); 
+											$slots[] = date("h:i A", $i); 
 											$server_slots[] = date("H:i:s", $i); 
 										}
 										$c = 0;
@@ -199,24 +199,11 @@
 								<label>End Time</label>
 								<br>
 								<select name="end" id=e >
-									<?php
-
-										$slots = array();
-										for($i = strtotime("09:35"); $i<= strtotime("15:25"); $i= $i+35*60) {
-											$slots[] = date("h:i", $i); 
-											$server_slots[] = date("H:i:s", $i); 
-										}
-										$c = 0;
-										foreach ($slots as $s) {
-											echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
-											$c++;
-										}
-
-									?>
 								</select>
 								<br>
 							</div>
-							
+							<script>cp()</script>
+
 							<br>
 							<br>
 							<label>Name of Person Booking</label>
@@ -227,7 +214,7 @@
 
 							<label>Contact No.</label>
 							<br>
-							<input type="number" name="phone" required minlength="10">
+							<input type="text" name="phone" minlength=10 required>
 							<br>
 							<br>
 
