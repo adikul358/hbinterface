@@ -27,7 +27,7 @@
         } elseif ($n < 9) {
             $color = "rgba(230, 214, 0, 0.7)";
         } else {
-            $color = "rgba(230, 0, 0, 0.7)";
+            $color = "rgba(255, 0, 0, 0.7)";
         }
         $slts = 100 - floor(($n/11) * 100);
         
