@@ -65,14 +65,14 @@ a.calcon span:hover {
 	transform: scale(1.5) rotate(90deg);
 }
 
-div#content, div#add {
+div#content, div#add, div#cntnt {
 	width: 60%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 15px;
 }
 
-div#content *, div#add * {
+div#content *, div#add *, div#cntnt * {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -107,6 +107,16 @@ div#content *, div#add * {
 		opacity:1;
 	}
 }
+@keyframes slide-in3 {
+	from {
+		top: 74%;
+		opacity: 0;
+	}
+	to {
+		top: 69%;
+		opacity:1;
+	}
+}
 @keyframes slide-out {
 	from {
 		top: 40%;
@@ -132,6 +142,18 @@ div#content *, div#add * {
 	z-index: 2;
 	cursor: pointer;
 }
+#booking-formc {
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(204, 15, 15, 0.5);
+	z-index: 2;
+	cursor: pointer;
+}
 /* https://www.w3schools.com/howto/howto_css_overlay.asp */
 #mbf{
     position: absolute;
@@ -140,6 +162,17 @@ div#content *, div#add * {
 	-ms-transform: translate(-50%,-50%);
 	animation: slide-in2 1s;
 	top: 45%;
+}
+#mbfc{
+	position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	animation: slide-in3 1s;
+	top: 69%;
+	margin-bottom: 20px;
+	/* margin-right: auto;
+	margin-left: auto; */
 }
 
 #mainconinfo {
@@ -198,6 +231,15 @@ input[name=email] {
 	width: 370px;
 }
 
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 input[type=text], input[type=number], input[type=email], select {
 	padding: 6px 10px;
 	margin-top: 12px;
@@ -225,7 +267,7 @@ input[type=submit]:active, input[type=button]:active {
 	background-color:rgb(10, 126, 0);
 }
 
-select {
+#e, #s {
 	width: 150px;
 }
 h5 {

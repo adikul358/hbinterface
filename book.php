@@ -78,7 +78,7 @@
 			</span>
 		</a>
 
-		<div id="bookedday"><div id=monthandyearspan><?php echo $_GET['d'] . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
+		<div id="bookedday"><div id=monthandyearspan><?php echo date('j', mktime(0, 0, 0, 1, $_GET['d'])) . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
 
 
 		<a class="calcon" id="btnNextDay" href="#" title="Next Day" onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
@@ -170,16 +170,23 @@
 										// 	$c++;
 										// }
 										foreach ($server_slots as $s) {
+											$present = false;
 											if ($tn == 0) {
 												echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
 											} else {
 											foreach ($timings as $t) {
 												if ($t['start'] == $s) {
 													echo '';
+													$present = false;
 												} else {
-													echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
+													$present = true;
 												}
-											}}
+											}
+												if ($present) {
+													echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
+													$present = false;
+												}
+											}
 											$c++;
 										}
 										
@@ -220,7 +227,7 @@
 
 							<label>Contact No.</label>
 							<br>
-							<input type="number" name="phone" required>
+							<input type="number" name="phone" required minlength="10">
 							<br>
 							<br>
 

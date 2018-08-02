@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="Java-Calendar/main.css">
     <script src="main.js"></script>
     <?php 
         
         session_start();
-        require "connect.php";
-        
+		require "connect.php";
+		
         $respond = 'confirm';
         $name = mysqli_real_escape_string($link, $_POST['name']);
         $event = mysqli_real_escape_string($link, $_POST['event']);
@@ -23,6 +25,11 @@
             $respond = 'err';
         }
 
+        $ds = array();
+        $ds = explode("-", $date);
+
+        $mp = (int)$ds[1];
+        $mp--;
     ?>
 <title>Page Title</title>
 </head>
@@ -34,7 +41,64 @@
 			</a>
 		</div>
 		<img src="images\SNS_Logo.png" alt="Shiv Nadar School logo" id="schlo">
+    </div>
+    <div id=cntnt>
+    <div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">
+        Slot Booked Successfully</div>
+    </div>
+    <div id=mbfc>
+        <form method=POST action="<?php echo 'book.php?d=' . $ds[2] . "&m=" . $mp . "&y=" . $ds[0]?>">
+					<div id="form">
 
-	</div>
+						<label>Event Name</label>
+						<br>
+						<input type=text name="event" readonly value="<?php echo $event?>">
+						<br>
+						<br>
+
+						<div id="times">
+							
+							<div style="width: 50%; float: left">
+								<label>Start Time</label>
+								<br>
+								<input type=text name="start" id=s readonly value="<?php echo $start?>">
+								</select>
+								<br>
+							</div>
+							
+							<div>
+								<label>End Time</label>
+								<br>    
+								<input type=text name="end" id=e readonly value="<?php echo $end?>">
+								</select>
+								<br>
+							</div>
+							
+							<br>
+							<br>
+							<label>Name of Person Booking</label>
+							<br>
+							<input type="text" name="name" readonly value="<?php echo $name?>">
+							<br>
+							<br>
+
+							<label>Contact No.</label>
+							<br>
+							<input type="number" name="phone" readonly value="<?php echo $phone?>">
+							<br>
+							<br>
+
+							<label>Email</label>
+							<br>
+							<input type="email" name="email" readonly value="<?php echo $email?>">
+							<br>
+							<br>
+						</div>
+					</div>
+					<br>
+					<div>
+						<input type="submit" value="Ok" style="float:right" id="em">
+					</div>
+				</form></div>
 </body>
 </html>

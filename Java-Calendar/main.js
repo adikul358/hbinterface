@@ -159,13 +159,15 @@ Calendar.prototype.Calendar = function (y, m) {
 
         // Current month dates
       } else if (checkMonth()) {
-        html += '<td id="prevdates">' + (p++) + '</td>';
+        html += '<td id="prevdates">' + d + '</td>';
 
       } else if (checkWeekDay()) {
         html += '<td id="prevdates">' + d + '</td>';
         p = 1;
       } else {
-        html += '<td id="currentmonthdates"><div class="sloid" id=' + d + '-' + m + '-' + y + '><a href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">' + d + '</a></div></td>';
+        html += '<td id="currentmonthdates"><div class="sloid" id=c_' + y + '-' + m + '-' + d + '><a href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+d+'</a></div></td>';
+        var eveid = 'c_' + y + '-' + m + '-' + d 
+        getSlts(eveid);
         p = 1;
       }
 
@@ -191,6 +193,17 @@ Calendar.prototype.Calendar = function (y, m) {
       return false;
     }
   }
+
+  function getSlts(id) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById(id).style.backgroundImage = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","calresponse.php?q="+id,true);
+        xmlhttp.send();
+    }
 
   function checkWeekDay() {
     var da = new Date(y, m, d);
@@ -256,8 +269,9 @@ window.onload = function () {
     c.nextYear();
 
   };
-
+  
 }
+
 // Get element by id
 function getId(id) {
   return document.getElementById(id);
