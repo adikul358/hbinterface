@@ -112,10 +112,10 @@ Calendar.prototype.Calendar = function (y, m) {
   var cdc = getSearchParameters();
   var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
 
-  var html = '<table>';
+  var html = '<table id=cal>';
 
   // Write the header of the days of the week
-  html += '<tr>';
+  html += '<tr class=head>';
 
   for (var i = 0; i < 7; i++) {
     html += '<th class="daysheader">' + this.DaysOfWeek[i] + '</th>';
@@ -135,7 +135,7 @@ Calendar.prototype.Calendar = function (y, m) {
   var cellvalue;
 
   for (var d, i = 0, z0 = 0; z0 < 6; z0++) {
-    html += '<tr>';
+    html += '<tr class=weeks>';
 
     for (var z0a = 0; z0a < 7; z0a++) {
 
@@ -167,7 +167,7 @@ Calendar.prototype.Calendar = function (y, m) {
       } else {
         html += '<td id="currentmonthdates"><div class="sloid" id=c_' + y + '-' + m + '-' + d + '><a href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+d+'</a></div></td>';
         var eveid = 'c_' + y + '-' + m + '-' + d 
-        // getSlts(eveid);
+        getSlts(eveid);
         p = 1;
       }
 
@@ -289,6 +289,12 @@ function currdate(d,m,y) {
 }
 
 function nextDay(d, m, y) {
+  var checkd = new Date(y, m, d);
+  checkd = checkd.getDay();
+
+  if (checkd == 5) {
+    d = d+2;
+  }
 
   if (d == daysInMonth(m, y) && m < 11) {
 
@@ -309,6 +315,13 @@ function nextDay(d, m, y) {
 }
 
 function prevDay(d, m, y) {
+  var checkd = new Date(y, m, d);
+  checkd = checkd.getDay();
+
+  if (checkd == 1) {
+    d = d-2;
+  }
+
   if (d == 1 && m > 0) {
 
     d = daysInMonth(m - 1, y);

@@ -105,11 +105,11 @@
 							# code...
 							echo '<table> 
 							<tr>
-								<th class="daysheader">S No.</th>
-								<th class="daysheader">Event</th>
-								<th class="daysheader">Start time</th>
-								<th class="daysheader">End time</th>
-								<th class="daysheader">Person Booking</th>
+								<th class="daysheaderl">S No.</th>
+								<th class="daysheaderl">Event</th>
+								<th class="daysheaderl">Start time</th>
+								<th class="daysheaderl">End time</th>
+								<th class="daysheaderl">Person Booking</th>
 							</tr>';
 	
 							foreach ($bookings as $row) {
