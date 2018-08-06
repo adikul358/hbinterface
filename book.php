@@ -73,22 +73,19 @@
 
 	<div id="calendarmonthcontrols">
 		<a class="calcon" id="btnPrevDay" href="#" title="Previous Day" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-			<span>
 				<img src="Java-Calendar/arrows/left_single.svg"></img>
-			</span>
 		</a>
 
 		<div id="bookedday"><div id=monthandyearspan><?php echo date('j', mktime(0, 0, 0, 1, $_GET['d'])) . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
 
 
 		<a class="calcon" id="btnNextDay" href="#" title="Next Day" onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-			<span>
 				<img src="Java-Calendar/arrows/right_single.svg"></img>
-			</span>
 		</a>
 	</div>
 </div>
 </div>
+		
 		<div id="bofoma">
 			<div id="content">
 				<div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">Booked Slots</div>
@@ -256,6 +253,9 @@
 						</div>
 				</div>
 			</div>
+			<script>
+				prevavail(<?php echo $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y']?>);
+		</script>
 	</body>
 
 </html>

@@ -109,7 +109,6 @@ Calendar.prototype.Calendar = function (y, m) {
   //var monthhtml = '<span class="monthspan">' + this.Months[m] + '</span>';
 
   // Write selected month and year. This HTML goes into <div id="month"></div>
-  var cdc = getSearchParameters();
   var monthandyearhtml = '<span id="monthandyear">' + this.Months[m] + ' ' + y + '</span>';
 
   var html = '<table id=cal>';
@@ -159,10 +158,10 @@ Calendar.prototype.Calendar = function (y, m) {
 
         // Current month dates
       } else if (checkMonth()) {
-        html += '<td id="prevdates">' + d + '</td>';
+        html += '<td class="prevdates" id=c_' + y + '-' + m + '-' + d + '>' + d + '</td>';
 
       } else if (checkWeekDay()) {
-        html += '<td id="prevdates">' + d + '</td>';
+        html += '<td class="prevdates" id=c_' + y + '-' + m + '-' + d + '>' + d + '</td>';
         p = 1;
       } else {
         html += '<td id="currentmonthdates"><div class="sloid" id=c_' + y + '-' + m + '-' + d + '><a href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+d+'</a></div></td>';
@@ -377,19 +376,16 @@ function prevDay(d, m, y) {
   location.href = "book.php?d=" + d + "&m=" + m + "&y=" + y;
 }
 
-function getSearchParameters() {
-  var prmstr = window.location.search.substr(1);
-  return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-}
-
-function transformToAssocArray(prmstr) {
-  var params = {};
-  var prmarr = prmstr.split("&");
-  for (var i = 0; i < prmarr.length; i++) {
-    var tmparr = prmarr[i].split("=");
-    params[tmparr[0]] = tmparr[1];
-  }
-  return params;
+function prevavail(d,m,y) {
+  var date = new Date();
+  var date2 = new Date(y,m,d);
+  date.setMilliseconds(0);
+  date.setSeconds(0);
+  date.setMinutes(0);
+  date.setHours(0);
+  if (date.getTime() === date2.getTime()) {
+    document.getElementById("btnPrevDay").style = "display:none";
+  } 
 }
 
 function launchForm() {

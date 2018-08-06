@@ -83,7 +83,7 @@ td.bkdslts {
   text-align: center;
 }
 
-#prevdates {
+.prevdates {
   background-color: rgba(90, 90, 90, 0.8);
   color: white;
 }
