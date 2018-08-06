@@ -72,14 +72,14 @@
 	<!-- <div id="year"></div> -->
 
 	<div id="calendarmonthcontrols">
-		<a class="calcon" id="btnPrevDay" href="#" title="Previous Day" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
+		<a class="calcon" id="btnPrevDay" href="#" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
 				<img src="Java-Calendar/arrows/left_single.svg"></img>
 		</a>
 
 		<div id="bookedday"><div id=monthandyearspan><?php echo date('j', mktime(0, 0, 0, 1, $_GET['d'])) . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
 
 
-		<a class="calcon" id="btnNextDay" href="#" title="Next Day" onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
+		<a class="calcon" id="btnNextDay" href="#"  onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
 				<img src="Java-Calendar/arrows/right_single.svg"></img>
 		</a>
 	</div>

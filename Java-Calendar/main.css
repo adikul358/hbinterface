@@ -144,7 +144,21 @@ a.calcon {
   padding: 10px;
 }
 .calcon img:hover {
-  background: rgba(0, 0, 0, 0.3);
+  /* background: rgba(0, 23, 88, 0.384); */
+  animation: flip 1s ease;
+  animation-delay: .25s;
+}
+
+@keyframes flip {
+  /* 25% {
+    transform: rotateY(180deg);
+  } */
+  50% {
+    transform: rotateY(180deg) translate(-15px, 0px);
+  }
+  /* 75% {
+    transform: rotateY(180deg);
+  } */
 }
 
 #monthandyear {

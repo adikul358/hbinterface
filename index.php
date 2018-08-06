@@ -24,21 +24,21 @@
 			<div id="calendaroverallcontrols">
 
 				<div id="calendarmonthcontrols">
-					<a class="calcon" id="btnPrevYr" href="#" title="Previous Year">
+					<a class="calcon" id="btnPrevYr" href="#" >
 						<img src="Java-Calendar/arrows/left_double.svg"></img>
 					</a>
 
-					<a class="calcon" id="btnPrev" href="#" title="Previous Month">
+					<a class="calcon" id="btnPrev" href="#" >
 						<img src="Java-Calendar/arrows/left_single.svg"></img>
 					</a>
 
 					<div id="monthandyear" style="width: 160px"></div>
 
-					<a class="calcon" id="btnNext" href="#" title="Next Month">
+					<a class="calcon" id="btnNext" href="#">
 						<img src="Java-Calendar/arrows/right_single.svg"></img>
 					</a>
 
-					<a class="calcon" id="btnNextYr" href="#" title="Next Year">
+					<a class="calcon" id="btnNextYr" href="#" >
 						<img src="Java-Calendar/arrows/right_double.svg"></img>
 					</a>
 
