@@ -19,42 +19,32 @@
 	</head>
 
 	<body>
+		<div id=mai>
 
-		<div class="divcalendar">
+		<div id="calendaroverallcontrols">
+    
+	<div id="calendarmonthcontrols">
+		<a class="calcon" id="btnPrevYr" href="#" title="Previous Year">
+				<img src="Java-Calendar/arrows/left_double.svg"></img>
+		</a>
 
-			<div id="calendaroverallcontrols">
-				<!-- <div id="year"></div> -->
+		<a class="calcon" id="btnPrev" href="#" title="Previous Month">
+				<img src="Java-Calendar/arrows/left_single.svg"></img>
+		</a>
 
-				<div id="calendarmonthcontrols">
-					<a class="calcon" id="btnPrevYr" href="#" title="Previous Year">
-						<span>
-							<img src="Java-Calendar/arrows/left_double.svg"></img>
-						</span>
-					</a>
+		<div id="monthandyear" style="width: 160px"></div>
 
-					<a class="calcon" id="btnPrev" href="#" title="Previous Month">
-						<span>
-							<img src="Java-Calendar/arrows/left_single.svg"></img>
-						</span>
-					</a>
+		<a class="calcon" id="btnNext" href="#" title="Next Month">
+				<img src="Java-Calendar/arrows/right_single.svg"></img>
+		</a>
 
-					<div id="monthandyear"></div>
+		<a class="calcon" id="btnNextYr" href="#" title="Next Year">
+				<img src="Java-Calendar/arrows/right_double.svg"></img>
+		</a>
 
-					<a class="calcon" id="btnNext" href="#" title="Next Month">
-						<span>
-							<img src="Java-Calendar/arrows/right_single.svg"></img>
-						</span>
-					</a>
-
-					<a class="calcon" id="btnNextYr" href="#" title="Next Year">
-						<span>
-							<img src="Java-Calendar/arrows/right_double.svg"></img>
-						</span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div id="divcalendartable"></div>
+	</div>
+</div>
+		<div id="divcalendartable"></div></div>
 	</body>
 
 </html>

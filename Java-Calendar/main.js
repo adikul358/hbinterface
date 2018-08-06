@@ -110,7 +110,7 @@ Calendar.prototype.Calendar = function (y, m) {
 
   // Write selected month and year. This HTML goes into <div id="month"></div>
   var cdc = getSearchParameters();
-  var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
+  var monthandyearhtml = '<span id="monthandyear">' + this.Months[m] + ' ' + y + '</span>';
 
   var html = '<table id=cal>';
 
