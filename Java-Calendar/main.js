@@ -291,37 +291,74 @@ function currdate(d,m,y) {
 function nextDay(d, m, y) {
   var checkd = new Date(y, m, d);
   checkd = checkd.getDay();
-
+  var last = new Date(y, m+1, 0);
+  last = last.getDate();
+  console.log(last + " " + d)
+  
   if (checkd == 5) {
-    d = d+2;
+    if (d == last) {
+      console.log("case 1 " + d + " | " + m);
+      d = 2;
+      m = m+1;
+      console.log("case 1 " + d + " | " + m);
+      
+    } else if ((d+1) == last) {
+      d = 1;
+      m = m+1;
+      console.log("case 2 " + d + " | " + m);
+    } else if ((d+2) == last) {
+      d = 0;
+      m = m+1;
+      console.log("case 3 " + d + " | " + m);
+    } else {
+      d = d+2;
+    }
   }
-
+  
+  
   if (d == daysInMonth(m, y) && m < 11) {
-
+    
     d = 1;
     m = m + 1;
-
+    
   } else if (d == daysInMonth(m, y) && m == 11) {
-
+    
     d = 1;
     m = 0;
     y = y + 1;
-
+    
   } else {
     d = d + 1;
   }
-
+  
   location.href = "book.php?d=" + d + "&m=" + m + "&y=" + y;
 }
 
 function prevDay(d, m, y) {
   var checkd = new Date(y, m, d);
   checkd = checkd.getDay();
-
+  var last = new Date(y, m, 0);
+  last = last.getDate();
+  
   if (checkd == 1) {
-    d = d-2;
+    if (d == 1) {
+      d = last-1;
+      m = m-1;
+      console.log("case 1 " + d + " | " + m);
+      
+    } else if ((d-1) == 1) {
+      d = last;
+      m = m-1;
+      console.log("case 2 " + d + " | " + m);
+    } else if ((d-2) == 1) {
+      d = last+1;
+      m = m-1;
+      console.log("case 3 " + d + " | " + m);
+    } else {
+      d = d-2;
+    }
   }
-
+  
   if (d == 1 && m > 0) {
 
     d = daysInMonth(m - 1, y);
