@@ -166,7 +166,7 @@ Calendar.prototype.Calendar = function (y, m) {
       } else {
         html += '<td id="currentmonthdates"><div class="sloid" id=c_' + y + '-' + m + '-' + d + '><a href="book.php?d=' + (d) + "&m=" + (m) + "&y=" + (y) + '">'+d+'</a></div></td>';
         var eveid = 'c_' + y + '-' + m + '-' + d 
-        getSlts(eveid);
+        // getSlts(eveid);
         p = 1;
       }
 
