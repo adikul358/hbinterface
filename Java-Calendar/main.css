@@ -143,26 +143,19 @@ a.calcon {
 .calcon img {
   padding: 10px;
 }
+
+.right img, .left img {
+
+  transition: all .3s ease-out;
+}
+
 .right img:hover {
   /* background: rgba(0, 23, 88, 0.384); */
-  animation: flip_right 1s ease;
-  animation-delay: .25s;
+  transform: translate(10px, 0px);
 }
 .left img:hover {
   /* background: rgba(0, 23, 88, 0.384); */
-  animation: flip_left 1s ease;
-  animation-delay: .25s;
-}
-
-@keyframes flip_right {
-  50% {
-    transform: rotateY(180deg) translate(-15px, 0px);
-  }
-}
-@keyframes flip_left {
-  50% {
-    transform: rotateY(180deg) translate(15px, 0px);
-  }
+  transform: translate(-10px, 0px);
 }
 
 #monthandyear {
