@@ -143,22 +143,26 @@ a.calcon {
 .calcon img {
   padding: 10px;
 }
-.calcon img:hover {
+.right img:hover {
   /* background: rgba(0, 23, 88, 0.384); */
-  animation: flip 1s ease;
+  animation: flip_right 1s ease;
+  animation-delay: .25s;
+}
+.left img:hover {
+  /* background: rgba(0, 23, 88, 0.384); */
+  animation: flip_left 1s ease;
   animation-delay: .25s;
 }
 
-@keyframes flip {
-  /* 25% {
-    transform: rotateY(180deg);
-  } */
+@keyframes flip_right {
   50% {
     transform: rotateY(180deg) translate(-15px, 0px);
   }
-  /* 75% {
-    transform: rotateY(180deg);
-  } */
+}
+@keyframes flip_left {
+  50% {
+    transform: rotateY(180deg) translate(15px, 0px);
+  }
 }
 
 #monthandyear {
