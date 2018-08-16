@@ -73,14 +73,14 @@
 
 	<div id="calendarmonthcontrols">
 		<a class="calcon left" id="btnPrevDay" href="#" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-				<img src="Java-Calendar/arrows/left_single.svg"></img>
+				<img src="Java-Calendar/arrows/left_single.svg">
 		</a>
 
 		<div id="bookedday"><div id=monthandyearspan><?php echo date('j', mktime(0, 0, 0, 1, $_GET['d'])) . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
 
 
 		<a class="calcon right" id="btnNextDay" href="#"  onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-				<img src="Java-Calendar/arrows/right_single.svg"></img>
+				<img src="Java-Calendar/arrows/right_single.svg">
 		</a>
 	</div>
 </div>
@@ -92,6 +92,21 @@
 				<div id="bkdslts">
 					<?php 
 						$counter = 1;
+						$js1 = "<script>
+									var rows = ";
+						$js2 = ";
+						if (rows == 12) {
+									document.getElementById('adda').removeAttribute('href');
+									document.getElementById('adda').removeAttribute('onclick');
+									document.getElementById('adda').innerHTML = '';
+									document.getElementById('adda').innerHTML = '<img src=images/block.svg id=blockico>';
+								} else {
+									document.getElementById('adda').setAttribute('href') = '#';
+									document.getElementById('adda').setAttribute('onclick') = 'launchForm()';
+									document.getElementById('adda').innerHTML = '';
+									document.getElementById('adda').innerHTML = '<img src=images/add.svg id=addico>;'
+								}
+								</script>";
 
 						switch ($r) {
 							case 0:
@@ -120,21 +135,24 @@
 								$counter++;
 								echo $html;
 							}
-								break;
+							$cjs = $counter;
+							break;
 						}
-					?>
+						?>
 					</table>
 				</div>
 			</div>
 			<div id="add">
 				<div id=k style="margin:15px">
-					<span id="titlespan" style="margin-right: 15px">Book a Slot</span>
-					<a href="#" id="add" onclick="launchForm()">
-						<img src="images/add.svg" id="addico">
-					</a>
+						<span id="titlespan" style="margin-right: 15px">Book a Slot</span>
+						<a href="#" id="adda" onclick="launchForm()">
+								<img src="images/add.svg" id="addico">
+							</a>
+							
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+				<?php echo $js1 . $counter . $js2;?>
 		<div id="booking-form">
 			<div id=mbf>
 				<form method="POST" action="<?php echo 'confirm.php?date=' . $currdate?>">

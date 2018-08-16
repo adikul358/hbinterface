@@ -60,9 +60,18 @@ a#contact:hover {
 	height: 30px;
 	transition: all 1s ease;
 	margin-top: 18px;
+
+	color: red;
 }
 
 #addico:hover {
+	transform: scale(1.5) rotate(90deg);
+}
+#blockico {
+	vertical-align: middle;
+	height: 30px;
+	transition: all 1s ease;
+	margin-top: 18px;
 	transform: scale(1.5) rotate(90deg);
 }
 
@@ -350,7 +359,7 @@ label.tag {
 	overflow-x: hidden;
 }
 
-#add {
+#add, #adda {
 	flex: 20%;
 	display: flex;
 	flex-direction: row;
@@ -369,7 +378,7 @@ label.tag {
 		max-height: initial;
 		overflow-y: visible;
 	}
-	#add {
+	#add,  {
 		flex: 100%
 	}
 	.header {
