@@ -1,8 +1,8 @@
 <html>
 
 <head>
-	<link href="style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="Java-Calendar/main.css">
+	<!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link rel="stylesheet" href="Java-Calendar/main.css"> -->
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
 	<!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
 
 <body>
 
-	<div class="header">
+	<div class="container-fluid">
 		<div id="title">
 			<h1>WCH Booking Interface</h1>
 		</div>
@@ -33,21 +33,21 @@
 
 				<div id="calendarmonthcontrols">
 					<a class="calcon left" id="btnPrevYr" href="#" >
-						<img src="Java-Calendar/arrows/left_double.svg"></img>
+						<img src="Java-Calendar/arrows/left_double.svg">
 					</a>
 
 					<a class="calcon left" id="btnPrev" href="#" >
-						<img src="Java-Calendar/arrows/left_single.svg"></img>
+						<img src="Java-Calendar/arrows/left_single.svg">
 					</a>
 
 					<div id="monthandyear" style="width: 160px"></div>
 
 					<a class="calcon right" id="btnNext" href="#">
-						<img src="Java-Calendar/arrows/right_single.svg"></img>
+						<img src="Java-Calendar/arrows/right_single.svg">
 					</a>
 
 					<a class="calcon right" id="btnNextYr" href="#" >
-						<img src="Java-Calendar/arrows/right_double.svg"></img>
+						<img src="Java-Calendar/arrows/right_double.svg">
 					</a>
 
 				</div>

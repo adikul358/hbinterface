@@ -6,6 +6,14 @@
 	<script src="Java-Calendar/main.js"></script>
 	<?php require "connect.php"?>
 	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
+	 <!-- Font Awesome -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
 
 	<?php
 
@@ -55,14 +63,8 @@
 
 <body>
 
-	<div class="header">
-		<div id="title">
-			<a href="index.php" style="text-decoration: none">
-				<h1>WCH Booking Interface</h1>
-			</a>
-		</div>
-		<img src="images\SNS_Logo.png" alt="Shiv Nadar School logo" id="schlo">
-
+	<div class="container-fluid">
+		<h1>Assembly Hall Booking Interface</h1>
 	</div>
 
 	<body>
