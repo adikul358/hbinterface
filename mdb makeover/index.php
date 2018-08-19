@@ -68,23 +68,23 @@
             <div class="card ">
                 <div class="card-body text-center ">
 
-                    <h4 class="card-title">August 2018</h4>
+                    <h4 id=monthandyearspan class="card-title">August 2018</h4>
                     <div class="btn-group " style="margin-right: 25px" role="group">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary-light">
                             <img height=20 src="Java-Calendar/arrows/left_double.svg">
                         </button>
 
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary-light">
                             <img src="Java-Calendar/arrows/left_single.svg" height=20>
                         </button>
 
                     </div>
                     <div class="btn-group " role="group">
 
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary-light">
                             <img height=20 src="Java-Calendar/arrows/right_single.svg">
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary-light">
                             <img height=20 src="Java-Calendar/arrows/right_double.svg">
                         </button>
 
