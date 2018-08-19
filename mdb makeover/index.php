@@ -13,9 +13,9 @@
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="height:100vh; background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-size: 400% 400%;background-position: center;background-size: cover;">
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light primary-color-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background:rgba(255,255,255, 0.9)">
 
         <!-- Navbar brand -->
         <a class="navbar-brand" href="#">
@@ -62,10 +62,11 @@
 
         </div>
     </nav>
+    <div class="view full-page-intro" >
     <br>
     <div class="row justify-content-center">
         <div class="col-sm-8">
-            <div class="card ">
+            <div class="card" style="background:rgba(255,255,255, 0.9)">
                 <div class="card-body text-center ">
                     <div class=container>
                     <!-- Responsive calendar - START -->
@@ -109,7 +110,21 @@
     <script src="cal/js/responsive-calendar.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".responsive-calendar").responsiveCalendar();
+            $(".responsive-calendar").responsiveCalendar({
+                events: {
+                    "2018-08-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
+                    "2018-08-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
+                    "2018-08-03": {"number": 1}, 
+                    "2018-09-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
+                    "2018-09-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
+                    "2018-09-03": {"number": 1}, 
+                    "2018-10-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
+                    "2018-10-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
+                    "2018-10-03": {"number": 1}, 
+                    "2018-11-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
+                    "2018-11-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
+                    "2018-11-03": {"number": 1}, 
+                }});
         });
     </script>
     <!-- <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script> -->

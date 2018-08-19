@@ -4,7 +4,9 @@
 .responsive-calendar .controls a {
   cursor: pointer;
 }
-.responsive-calendar .controls h4 {
+.responsive-calendar .controls h4,
+.responsive-calendar .controls h5,
+.responsive-calendar .controls h6 {
   display: inline;
 }
 .responsive-calendar .day-headers,
