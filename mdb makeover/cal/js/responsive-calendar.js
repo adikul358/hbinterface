@@ -257,8 +257,8 @@
           multiplier = Math.ceil((firstDayOfMonth - (dayBase - 1) + lastDayOfMonth) / 7);
           loopBase = multiplier * 7;
         }
-        this.$element.find("[data-head-year]").html(time.getFullYear());
         this.$element.find("[data-head-month]").html(this.options.translateMonths[time.getMonth()]);
+        this.$element.find("[data-head-year]").html(time.getFullYear());
         draw = function() {
           var dayNum, setEvents;
           thisRef.$element.find('[data-group="days"]').empty();
