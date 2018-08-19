@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <title>WCH Booking Interface - Shiv Nadar School, Noida</title>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-        <!-- Respomsive slider -->
-        <link href="calendar 0.9/css/responsive-calendar.css" rel="stylesheet">
+
+<head>
+    <title>WCH Booking Interface - Shiv Nadar School, Noida</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Respomsive slider -->
+    <link href="css/responsive-calendar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -73,7 +70,7 @@
             <div class="card ">
                 <div class="card-body text-center ">
 
-                    <h4 id=monthandyearspan class="card-title">August 2018</h4>
+                    <!-- <h4 id=monthandyearspan class="card-title">August 2018</h4>
                     <div class="btn-group " style="margin-right: 25px" role="group">
                         <button type="button" class="btn btn-primary-light">
                             <img height=20 src="Java-Calendar/arrows/left_double.svg">
@@ -93,44 +90,54 @@
                             <img height=20 src="Java-Calendar/arrows/right_double.svg">
                         </button>
 
+                    </div> -->
+                    <!-- Responsive calendar - START -->
+                    <div class="responsive-calendar">
+                        <div class="controls">
+                            <a class="pull-left" data-go="prev">
+                                <div class="btn btn-primary">Prev</div>
+                            </a>
+                            <h4>
+                                <span data-head-year></span>
+                                <span data-head-month></span>
+                            </h4>
+                            <a class="pull-right" data-go="next">
+                                <div class="btn btn-primary">Next</div>
+                            </a>
+                        </div>
+                        <hr/>
+                        <div class="day-headers">
+                            <div class="day header">Mon</div>
+                            <div class="day header">Tue</div>
+                            <div class="day header">Wed</div>
+                            <div class="day header">Thu</div>
+                            <div class="day header">Fri</div>
+                            <div class="day header">Sat</div>
+                            <div class="day header">Sun</div>
+                        </div>
+                        <div class="days" data-group="days">
+
+                        </div>
                     </div>
+                    <!-- Responsive calendar - END -->
 
                 </div>
 
             </div>
         </div>
-    <div class="container">
-      <!-- Responsive calendar - START -->
-    	<div class="responsive-calendar">
-        <div class="controls">
-            <a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
-            <h4><span data-head-year></span> <span data-head-month></span></h4>
-            <a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
-        </div><hr/>
-        <div class="day-headers">
-          <div class="day header">Mon</div>
-          <div class="day header">Tue</div>
-          <div class="day header">Wed</div>
-          <div class="day header">Thu</div>
-          <div class="day header">Fri</div>
-          <div class="day header">Sat</div>
-          <div class="day header">Sun</div>
-        </div>
-        <div class="days" data-group="days">
-          
-        </div>
-      </div>
-      <!-- Responsive calendar - END -->
     </div>
-    <script src="calendar 0.9/js/jquery.js"></script>
-    <script src="calendar 0.9/js/bootstrap.min.js"></script>
-    <script src="calendar 0.9/js/responsive-calendar.js"></script>
+    </div>
+
+
+        <script src="js/jquery.js"></script>
+    <script src="js/responsive-calendar.js"></script>
     <script type="text/javascript">
-
-
       $(document).ready(function () {
+        var c = new Date();
+        var t = c.getFullYear() + '-' + (c.getMonth()+1);
+
         $(".responsive-calendar").responsiveCalendar({
-          time: "2018-08",
+          time: t,
           events: {
             "2013-04-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
             "2013-04-26": {"number": 1, "url": "http://w3widgets.com"}, 
@@ -139,10 +146,6 @@
         });
       });
     </script>
-        </div>
-    </div>
-
-
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
@@ -150,7 +153,6 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="Java-Calendar/main.js"></script>
 
 </body>
 
