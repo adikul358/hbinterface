@@ -11,6 +11,46 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Respomsive slider -->
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
+    <?php require 'php/conn.php';
+    
+    $dates_query = "SELECT DISTINCT date FROM bookings ORDER BY date";
+    $result = mysqli_query($link, $dates_query);
+    
+    if (!$result) {
+        exit("Failed to fetch:<br>" . mysqli_error($link));
+    }
+    
+    $dates = array();
+    while($row = mysqli_fetch_assoc($result)) {
+        $dates[] = $row;
+    }
+
+    
+    $events = array();
+    $dates_u = array();
+    
+    foreach ($dates as $c) {
+        $dates_u[] = $c['date'];
+    }
+
+    foreach ($dates_u as $d) {
+        $bookings_query = "SELECT * FROM bookings WHERE date='$d' ORDER BY date";
+        $result = mysqli_query($link, $bookings_query);
+        
+        if (!$result) {
+            exit("Failed to fetch:<br>" . mysqli_error($link));
+        }
+        
+        $bookings = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $bookings[] = $row;
+        }
+
+        $bno = mysqli_num_rows($result);
+        
+        $events[] = array("date"=>$d, 'no'=>$bno);
+    }
+    ?>
 </head>
 
 <body style="height:100vh; background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-size: 400% 400%;background-position: center;background-size: cover;">
@@ -83,7 +123,7 @@
                                 <div class="btn btn-primary">Next</div>
                             </a>
                         </div>
-                        <br>
+                              <br>
                         <br>
                         <div class="day-headers">
                             <div class="day header">Mon</div>
@@ -114,16 +154,13 @@
                 events: {
                     "2018-08-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
                     "2018-08-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
-                    "2018-08-03": {"number": 1}, 
-                    "2018-09-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
-                    "2018-09-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
-                    "2018-09-03": {"number": 1}, 
-                    "2018-10-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
-                    "2018-10-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
-                    "2018-10-03": {"number": 1}, 
-                    "2018-11-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
-                    "2018-11-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
-                    "2018-11-03": {"number": 1}, 
+                    "2018-08-03": {"number": 1},
+                    <?php
+                       foreach ($events as $curr) {
+                        echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},';
+                    }
+                    ?>
+                   
                 }});
         });
     </script>

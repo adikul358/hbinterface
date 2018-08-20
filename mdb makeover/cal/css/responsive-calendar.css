@@ -48,6 +48,7 @@
   background-color: #bcdff5;
 }
 .responsive-calendar .day.not-current a {
+  background-color: #4b4b4b93;
   color: #ddd;
 }
 .responsive-calendar .day .badge {
