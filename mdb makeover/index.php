@@ -152,9 +152,6 @@
         $(document).ready(function () {
             $(".responsive-calendar").responsiveCalendar({
                 events: {
-                    "2018-08-30": {"number": 5, "url": "/wchbooking/mdb makeover"},
-                    "2018-08-26": {"number": 1, "url": "/wchbooking/mdb makeover"}, 
-                    "2018-08-03": {"number": 1},
                     <?php
                        foreach ($events as $curr) {
                         echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},';
