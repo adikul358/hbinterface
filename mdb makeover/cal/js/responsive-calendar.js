@@ -169,9 +169,6 @@
             }
             day.append(badge);
           }
-          if (dayEvents.url) {
-            day.find("a").attr("href", dayEvents.url);
-          }
         }
         return day;
       },
@@ -220,7 +217,7 @@
             dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
           }
         }
-        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum));
+        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum).attr("href", "book.php?d=" + dayNum + "&m=" + monthNum + "&y=" + yearNum));
         if (this.options.monthChangeAnimation) {
           this.applyTransform(day, 'rotateY(180deg)');
           this.applyBackfaceVisibility(day);
