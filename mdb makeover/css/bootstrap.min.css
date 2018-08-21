@@ -3804,7 +3804,8 @@ fieldset:disabled a.btn {
 .nav,
 .navbar {
     display: -ms-flexbox;
-    -ms-flex-wrap: wrap
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .modal-dialog-centered::before,
