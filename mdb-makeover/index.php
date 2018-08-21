@@ -50,12 +50,63 @@
         
         $events[] = array("date"=>$d, 'no'=>$bno);
     }
+
+    $hall = "Wild Cats Hall";
+    if (isset($_GET['hall'])) {
+        $hall = $_GET['hall'];
+    }
+
+    $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COML"=>"", "SENL"=>"");
+        switch ($hall) {
+            case 'Wild Cats Hall':
+                foreach ($active as $key => $ac) {
+                    if ($key === "WCH") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+            case 'Conference Room':
+                foreach ($active as $key => $ac) {
+                    if ($key === "CONR") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+            case 'Meeting Room':
+                foreach ($active as $key => $ac) {
+                    if ($key === "MEER") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+            case 'Gymnasium':
+                foreach ($active as $key => $ac) {
+                    if ($key === "GYM") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+            case 'Composite Lab':
+                foreach ($active as $key => $ac) {
+                    if ($key === "COTEL") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+            case 'Senior Library':
+                foreach ($active as $key => $ac) {
+                    if ($key === "SENR") {
+                        $active[$key] = "active";
+                    }
+                }
+                break;
+        }
     ?>
 </head>
 
-<body style="height:100vh; background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-size: 400% 400%;background-position: center;background-size: cover;">
+<body style="height:105vh; background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-size: 400% 400%;background-position: center;background-size: cover;">
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background:rgba(255,255,255, 0.9)">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.9)">
 
         <!-- Navbar brand -->
         <a class="navbar-brand" href="#">
@@ -89,12 +140,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Halls</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Wild Cats Hall</a>
-                        <a class="dropdown-item" href="#">Conference Room</a>
-                        <a class="dropdown-item" href="#">Meeting Room</a>
-                        <a class="dropdown-item" href="#">Gymnasium</a>
-                        <a class="dropdown-item" href="#">Composite Lab</a>
-                        <a class="dropdown-item" href="#">Senior Library</a>
+                        <a class="dropdown-item <?php echo $active['WCH']?>" href="/wchbooking/mdb makeover">Wild Cats Hall</a>
+                        <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference Room</a>
+                        <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting Room</a>
+                        <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
+                        <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite Lab</a>
+                        <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior Library</a>
                     </div>
                 </li>
 
@@ -109,9 +160,15 @@
             <div class="card" style="background:rgba(255,255,255, 0.9)">
                 <div class="card-body text-center ">
                     <div class=container>
+                        <h4 class=card-title><?php echo $hall?></h4>
                     <!-- Responsive calendar - START -->
                     <div class="responsive-calendar">
-                        <div class="controls">
+                        <style>
+                            .controls * {
+                                vertical-align: middle;
+                            }
+                        </style>    
+                    <div class="controls">
                             <a class=float-left data-go="prev">
                                 <div class="btn btn-primary">Prev</div>
                             </a>
