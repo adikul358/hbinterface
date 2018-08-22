@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>WCH Booking Interface - Shiv Nadar School, Noida</title>
+    <title>Hall Booking Interface - Shiv Nadar School, Noida</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/mdb.min.css" rel="stylesheet">
