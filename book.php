@@ -45,7 +45,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
-        <a class="navbar-brand" href="/wchbooking">
+        <a class="navbar-brand" href="/">
             <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                 height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
         </a>
@@ -61,7 +61,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Halls</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item <?php echo $active['WCH']?>" href="/wchbooking/">Wild Cats Hall</a>
+                        <a class="dropdown-item <?php echo $active['WCH']?>" href="/">Wild Cats Hall</a>
                         <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference Room</a>
                         <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting Room</a>
                         <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
