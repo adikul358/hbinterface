@@ -53,29 +53,24 @@
     ?>
 </head>
 
-<body style="min-height: 100vh; overflow-x: hidden;background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
+<body style="min-height: 100vh; overflow-x: hidden;background-image: url('images/tuscany-wallpaper-3840x2160-4k-hd-wallpaper-italy-meadows-hills-pines-trees-4886.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
     
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.9)">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
-        <!-- Navbar brand -->
         <a class="navbar-brand" href="/wchbooking/mdb-makeover">
             <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                 height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
         </a>
 
-        <!-- Collapse button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible content -->
         <div class="collapse navbar-collapse" id="basicExampleNav">
 
-            <!-- Links -->
             <ul class="navbar-nav mr-auto">
 
-                <!-- Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Halls</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
@@ -95,7 +90,7 @@
     <br>
     <div class="row justify-content-center">
         <div class="col-sm-9">
-            <div class="card" style="background:rgba(255,255,255, 0.9)">
+            <div class="card" style="background:rgba(255,255,255, 0.7)">
                 <div class="card-body text-center ">
                     <div class=container>
                             <h4 class=card-title>
@@ -146,8 +141,6 @@
             transition: min-width 1s;
             border-radius:50px; 
             height:50px;
-            background:rgba(66,133,244, 0.9);
-            color: black;
         }
         #float span {
             max-width: 0;
@@ -182,7 +175,7 @@
         <?php
             $link = "'book.php?date=" . $date . "'";
         ?>
-        <button id=float type=button class="btn btn-rounded" onclick="location.href=<?php echo $link?>;">
+        <button id=float type=button class="btn btn-primary" onclick="location.href=<?php echo $link?>;">
             <i class="fa fa-plus" id=pen></i><span>Book New Event</span>
         </button>
     </div>

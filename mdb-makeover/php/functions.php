@@ -118,4 +118,8 @@
             $counter++;
         }
     }
+
+    function book_event($data) {
+        
+    }
 ?>

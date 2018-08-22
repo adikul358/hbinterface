@@ -66,8 +66,8 @@
     ?>
 </head>
 
-<body style="height:105vh; background-image: url('images/noida-overview.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.9)">
+<body style="height:105vh; background-image: url('images/tuscany-wallpaper-3840x2160-4k-hd-wallpaper-italy-meadows-hills-pines-trees-4886.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
         <!-- Navbar brand -->
         <a class="navbar-brand" href="/wchbooking/mdb-makeover">
@@ -108,7 +108,7 @@
     <br>
     <div class="row justify-content-center">
         <div class="col-sm-8">
-            <div class="card" style="background:rgba(255,255,255, 0.9)">
+            <div class="card" style="background:rgba(255,255,255, 0.7)">
                 <div class="card-body text-center ">
                     <div class=container>
                         <h4 class=card-title>
