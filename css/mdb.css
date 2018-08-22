@@ -1206,7 +1206,6 @@
 .special-color-dark {
   background-color: #263238 !important; }
 
-/*** Global ***/
 .z-depth-0 {
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
@@ -1740,13 +1739,6 @@ a.text-light:hover, a.text-light:focus {
 .pattern-9 {
   background: url("../img/overlays/09.png"); }
 
-/*!
- * Waves v0.7.6
- * http://fian.my.id/Waves
- *
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
- * Released under the MIT license
- * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
   position: relative;
   cursor: pointer;
@@ -1868,13 +1860,6 @@ a.text-light:hover, a.text-light:focus {
 a.waves-effect, a.waves-light {
   display: inline-block; }
 
-/*!
- * animate.css -http://daneden.me/animate
- * Version - 3.6.0
- * Licensed under the MIT license - http://opensource.org/licenses/MIT
- *
- * Copyright (c) 2018 Daniel Eden
- */
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -2164,7 +2149,6 @@ a.waves-effect, a.waves-light {
   -webkit-animation-name: flash;
   animation-name: flash; }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes pulse {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -2420,7 +2404,6 @@ a.waves-effect, a.waves-light {
   -webkit-animation-name: tada;
   animation-name: tada; }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes wobble {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -3854,7 +3837,6 @@ a.waves-effect, a.waves-light {
   -webkit-animation-name: jackInTheBox;
   animation-name: jackInTheBox; }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes rollIn {
   from {
     opacity: 0;
@@ -3879,7 +3861,6 @@ a.waves-effect, a.waves-light {
   -webkit-animation-name: rollIn;
   animation-name: rollIn; }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes rollOut {
   from {
     opacity: 1; }

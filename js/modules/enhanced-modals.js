@@ -1,9 +1,3 @@
-/*
-    Enhanced Bootstrap Modals
-    https://mdbootstrap.com
-    office@mdbootstrap.com
-*/
-
 $('body').on('shown.bs.modal', '.modal', function() {
     if($('.modal-backdrop').length) {
     } else {

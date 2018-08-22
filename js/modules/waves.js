@@ -1,12 +1,3 @@
-/*!
- * Waves v0.7.6
- * http://fian.my.id/Waves
- *
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
- * Released under the MIT license
- * https://github.com/fians/Waves/blob/master/LICENSE
- */
-
 ;(function(window, factory) {
     'use strict';
 
@@ -199,10 +190,6 @@
         }
     };
 
-    /**
-     * Collection of wrapper for HTML element that only have single tag
-     * like <input> and <img>
-     */
     var TagWrapper = {
 
         // Wrap <input> tag so it can perform the effect
@@ -252,10 +239,6 @@
         }
     };
 
-    /**
-     * Hide the effect and remove the ripple. Must be
-     * a separate function to pass the JSLint...
-     */
     function removeRipple(e, el, ripple) {
 
         // Check if the ripple still exist
