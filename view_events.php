@@ -51,6 +51,7 @@
             $event_status[0] = "";
             $event_status[1] = mysqli_num_rows($result) . " Events Booked";
             $event_status[2] = "<br>";
+            $event_status[3] = "";
             if (mysqli_num_rows($result) == 1) {
                 $event_status[1] = mysqli_num_rows($result) . " Event Booked";
             }
@@ -66,9 +67,9 @@
             $event_status[0] = "style=display:none";
             $event_status[1] = "No Events Booked";
             $event_status[2] = "";
+            $event_status[3] = "<br>";
         }
 
-        $event_status[1] .= " for " . date("j F\, Y", strtotime($date));
     ?>
 </head>
 
@@ -120,7 +121,7 @@
                                 <div class="btn btn-primary">Prev</div>
                             </a>
                             <div class=btn style=color:black;box-shadow:none;>
-                            <h6 style=margin:0;letter-spacing:2.5px>
+                            <h6 style=margin:0>
                                 <?php echo $event_status[1]?>
                             </h6>
                             </div>
@@ -128,6 +129,10 @@
                                 <div class="btn btn-primary">Next</div>
                             </a>
                         </div>
+                            <h6 style=margin:0;letter-spacing:4px>
+                                <?php echo date("j F\, Y", strtotime($date))?>
+                            </h6>
+                        <?php echo $event_status[3]?>
                         <script>
                         </script>
                         <?php echo $event_status[2]?>
