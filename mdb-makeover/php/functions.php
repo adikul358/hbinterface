@@ -1,4 +1,13 @@
 <?php
+    require "conn.php";
+
+    $total_slts = array("09:00:00 - 10:10:00",
+                    "10:10:00 - 11:20:00",
+                    "11:20:00 - 12:30:00",
+                    "12:30:00 - 13:40:00",
+                    "14:10:00 - 15:20:00");
+
+    
     function hall() {
         global $hall;
         global $hall_table;
@@ -67,9 +76,9 @@
             $html .= "</th><td>";
             $html .= $eve['event'];
             $html .= "</td><td>";
-            $html .= $eve['start'];
+            $html .= date("g:i A", strtotime($eve['start']));
             $html .= "</td><td>";
-            $html .= $eve['end'];
+            $html .= date("g:i A", strtotime($eve['end']));
             $html .= "</td><td>";
             $html .= $eve['name'];
             $html .= "</td><td>";
@@ -87,32 +96,34 @@
         global $bookings;
         $counter = 1;
         $html = "";
-        $slts = array("9:00 AM - 10:10 AM",
-                    "10:10 AM - 11:20 AM",
-                    "11:20 AM - 12:30 PM",
-                    "12:30 PM - 1:40 PM",
-                    "2:10 PM - 3:20 PM");
+        global $total_slts; 
+
         $used_slts = array();
         $avail_slts = array();
         $ava_slts = array();
         
         foreach ($bookings as $slt) {
-            $used_slts[] = ($slt['slot_no'] >  0) ? $slts[$slt['slot_no']-1] : "";
+            $used_slts[] = ($slt['slot_no'] >  0) ? $total_slts[$slt['slot_no']-1] : "";
         }
-        $ava_slts = array_diff($slts, $used_slts);
+        $ava_slts = array_diff($total_slts, $used_slts);
         
         foreach ($ava_slts as $v)  {
             $avail_slts[] = $v;
         }
         
         foreach ($avail_slts as $slt) {
+            $s = explode(" - ", $slt);
+            $st = date("g:i A", strtotime($s[0])) . " - " . date("g:i A", strtotime($s[1])) ;
+            
             $html = '<div class="custom-control custom-checkbox" style=margin-bottom:5px>
-            <input type="checkbox" class="custom-control-input" id=timeslot';
+            <input type="checkbox" class="custom-control-input" name="slots[]" value="';
+            $html .= $slt;
+            $html .= '" id=timeslot';
             $html .= $counter;
             $html .= '><label class="custom-control-label" for=timeslot';
             $html .= $counter;
             $html .= '>';
-            $html .= $slt;
+            $html .= $st;
             $html .= '</label></div>';
             echo $html;
             $counter++;
@@ -120,6 +131,38 @@
     }
 
     function book_event($data) {
-        
-    }
+        global $link;
+        $event = mysqli_real_escape_string($link, $data['event']);
+        $date = $data['date'];
+        $name = mysqli_real_escape_string($link, $data['name']);
+        $email = mysqli_real_escape_string($link, $data['email']);
+        $phone = $data['phone'];
+
+        global $total_slts;
+        print_r($data['slots']);
+        foreach ($data['slots'] as $time) {
+            $slot_no = array_search($time, $total_slts);
+            $slot_no++;
+            
+            $time = explode(" - ", $time);
+            $start = $time[0];
+            $end = $time[1];
+
+            $insert_query = "INSERT INTO " . $data['table'] . " (event, date, start, end, name, email, phone, slot_no)";
+            $insert_query .= " VALUES ('$event', '$date', '$start', '$end', '$name', '$email', '$phone', $slot_no)";
+            $insert_query .= "; ";
+
+            echo $insert_query;
+
+            $result = mysqli_query($link, $insert_query);
+
+            if (!$result) {die(mysqli_error($link));}
+        }
+        $link_date = explode("-", $date);
+        $link_date = "d=" . $link_date[2] . "&m=" . $link_date[1] . "&y=" . $link_date[0];
+
+        $_SESSION['query_status'] = true;
+        echo "<script>window.location.href = 'view_events.php?" . $link_date . "';</script>";
+    }   
+
 ?>

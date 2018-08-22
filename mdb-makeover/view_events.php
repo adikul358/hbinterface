@@ -27,7 +27,7 @@
 
         $date = date("Y\-m\-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y']));
 
-        $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY date";
+        $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY slot_no";
         $result = mysqli_query($link, $bookings_query);
             
         if (!$result) {
@@ -41,10 +41,28 @@
 
         $event_status = array();
         
+        $link_book = "'book.php?date=" . $date . "'";
+        $button_status['color'] = "btn-primary";
+        $button_status['link'] = "onclick=location.href=" . $link_book;
+        $button_status['text'] = "Book New Event";
+        $button_status['len'] = "7";
+        $button_status['icon'] = "fa-plus";
+
         if (mysqli_num_rows($result)) {
             $event_status[0] = "";
             $event_status[1] = mysqli_num_rows($result) . " Events Booked";
             $event_status[2] = "<br>";
+            if (mysqli_num_rows($result) == 1) {
+                $event_status[1] = mysqli_num_rows($result) . " Event Booked";
+            }
+
+            if (mysqli_num_rows($result) >= count($total_slts)) {
+                $button_status['color'] = "btn-blue-grey";
+                $button_status['link'] = "";
+                $button_status['text'] = "No More Slots Available";
+                $button_status['len'] = "12";
+                $button_status['icon'] = "fa-times";
+            }
         } else {
             $event_status[0] = "style=display:none";
             $event_status[1] = "No Events Booked";
@@ -97,7 +115,7 @@
                                 <?php echo $hall?>
                             </h4>
                         <div class="controls">
-                            <a class=float-left data-go="prev">
+                            <a class=float-left data-go="prevd">
                                 <div class="btn btn-primary">Prev</div>
                             </a>
                             <div class=btn style=color:black;box-shadow:none;>
@@ -105,7 +123,7 @@
                                 <?php echo $event_status[1]?>
                             </h6>
                             </div>
-                            <a class=float-right data-go="next">
+                            <a class=float-right data-go="nextn">
                                 <div class="btn btn-primary">Next</div>
                             </a>
                         </div>
@@ -160,7 +178,7 @@
             width:auto;
         }
         #float:hover span {
-            max-width: 7rem;
+            max-width: <?php echo $button_status['len']?>rem;
         }
         #float:hover #pen {
             margin-right: 8px;
@@ -172,11 +190,8 @@
         }
     </style>
     <div class=fixed-button>
-        <?php
-            $link = "'book.php?date=" . $date . "'";
-        ?>
-        <button id=float type=button class="btn btn-primary" onclick="location.href=<?php echo $link?>;">
-            <i class="fa fa-plus" id=pen></i><span>Book New Event</span>
+        <button id=float type=button class="btn <?php echo $button_status['color']?>" <?php echo $button_status['link']?>>
+            <i class="fa <?php echo $button_status['icon']?>" id=pen></i><span><?php echo $button_status['text']?></span>
         </button>
     </div>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

@@ -112,31 +112,41 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" name=name class="form-control">
+                                        <input type="text" name=email class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <input type="text" name=name class="form-control">
+                                        <input type="text" name=phone class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center float-right">
-                                <a class="btn btn-success" onclick="document.getElementById('booking-form').submit();">Book Event</a>
+                                <input type=submit name=submit class="btn btn-primary" value="Book Event">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
     <br>    
 
     <?php 
-        if (isset($_POST['name'])) {book_event();}
+        if (isset($_POST['submit'])) {
+            $form_data = array();
+            $form_data['table'] = $hall_table;
+            $form_data['event'] = $_POST['event'];
+            $form_data['name'] = $_POST['name'];
+            $form_data['date'] = $date;
+            $form_data['email'] = $_POST['email'];
+            $form_data['phone'] = $_POST['phone'];
+            $form_data['slots'] = $_POST['slots'];
+
+            book_event($form_data);
+        }
     ?>
-    
 
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tooltips -->
