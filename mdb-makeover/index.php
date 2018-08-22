@@ -115,25 +115,21 @@
                             <?php echo $hall?>
                         </h4>
                         <div class="responsive-calendar">
-                            <style>
-                                .controls * {
-                                    vertical-align: middle;
-                                }
-                            </style>
                             <div class="controls">
                                 <a class=float-left data-go="prev">
                                     <div class="btn btn-primary">Prev</div>
                                 </a>
-                                <h5>
-                                    <span data-head-month></span>
-                                     -
-                                    <span data-head-year></span>
-                                </h5>
+                                <div class=btn style=color:black;box-shadow:none;>
+                                    <h5 style=margin:0>
+                                        <span data-head-month></span>
+                                        -
+                                        <span data-head-year></span>
+                                    </h5>
+                                </div>
                                 <a class=float-right data-go="next">
                                     <div class="btn btn-primary">Next</div>
                                 </a>
                             </div>
-                            <br>
                             <br>
                             <div class="day-headers">
                                 <div class="day header">Mon</div>

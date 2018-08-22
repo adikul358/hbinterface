@@ -98,10 +98,22 @@
             <div class="card" style="background:rgba(255,255,255, 0.9)">
                 <div class="card-body text-center ">
                     <div class=container>
-                        <h4 class=card-title>
-                            <?php echo $hall?>
-                        </h4>
-                        <h6><?php echo $event_status[1]?></h6>
+                            <h4 class=card-title>
+                                <?php echo $hall?>
+                            </h4>
+                        <div class="controls">
+                            <a class=float-left data-go="prev">
+                                <div class="btn btn-primary">Prev</div>
+                            </a>
+                            <div class=btn style=color:black;box-shadow:none;>
+                            <h6 style=margin:0>
+                                <?php echo $event_status[1]?>
+                            </h6>
+                            </div>
+                            <a class=float-right data-go="next">
+                                <div class="btn btn-primary">Next</div>
+                            </a>
+                        </div>
                         <?php echo $event_status[2]?>
                         <div class=table-responsive <?php echo $event_status[0]?>>
                             <table id="tablePreview" class="table">
@@ -167,7 +179,10 @@
         }
     </style>
     <div class=fixed-button>
-        <button id=float type=button class="btn btn-rounded">
+        <?php
+            $link = "'book.php?date=" . $date . "'";
+        ?>
+        <button id=float type=button class="btn btn-rounded" onclick="location.href=<?php echo $link?>;">
             <i class="fa fa-plus" id=pen></i><span>Book New Event</span>
         </button>
     </div>
