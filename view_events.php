@@ -26,6 +26,8 @@
         hall();
 
         $date = date("Y\-m\-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y']));
+        $next_link = next_link($_GET['d'], $_GET['m'], $_GET['y']);
+        $prev_link = prev_link($_GET['d'], $_GET['m'], $_GET['y']);
 
         $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY slot_no";
         $result = mysqli_query($link, $bookings_query);
@@ -115,7 +117,7 @@
                                 <?php echo $hall?>
                             </h4>
                         <div class="controls">
-                            <a class=float-left data-go="prevd">
+                            <a class=float-left id="prevd"  href=view_events.php?<?php echo $prev_link?>>
                                 <div class="btn btn-primary">Prev</div>
                             </a>
                             <div class=btn style=color:black;box-shadow:none;>
@@ -123,10 +125,12 @@
                                 <?php echo $event_status[1]?>
                             </h6>
                             </div>
-                            <a class=float-right data-go="nextn">
+                            <a class=float-right id="nextn" href=view_events.php?<?php echo $next_link?>>
                                 <div class="btn btn-primary">Next</div>
                             </a>
                         </div>
+                        <script>
+                        </script>
                         <?php echo $event_status[2]?>
                         <div class=table-responsive <?php echo $event_status[0]?>>
                             <table id="tablePreview" class="table">
@@ -194,6 +198,27 @@
             <i class="fa <?php echo $button_status['icon']?>" id=pen></i><span><?php echo $button_status['text']?></span>
         </button>
     </div>
+
+    <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Event Successfully Added</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
@@ -201,6 +226,13 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+
+    <?php 
+        if ($_SESSION['query_status'] == true) {
+            echo "<script>$('#centralModalSuccess').modal('show');</script>";
+        }
+        $_SESSION['query_status'] = false;
+        ?>
 
 </body>
 

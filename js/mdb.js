@@ -15532,11 +15532,6 @@ Waves.init();
   $(textAreaSelector).each(textAreaAutoResize);
   $body.on('keyup keydown', textAreaSelector, textAreaAutoResize);
 })(jQuery);
-/*
-    Enhanced Bootstrap Modals
-    https://mdbootstrap.com
-    office@mdbootstrap.com
-*/
 
 $('body').on('shown.bs.modal', '.modal', function() {
     if($('.modal-backdrop').length) {

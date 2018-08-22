@@ -65,6 +65,36 @@
             }
     }
 
+    function next_link($d,$m,$y) {
+        $dn = $d+1; $mn = $m; $yn = $y;
+
+        $last_day = date("d", mktime(0,0,0, $m+1, 0, $y));
+        if ($dn > $last_day) {
+            $dn = 1;
+            $mn++;
+            if ($m >= 12) {
+                $mn = 1;
+                $yn++;
+            }
+        }
+        return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
+    }
+    
+    function prev_link($d,$m,$y) {
+        $dn = $d-1; $mn = $m; $yn = $y;
+        
+        $last_day = date("d", mktime(0,0,0, $m, 0, $y));
+        if ($dn < 1) {
+            $dn = $last_day;
+            $mn--;
+            if ($m <= 1) {
+                $mn = 12;
+                $yn--;
+            }
+        }
+        return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
+    }
+    
     function event_display() {
         global $bookings;
         $counter = 1;

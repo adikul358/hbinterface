@@ -1,281 +1,163 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-	<link href="style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="Java-Calendar/main.css">
-	<script src="Java-Calendar/main.js"></script>
-	<?php require "connect.php"?>
-	<title>WCH Booking Interface - Shiv Nadar School, Noida</title>
-	 <!-- Font Awesome -->
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>WCH Booking Interface - Shiv Nadar School, Noida</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <!-- Respomsive slider -->
+    <link href="cal/css/responsive-calendar.css" rel="stylesheet">
+    <?php 
+        require 'php/conn.php'; 
+        require 'php/functions.php'; 
+        session_start();
 
-	<?php
+        $_SESSION['query_status'] = false;
 
-		session_start();
+        $events = array();
+        $dates_u = array();
+        
+        $hall_table = "";
+        $hall = $_SESSION['hall'];
+        $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
 
-		$m = $_GET['m'];
-		$m++; 
-		$currdate = date("Y\-m\-d", mktime(0,0,0,$m, $_GET['d'], $_GET['y']));
-		$_SESSION['date'] = $currdate;
+        hall();
 
-		$booking_query = "SELECT * FROM bookings WHERE date='$currdate'  ORDER BY start";
-		$result = mysqli_query($link, $booking_query);
+        $date = $_GET['date'];
 
-		if (!$result) {
-			exit("Failed to fetch:<br>" . mysqli_error($link));
-		}
-		
-		$bookings = array();
-		while($row = mysqli_fetch_assoc($result)) {
-			$bookings[] = $row;
-		}
-		$timing_query = "SELECT DISTINCT start FROM bookings WHERE date='$currdate'  ORDER BY start";
-		$tresult = mysqli_query($link, $timing_query);
+        $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY date";
+        $result = mysqli_query($link, $bookings_query);
+            
+        if (!$result) {
+          exit("Failed to fetch:<br>" . mysqli_error($link));
+        }
+            
+        $bookings = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $bookings[] = $row;
+        }
 
-		if (!$tresult) {
-			exit("Failed to fetch:<br>" . mysqli_error($link));
-		}
-		$tn = mysqli_num_rows($tresult);
-		
-		$timings = array();
-		while($row = mysqli_fetch_assoc($tresult)) {
-			$timings[] = $row;
-		}
-		$r = mysqli_num_rows($result);
-
-		function coninfo($name) {
-			$con_query = "SELECT DISTINCT name, phone, email FROM bookings WHERE name='$name'";
-			$conresult = mysqli_query($link, $con_query);
-			$con = array();
-			while($row = mysqli_fetch_assoc($conresult)) {
-				$con[] = $row;
-			}
-		}
-
-	?>
+    ?>
 </head>
 
-<body>
+<body style="min-height: 100vh; overflow-x: hidden;background-image: url('images/tuscany-wallpaper-3840x2160-4k-hd-wallpaper-italy-meadows-hills-pines-trees-4886.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
 
-	<div class="container-fluid">
-		<h1>Assembly Hall Booking Interface</h1>
-	</div>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
-	<body>
-	<div class="divcalendar">
+        <a class="navbar-brand" href="/wchbooking/mdb-makeover">
+            <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
+                height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
+        </a>
 
-<div id="calendaroverallcontrols">
-	<!-- <div id="year"></div> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-	<div id="calendarmonthcontrols">
-		<a class="calcon left" id="btnPrevDay" href="#" onclick="<?php echo "prevDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-				<img src="Java-Calendar/arrows/left_single.svg">
-		</a>
+        <div class="collapse navbar-collapse" id="basicExampleNav">
 
-		<div id="bookedday"><div id=monthandyearspan><?php echo date('j', mktime(0, 0, 0, 1, $_GET['d'])) . " " . date('F', mktime(0, 0, 0, $m, 10)) . " - " . $_GET['y'];?></div></div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Halls</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item <?php echo $active['WCH']?>" href="/wchbooking/mdb-makeover">Wild Cats Hall</a>
+                        <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference Room</a>
+                        <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting Room</a>
+                        <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
+                        <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite Lab</a>
+                        <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior Library</a>
+                    </div>
+                </li>
 
+            </ul>
 
-		<a class="calcon right" id="btnNextDay" href="#"  onclick="<?php echo "nextDay(" . $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y'] . ")"?>">
-				<img src="Java-Calendar/arrows/right_single.svg">
-		</a>
-	</div>
-</div>
-</div>
-		
-		<div id="bofoma">
-			<div id="content">
-				<div id="titlespan" style="display: block; border-bottom: 2px solid black; width: 80%;">Booked Slots</div>
-				<div id="bkdslts">
-					<?php 
-						$counter = 1;
-						$js1 = "<script>
-									var rows = ";
-						$js2 = ";
-						if (rows == 12) {
-									document.getElementById('adda').removeAttribute('href');
-									document.getElementById('adda').removeAttribute('onclick');
-									document.getElementById('adda').innerHTML = '';
-									document.getElementById('adda').innerHTML = '<img src=images/block.svg id=blockico>';
-								} else {
-									document.getElementById('adda').setAttribute('href') = '#';
-									document.getElementById('adda').setAttribute('onclick') = 'launchForm()';
-									document.getElementById('adda').innerHTML = '';
-									document.getElementById('adda').innerHTML = '<img src=images/add.svg id=addico>;'
-								}
-								</script>";
+        </div>
+    </nav>
 
-						switch ($r) {
-							case 0:
-								echo '<h3 id="noro">No bookings yet</h3>';
-								break;
-							
-							default:
-							# code...
-							echo '<table> 
-							<tr>
-								<th class="daysheaderl">S No.</th>
-								<th class="daysheaderl">Event</th>
-								<th class="daysheaderl">Start time</th>
-								<th class="daysheaderl">End time</th>
-								<th class="daysheaderl">Person Booking</th>
-							</tr>';
-	
-							foreach ($bookings as $row) {
-								$html = '<tr>';
-								$html .= '<td class="bkdslts" style="width:80px">' . $counter . '</td>';
-								$html .= '<td class="bkdslts" style="text-align:left; width:350px">' . $row['event'] . '</td>';
-								$html .= '<td class="bkdslts" style="width:100px">' . date('h:i A', strtotime($row['start'])) . '</td>';
-								$html .= '<td class="bkdslts" style="width:100px">' . date('h:i A', strtotime($row['end'])) . '</td>';
-								$html .= '<td class="bkdslts" style="width:200px">' . $row['name'] . '<h5><a id="contact" onclick="conpop(' . "'" . $row['name'] . "'" . ",'" . $row['email'] . "','" . $row['phone'] . "'" . ')" href="#">Contact Info</a></h5></td>';
-								$html .= '</tr>';
-								$counter++;
-								echo $html;
-							}
-							$cjs = $counter;
-							break;
-						}
-						?>
-					</table>
-				</div>
-			</div>
-			<div id="add">
-				<div id=k style="margin:15px">
-						<span id="titlespan" style="margin-right: 15px">Book a Slot</span>
-						<a href="#" id="adda" onclick="launchForm()">
-								<img src="images/add.svg" id="addico">
-							</a>
-							
-						</div>
-					</div>
-				</div>
-				<?php echo $js1 . $counter . $js2;?>
-		<div id="booking-form">
-			<div id=mbf>
-				<form method="POST" action="<?php echo 'confirm.php?date=' . $currdate?>">
-					<div id="form">
+    <br>
 
-						<label>Event Name</label>
-						<br>
-						<input type=text name="event" required>
-						<br>
-						<br>
+    <div class="row justify-content-center">
+        <div class="col-sm-7">
+            <div class="card" style="background:rgba(255,255,255, 0.7)">
+                <div class="card-body">
+                    <div class="container text-center">
+                        <h4 class=card-title>
+                            <?php echo $hall?>
+                        </h4>
+                        <h6>Add New Event for
+                            <?php echo date("j F\, Y", strtotime($date))?>
+                        </h6>
+                    </div>
+                    <br>
+                    <div class=container>
+                        <form id=booking-form method=POST action="" style="width: 80%; margin:auto">
+                            <h5>Event Details</h5>
+                            <div class="form-group">
+                                <label>Event Name</label>
+                                <input type="text" name=event class="form-control">
+                            </div>
+                            <div class=form-group>
+                                <label>Available Slots</label>
+                                <?php time_slots_display();?>
+                        </div>
+                            <br>
+                            <h5>Contact Details</h5>
+                            <div class="form-group">
+                                <label>Booking Person</label>
+                                <input type="text" name=name class="form-control">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" name=email class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text" name=phone class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center float-right">
+                                <input type=submit name=submit class="btn btn-primary" value="Book Event">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <br>    
 
-						<div id="times">
-							
-							<div style="width: 50%; float: left">
-								<label>Start Time</label>
-								<br>
-								<select name="start" id=s onchange="cp()">
-									<?php
+    <?php 
+        if (isset($_POST['submit'])) {
+            $form_data = array();
+            $form_data['table'] = $hall_table;
+            $form_data['event'] = $_POST['event'];
+            $form_data['name'] = $_POST['name'];
+            $form_data['date'] = $date;
+            $form_data['email'] = $_POST['email'];
+            $form_data['phone'] = $_POST['phone'];
+            $form_data['slots'] = $_POST['slots'];
 
-										$slots = array();
-										for($i = strtotime("09:00"); $i<= strtotime("14:50"); $i= $i+35*60) {
-											$slots[] = date("h:i A", $i); 
-											$server_slots[] = date("H:i:s", $i); 
-										}
-										$c = 0;
+            book_event($form_data);
+        }
+    ?>
 
-										// $c = 0;
-										// foreach ($slots as $s) {
-										// 	echo '<option value="' . $server_slots[$c] . '" name="' .$s .'">' . $s . '</option>';
-										// 	$c++;
-										// }
-										foreach ($server_slots as $s) {
-											$present = false;
-											if ($tn == 0) {
-												echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
-											} else {
-											foreach ($timings as $t) {
-												if ($t['start'] == $s) {
-													echo '';
-													$present = false;
-												} else {
-													$present = true;
-												}
-											}
-												if ($present) {
-													echo '<option value="' . $s . '" name="' .$slots[$c] .'">' . $slots[$c] . '</option>';
-													$present = false;
-												}
-											}
-											$c++;
-										}
-										
-										?>
-								</select>
-								<br>
-							</div>
-							
-							<div>
-								<label>End Time</label>
-								<br>
-								<select name="end" id=e >
-								</select>
-								<br>
-							</div>
-							<script>cp()</script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
 
-							<br>
-							<br>
-							<label>Name of Person Booking</label>
-							<br>
-							<input type="text" name="name" required>
-							<br>
-							<br>
-
-							<label>Contact No.</label>
-							<br>
-							<input type="text" name="phone" minlength=10 required>
-							<br>
-							<br>
-
-							<label>Email</label>
-							<br>
-							<input type="email" name="email" required>
-							<br>
-							<br>
-						</div>
-					</div>
-					<br>
-					<div>
-						<input type="submit" value="Book Hall" style="float:right" id="em">
-					</div>
-				</form>
-			</div>
-		</div>
-				<div id="mainconinfo">
-				<div id="ne">
-					<div id="coninfo">
-						<h1 id="contitle"></h1>
-
-						<div class="first">
-
-							<div id="firstt">
-								<label class=tag>Email:</label>
-								<label class=tag>Phone:</label>
-							</div>
-
-							<div id="firsti">
-								<label class=info id="conemail"></label>
-								<label class=info id="conphone"></label>
-							</div>
-						</div>
-					</div>
-					<br>
-						<div>
-							<input type="button" value="Ok" onclick="condown()" style="float:right" id="conm">
-						</div>
-				</div>
-			</div>
-			<script>
-				prevavail(<?php echo $_GET['d'] . "," . $_GET['m'] . "," . $_GET['y']?>);
-		</script>
-	</body>
+</body>
 
 </html>
