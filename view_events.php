@@ -67,6 +67,8 @@
             $event_status[1] = "No Events Booked";
             $event_status[2] = "";
         }
+
+        $event_status[1] .= " for " . date("j F\, Y", strtotime($date));
     ?>
 </head>
 
@@ -118,7 +120,7 @@
                                 <div class="btn btn-primary">Prev</div>
                             </a>
                             <div class=btn style=color:black;box-shadow:none;>
-                            <h6 style=margin:0>
+                            <h6 style=margin:0;letter-spacing:2.5px>
                                 <?php echo $event_status[1]?>
                             </h6>
                             </div>
