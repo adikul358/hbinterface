@@ -65,8 +65,8 @@
     ?>
 </head>
 
-<body style="overflow-x:hidden; min-height:100vh; background-image: url('images/tuscany-wallpaper-3840x2160-4k-hd-wallpaper-italy-meadows-hills-pines-trees-4886.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
-    <div  class=container-fluid>
+<body style="overflow-x:hidden; min-height:100vh; background: white; background-repeat: no-repeat; background-position: center;background-size: cover;">
+    <div  class=container-fluid style=padding:0>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
         <a class="navbar-brand" href="/">
