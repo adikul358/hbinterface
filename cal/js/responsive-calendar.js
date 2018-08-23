@@ -195,7 +195,7 @@
         day.addClass(this.weekDays[i % 7]);
         day.addClass(pastFutureClass);
         dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
-        if (dayNum <= 0 || dayNum > lastDayOfMonth) {
+        if (dayNum <= 0 || dayNum > lastDayOfMonth || dayNum  < dateNow.getDate()) {
           calcDate = new Date(yearNum, monthNum - 1, dayNum);
           dayNum = calcDate.getDate();
           monthNum = calcDate.getMonth() + 1;
