@@ -123,7 +123,7 @@
                                     </h5>
                                 </div>
                                 <a class=float-right data-go="next">
-                                    <div class="btn btn-primary">Next</div>
+                                    <div class="btn btn-primary" style=border-radius:50px>Next</div>
                                 </a>
                             </div>
                             <br>
