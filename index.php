@@ -113,7 +113,7 @@
                         <div class="responsive-calendar">
                             <div class="controls">
                                 <a class=float-left data-go="prev">
-                                    <div class="btn btn-primary">Prev</div>
+                                    <div class="btn btn-primary" style=border-radius:50px>Prev</div>
                                 </a>
                                 <div class=btn style=color:black;box-shadow:none;>
                                     <h5 style=margin:0>
