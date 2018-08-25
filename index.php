@@ -65,8 +65,8 @@
     ?>
 </head>
 
-<body style="overflow-x:hidden; min-height:100vh; background-image: url('images/tuscany-wallpaper-3840x2160-4k-hd-wallpaper-italy-meadows-hills-pines-trees-4886.jpg'); background-repeat: no-repeat; background-position: center;background-size: cover;">
-    <div  class=container-fluid>
+<body style="overflow-x:hidden; min-height:100vh; background: white; background-repeat: no-repeat; background-position: center;background-size: cover;">
+    <div  class=container-fluid style=padding:0>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
         <a class="navbar-brand" href="/">
@@ -113,7 +113,7 @@
                         <div class="responsive-calendar">
                             <div class="controls">
                                 <a class=float-left data-go="prev">
-                                    <div class="btn btn-primary">Prev</div>
+                                    <div class="btn btn-primary" style=border-radius:50px>Prev</div>
                                 </a>
                                 <div class=btn style=color:black;box-shadow:none;>
                                     <h5 style=margin:0>
@@ -123,7 +123,7 @@
                                     </h5>
                                 </div>
                                 <a class=float-right data-go="next">
-                                    <div class="btn btn-primary">Next</div>
+                                    <div class="btn btn-primary" style=border-radius:50px>Next</div>
                                 </a>
                             </div>
                             <br>
