@@ -210,8 +210,15 @@
           this.applyTransform(day, 'rotateY(180deg)');
           this.applyBackfaceVisibility(day);
         }
+        if(pastFutureClass == "past") {
+          day.addClass("not-current").addClass(pastFutureClass);
+          day.find("a").removeAttr('href');
+          day = this.makeActive(day, this.options.events[""]);
+          return this.$element.find('[data-group="days"]').append(day);
+        } else {
         day = this.makeActive(day, this.options.events[dateString]);
         return this.$element.find('[data-group="days"]').append(day);
+        }
       },
       drawDays: function(year, month) {
         var currentMonth, day, dayBase, days, delay, draw, firstDayOfMonth, i, lastDayOfMonth, loopBase, monthNum, multiplier, thisRef, time, timeout, yearNum, _i, _len;
