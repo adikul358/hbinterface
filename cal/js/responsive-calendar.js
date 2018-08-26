@@ -193,14 +193,13 @@
           pastFutureClass = "future";
         }
         day.addClass(this.weekDays[i % 7]);
-        day.addClass(pastFutureClass);
         dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
         if (dayNum <= 0 || dayNum > lastDayOfMonth) {
           calcDate = new Date(yearNum, monthNum - 1, dayNum);
           dayNum = calcDate.getDate();
           monthNum = calcDate.getMonth() + 1;
           yearNum = calcDate.getFullYear();
-          day.addClass("not-current").addClass(pastFutureClass);
+          day.addClass("not-current");
           if (this.options.activateNonCurrentMonths) {
             dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
           }
@@ -211,7 +210,7 @@
           this.applyBackfaceVisibility(day);
         }
         if(pastFutureClass == "past") {
-          day.addClass("not-current").addClass(pastFutureClass);
+          day.addClass("past").removeClass("not-current");
           day.find("a").removeAttr('href');
           day = this.makeActive(day, this.options.events[""]);
           return this.$element.find('[data-group="days"]').append(day);

@@ -47,8 +47,14 @@
 .responsive-calendar .day.active .not-current:hover {
   background-color: #bcdff5;
 }
-.responsive-calendar .day.not-current a {
+.responsive-calendar .day.past a {
   background-color: #4b4b4b93;
+  pointer-events: none;
+   cursor: default;
+  color: #ddd;
+}
+.responsive-calendar .day.not-current a {
+  background-color: #0f5c8b93;
   color: #ddd;
 }
 .responsive-calendar .day .badge {

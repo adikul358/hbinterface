@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link href="css/mdb.min.css" rel="stylesheet">
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
@@ -65,7 +66,7 @@
     ?>
 </head>
 
-<body style="overflow-x:hidden; min-height:100vh; background: white; background-repeat: no-repeat; background-position: center;background-size: cover;">
+<body style="overflow-x:hidden; min-height:100vh;">
     <div  class=container-fluid style=padding:0>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
