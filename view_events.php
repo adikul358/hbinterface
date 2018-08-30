@@ -164,40 +164,8 @@
     </div>
     <br>
     <style>
-        #float {
-            min-width: 50px;
-            -webkit-transition: min-width 1s;
-            transition: min-width 1s;
-            border-radius:50px; 
-            height:50px;
-        }
-        #float span {
-            max-width: 0;
-            -webkit-transition: max-width 1s;
-            transition: max-width 1s;
-            display: inline-block;
-            vertical-align: top;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-        #pen {
-            margin-right: 0;
-            -webkit-transition: margin-right 0.5s;
-            transition: margin-right 0.5s;
-        }
-        #float:hover {
-            width:auto;
-        }
         #float:hover span {
             max-width: <?php echo $button_status['len']?>rem;
-        }
-        #float:hover #pen {
-            margin-right: 8px;
-        }
-        .fixed-button {
-            position: fixed;
-            right: 24px;
-            bottom: 24px;
         }
     </style>
     <div class=fixed-button>

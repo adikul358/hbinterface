@@ -1,3 +1,2 @@
-Background Repeat
-Month Shorten
 Full Day Indication
+Validations

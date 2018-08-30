@@ -5,4 +5,38 @@ body {
     /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(-135deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-repeat: no-repeat no-repeat;
+}
+#float {
+    min-width: 50px;
+    -webkit-transition: min-width 1s;
+    transition: min-width 1s;
+    border-radius:50px; 
+    height:50px;
+}
+#float span {
+    max-width: 0;
+    -webkit-transition: max-width 1s;
+    transition: max-width 1s;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#pen {
+    margin-right: 0;
+    -webkit-transition: margin-right 0.5s;
+    transition: margin-right 0.5s;
+}
+#float:hover {
+    width:auto;
+}
+
+#float:hover #pen {
+    margin-right: 8px;
+}
+.fixed-button {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
 }
