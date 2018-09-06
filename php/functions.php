@@ -1,5 +1,6 @@
 <?php
     require "conn.php";
+    date_default_timezone_set("Asia/Kolkata");
 
     $total_slts = array("08:00:00 - 09:00:00", 
                     "09:00:00 - 10:00:00",

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -13,17 +14,17 @@
     <?php 
         require 'php/conn.php'; 
         require 'php/functions.php'; 
-        session_start();
+        
     
         $events = array();
         $dates_u = array();
         
         $hall_table = "";
         $hall = $_SESSION['hall'];
+
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
 
         hall();
-
         $date = date("Y\-m\-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y']));
         $next_link = next_link($_GET['d'], $_GET['m'], $_GET['y']);
         $prev_link = prev_link($_GET['d'], $_GET['m'], $_GET['y']);

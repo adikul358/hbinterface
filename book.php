@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -13,8 +14,7 @@
     <?php 
         require 'php/conn.php'; 
         require 'php/functions.php'; 
-        session_start();
-
+        
         $_SESSION['query_status'] = false;
 
         $events = array();
