@@ -44,39 +44,44 @@
 </head>
 
 <body style="overflow-x:hidden; min-height:100vh;">
-<div  class=container-fluid style=padding:0>
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
+    <div class=container-fluid style=padding:0>
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
-        <a class="navbar-brand" href="/">
-            <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
-                height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
-        </a>
+            <a class="navbar-brand" href="/">
+                <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
+                    height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
+            </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="basicExampleNav">
+            <div class="collapse navbar-collapse" id="basicExampleNav">
 
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Halls</a>
-                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item <?php echo $active['WCH']?>" href="/">Wild Cats Hall</a>
-                        <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference Room</a>
-                        <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting Room</a>
-                        <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
-                        <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite Lab</a>
-                        <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior Library</a>
-                    </div>
-                </li>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Halls</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item <?php echo $active['WCH']?>" href="/">Wild Cats Hall</a>
+                            <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference
+                                Room</a>
+                            <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting
+                                Room</a>
+                            <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
+                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite
+                                Lab</a>
+                            <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior
+                                Library</a>
+                        </div>
+                    </li>
 
-            </ul>
+                </ul>
 
-        </div>
-    </nav>
-</div>
+            </div>
+        </nav>
+    </div>
     <br>
 
     <div class="row justify-content-center">
@@ -93,32 +98,33 @@
                     </div>
                     <br>
                     <div class=container>
-                        <form id=booking-form method=POST action="" style="width: 80%; margin:auto">
+                        <form class="needs-validation" novalidate id=booking-form method=POST action="" style="width: 80%; margin:auto">
                             <h5>Event Details</h5>
                             <div class="form-group">
-                                <label>Event Name</label>
-                                <input type="text" name=event class="form-control">
+                                <label for="validationEventName">Event Name</label>
+                                <input id="validationEventName" required placeholder="Event Name" type="text" name=event
+                                    class="form-control">
                             </div>
                             <div class=form-group>
-                                <label>Available Slots</label>
+                                <label >Available Slots</label>
                                 <?php time_slots_display();?>
-                        </div>
+                            </div>
                             <br>
                             <h5>Contact Details</h5>
                             <div class="form-group">
-                                <label>Booking Person</label>
+                                <label for="validateName">Name</label>
                                 <input type="text" name=name class="form-control">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Email</label>
+                                        <label for="validateEmail">Email</label>
                                         <input type="text" name=email class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Phone</label>
+                                        <label for="validatePhone">Phone</label>
                                         <input type="text" name=phone class="form-control">
                                     </div>
                                 </div>
@@ -127,12 +133,13 @@
                                 <input type=submit name=submit class="btn btn-primary" value="Book Event">
                             </div>
                         </form>
-                    </div>
-                </div>
+                        <br><br>
             </div>
         </div>
-    </div>  
-    <br>    
+    </div>
+    </div>
+    </div>
+    <br>
 
     <?php 
         if (isset($_POST['submit'])) {
@@ -153,6 +160,26 @@
     <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mdb.min.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 
 </body>
 

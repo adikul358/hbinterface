@@ -153,7 +153,7 @@
             $st = date("g:i A", strtotime($s[0])) . " - " . date("g:i A", strtotime($s[1])) ;
             
             $html = '<div class="custom-control custom-checkbox" style=margin-bottom:5px>
-            <input type="checkbox" class="custom-control-input" name="slots[]" value="';
+            <input type="checkbox" required class="custom-control-input" name="slots[]" value="';
             $html .= $slt;
             $html .= '" id=timeslot';
             $html .= $counter;
