@@ -52,11 +52,11 @@
 
         if (mysqli_num_rows($result)) {
             $event_status[0] = "";
-            $event_status[1] = mysqli_num_rows($result) . " Events Booked";
+            $event_status[1] = mysqli_num_rows($result) . " Slots Booked";
             $event_status[2] = "<br>";
             $event_status[3] = "";
             if (mysqli_num_rows($result) == 1) {
-                $event_status[1] = mysqli_num_rows($result) . " Event Booked";
+                $event_status[1] = mysqli_num_rows($result) . " Slot Booked";
             }
 
             if (mysqli_num_rows($result) >= count($total_slts)) {

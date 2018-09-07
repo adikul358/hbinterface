@@ -102,35 +102,39 @@
                             <h5>Event Details</h5>
                             <div class="form-group">
                                 <label for="validationEventName">Event Name</label>
-                                <input id="validationEventName" required placeholder="Event Name" type="text" name=event
-                                    class="form-control">
-                            </div>
+                                <input id="validationEventName" required placeholder="Event Name" type="text" name=event class="form-control">
+                                <div class="invalid-feedback">Please Enter an Event Name</div>
+                                </div>
                             <div class=form-group>
-                                <label >Available Slots</label>
+                                <label for=slots[]>Available Slots</label>
                                 <?php time_slots_display();?>
+                                
                             </div>
                             <br>
                             <h5>Contact Details</h5>
                             <div class="form-group">
                                 <label for="validateName">Name</label>
                                 <input required id=validateName type="text" name=name class="form-control">
+                                <div class="invalid-feedback">Please Enter Your Name</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="validateEmail">Email</label>
-                                        <input required id=validateEmail type="text" name=email class="form-control">
+                                        <input required id=validateEmail type="email" name=email class="form-control">
+                                        <div class="invalid-feedback">Please Enter Your Email</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="validatePhone">Phone</label>
-                                        <input required id=validatePhone type="text" name=phone class="form-control">
+                                        <input onkeypress="return AllowNumbersOnly(event)" required id=validatePhone type="text" minlength="10" maxlength="10" name=phone class="form-control">
+                                        <div class="invalid-feedback">Please Enter Your 10-digit Phone No.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center float-right">
-                                <input type=submit name=submit class="btn btn-primary" value="Book Event">
+                                <button type=submit name=submit class="btn btn-primary">Book Event</button>
                             </div>
                         </form>
                         <br><br>
@@ -162,6 +166,12 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
 
     <script>
+        function AllowNumbersOnly(e) {
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                e.preventDefault();
+            }
+        }
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -170,6 +180,12 @@
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     form.addEventListener('submit', function (event) {
+                        var checked = $(".needs-validation input:checked").length > 0;
+                        if (!checked) {
+                            $(".slots").prop('required', true);
+                        } else {
+                            $(".slots").prop('required', false);
+                        }
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();

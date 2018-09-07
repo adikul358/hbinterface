@@ -1,6 +1,6 @@
 <?php
 
-require 'conn.php';
+// require 'conn.php';
 
 // $clear_query = 'DELETE FROM wch';
 // $result = mysqli_query($link, $clear_query);
@@ -37,21 +37,30 @@ require 'conn.php';
 // }
 // $css_file = fopen("../css/style.css", "a");
 // fwrite($css_file, $css);
-
 $css="";
-for ($i=1; $i<12; $i++) {
-    $css .= ".badge-" . $i . ":hover";
-    if ($i < 11) {
-        $css .= ", ";
-    } else {
-        $css .= " ";
+
+// for ($i=0; $i<12; $i++) {
+//     $css .= ".badge-" . $i . ":hover";
+//     if ($i < 11) {
+//         $css .= ", \r\n";
+//     } else {
+//         $css .= " ";
+//     }
+// }
+
+// $css .= "{ \r\n background-color: rgba(2, 44, 107, 0.534); \r\n}";
+
+// $css_file = fopen("../css/style.css", "a");
+// fwrite($css_file, $css);
+$alphabet = explode(" ", "0 1");
+echo "<body style=margin:0;background-color:black;color:green;text-align:center;font-family:monospace;font-size:1.5em>";
+for ($h=462; $h>0; $h--) {
+    $word = "";
+    for($i=8; $i>0; $i--) {
+        $word .= $alphabet[rand(0,1)];
     }
+    echo strtolower($word) . " ";
 }
-
-$css .= "{ background-color: rgba(2, 44, 107, 0.534); }";
-
-$css_file = fopen("../css/style.css", "a");
-fwrite($css_file, $css);
-echo $css;
+echo "<script>window.location.eload(); </script></body>";
 
 ?>
