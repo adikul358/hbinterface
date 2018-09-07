@@ -104,10 +104,9 @@
 
     <br>
     <div class="row justify-content-center">
-        <div class="col-sm-8">
+        <div class="col-xl-8">
             <div class="card" style="background:rgba(255,255,255, 0.7)">
                 <div class="card-body text-center ">
-                    <div class=container>
                         <h4 class=card-title>
                             <?php echo $hall?>
                         </h4>
@@ -141,7 +140,6 @@
 
                             </div>
                         </div>
-                    </div>
                 </div>
 
             </div>
