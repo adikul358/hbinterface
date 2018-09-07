@@ -66,7 +66,7 @@
     ?>
 </head>
 
-<body style="overflow-x:hidden; min-height:100vh;">
+<body style="width:100vw; overflow-x:hidden; min-height:100vh;">
     <div  class=container-fluid style=padding:0>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
 
@@ -167,7 +167,10 @@
     <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mdb.min.js"></script>
-
+    <style>
+    .offscree {
+        display:none;
+    }
 </body>
 
 </html>

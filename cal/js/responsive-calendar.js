@@ -152,10 +152,12 @@
         if (typeof dayEvents === "object") {
           if (dayEvents.number != null) {
             badge = $("<span></span>").html(dayEvents.number).addClass("badge");
+            badge.addClass("badge-" + dayEvents.number);
             if (dayEvents.badgeClass != null) {
               badge.addClass(dayEvents.badgeClass);
             }
             day.append(badge);
+            // day.addClass("badge-" + dayEvents.number);
           }
         }
         return day;
@@ -223,6 +225,7 @@
         var currentMonth, day, dayBase, days, delay, draw, firstDayOfMonth, i, lastDayOfMonth, loopBase, monthNum, multiplier, thisRef, time, timeout, yearNum, _i, _len;
         thisRef = this;
         time = new Date(year, month);
+        var m = new Date();
         currentMonth = time.getMonth();
         monthNum = time.getMonth() + 1;
         yearNum = time.getFullYear();
@@ -315,7 +318,7 @@
         if (options.onInit) {
           options.onInit.call(data);
         }
-        return $this.find("[data-go]").click(function() {
+                  return $this.find("[data-go]").click(function() {
           if ($(this).data("go") === "prev") {
             data.prev();
           }

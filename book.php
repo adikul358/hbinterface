@@ -113,19 +113,19 @@
                             <h5>Contact Details</h5>
                             <div class="form-group">
                                 <label for="validateName">Name</label>
-                                <input type="text" name=name class="form-control">
+                                <input required id=validateName type="text" name=name class="form-control">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="validateEmail">Email</label>
-                                        <input type="text" name=email class="form-control">
+                                        <input required id=validateEmail type="text" name=email class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="validatePhone">Phone</label>
-                                        <input type="text" name=phone class="form-control">
+                                        <input required id=validatePhone type="text" name=phone class="form-control">
                                     </div>
                                 </div>
                             </div>
