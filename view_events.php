@@ -1,4 +1,20 @@
-<?php session_start(); ?>
+<?php 
+
+    ob_start();
+    $selected_date = new DateTime(date("Y-m-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y'])));
+    $current_date = new DateTime("today");
+    include 'php/functions.php'; 
+    $nexink = next_link($current_date->format("d")-1, $current_date->format("m"), $current_date->format("Y"), "br");
+    $next_location = "location: view_events.php?" . $nexink;
+    $prev_disable = false;
+    if ($selected_date < $current_date) {
+        header($next_location);
+    } elseif ($selected_date == $current_date) {
+        $prev_disable = true;
+    }
+
+    session_start(); 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -13,21 +29,24 @@
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
         require 'php/conn.php'; 
-        require 'php/functions.php'; 
         
-    
         $events = array();
         $dates_u = array();
         
         $hall_table = "";
         $hall = $_SESSION['hall'];
-
+        
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
-
+        
         hall();
-        $date = date("Y\-m\-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y']));
-        $next_link = next_link($_GET['d'], $_GET['m'], $_GET['y']);
-        $prev_link = prev_link($_GET['d'], $_GET['m'], $_GET['y']);
+        $date = date("Y-m-d", mktime(0,0,0,$_GET['m'], $_GET['d'], $_GET['y']));
+        $next_link = next_link($_GET['d'], $_GET['m'], $_GET['y'], "br");
+        $prev_link = prev_link($_GET['d'], $_GET['m'], $_GET['y'], "br");
+        
+        $pd = array("href=view_events.php?" . $prev_link, "");
+        if ($prev_disable) {
+            $pd = array("style=cursor:default", "disabled");
+        }
 
         $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY slot_no";
         $result = mysqli_query($link, $bookings_query);
@@ -121,8 +140,8 @@
                                 <?php echo $hall?>
                             </h4>
                         <div class="controls">
-                            <a class=float-left id="prevd"  href=view_events.php?<?php echo $prev_link?>>
-                                <div class="btn btn-primary">Prev</div>
+                            <a class=float-left id="prevd" <?php echo $pd[0]?>>
+                                <div class="<?php echo $pd[1]?> btn btn-primary">Prev</div>
                             </a>
                             <div class=btn style=color:black;box-shadow:none;>
                             <h6 style=margin:0>
@@ -188,7 +207,7 @@
 
             <div class="modal-body">
                 <div class="text-center">
-                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
                 </div>
             </div>
         </div>

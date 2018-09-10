@@ -2,19 +2,29 @@
     require "conn.php";
     date_default_timezone_set("Asia/Kolkata");
 
-    $total_slts = array("08:00:00 - 09:00:00", 
-                    "09:00:00 - 10:00:00",
-                    "10:00:00 - 11:00:00",
-                    "11:00:00 - 12:00:00",
-                    "12:00:00 - 13:00:00",
-                    "13:00:00 - 14:00:00",
-                    "14:00:00 - 15:00:00",
-                    "15:00:00 - 16:00:00",
-                    "17:00:00 - 18:00:00",
-                    "18:00:00 - 19:00:00",
-                    "19:00:00 - 20:00:00");
+    function make_slots($start_time, $end_time, $gap) {
+        global $total_slts;
+        $start_time = strtotime($start_time);
+        $end_time = strtotime($end_time);
+        $gap_i = "+" . $gap . " minutes";
+        $curr_start_time = $curr_end_time = strtotime("00:00:00");
+        $total_slts = array();
+        $i = 0;
 
+        do {
+            $offset = "+" . $gap*$i . " minutes";
+            $curr_start_time = strtotime($offset, $start_time);
+            $curr_end_time = strtotime($gap_i, $curr_start_time);
+            $input = date("H:i:s", $curr_start_time) . " - " . date("H:i:s", $curr_end_time);
+            $total_slts[] = $input;
+            $i++;
+            
+        } while (strtotime($gap_i, $curr_end_time) < $end_time);
+
+    }
     
+    make_slots("08:00:00", "20:00:00", 58);
+
     function hall() {
         global $hall;
         global $hall_table;
@@ -72,7 +82,7 @@
             }
     }
 
-    function next_link($d,$m,$y) {
+    function next_link($d,$m,$y, $format) {
         $dn = $d+1; $mn = $m; $yn = $y;
 
         $last_day = date("d", mktime(0,0,0, $m+1, 0, $y));
@@ -84,7 +94,14 @@
                 $yn++;
             }
         }
-        return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
+
+        if ($format == "br") {
+            return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
+        } elseif ($format == "jn") {
+            return "date=" . $yn . "-" . $mn . "-" . $dn;
+        } else {
+            return "<strong>ERR: </strong>format not specified properly";
+        }
     }
     
     function prev_link($d,$m,$y) {
@@ -129,7 +146,7 @@
     
     }
     
-    function time_slots_display() {
+    function time_slots_display($date) {
         global $bookings;
         $counter = 1;
         $html = "";
@@ -138,21 +155,30 @@
         $used_slts = array();
         $avail_slts = array();
         $ava_slts = array();
-        
+
+        $bookings = array();
         foreach ($bookings as $slt) {
             $used_slts[] = ($slt['slot_no'] >  0) ? $total_slts[$slt['slot_no']-1] : "";
         }
         $ava_slts = array_diff($total_slts, $used_slts);
         
+        $date = explode("-", $date);
+        $now  = new DateTime();
         foreach ($ava_slts as $v)  {
-            $avail_slts[] = $v;
+            $start = new DateTime(explode(" - ", $v)[0]);
+            $start->setDate($date[0], $date[1], $date[2]);
+            
+            if ($start > $now) { 
+                $avail_slts[] = $v;
+            }
         }
         
+        if (count($avail_slts) > 0)
         foreach ($avail_slts as $slt) {
             $s = explode(" - ", $slt);
             $st = date("g:i A", strtotime($s[0])) . " - " . date("g:i A", strtotime($s[1])) ;
             
-            $html = '<div class="custom-control custom-checkbox" style=margin-bottom:5px>
+            $html = '<body style=margin:none><div class="custom-control custom-checkbox" style=margin-bottom:5px>
             <input type="checkbox" class="slots custom-control-input" name="slots[]" value="';
             $html .= $slt;
             $html .= '" id=timeslot';
@@ -176,7 +202,6 @@
         $phone = $data['phone'];
 
         global $total_slts;
-        print_r($data['slots']);
         foreach ($data['slots'] as $time) {
             $slot_no = array_search($time, $total_slts);
             $slot_no++;
@@ -201,5 +226,5 @@
         $_SESSION['query_status'] = true;
         echo "<script>window.location.href = 'view_events.php?" . $link_date . "';</script>";
     }   
-
+    
 ?>

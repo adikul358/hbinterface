@@ -1,4 +1,16 @@
-<?php session_start(); ?>
+<?php 
+ob_start();
+$selected_date = new DateTime($_GET['date']);
+$current_date = new DateTime("today");
+$nexink = "date=" . $current_date->format("Y-m-d");
+include 'php/functions.php'; 
+$date = explode("-", $_GET['date']);
+$next_location = "location: book.php?" . $nexink;
+
+if ($selected_date < $current_date) {
+    header($next_location);
+} 
+session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +24,8 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
-        require 'php/conn.php'; 
-        require 'php/functions.php'; 
-        
+        // require 'php/conn.php'; 
+                
         $_SESSION['query_status'] = false;
 
         $events = array();
@@ -107,7 +118,7 @@
                                 </div>
                             <div class=form-group>
                                 <label for=slots[]>Available Slots</label>
-                                <?php time_slots_display();?>
+                                <?php time_slots_display(date("Y-m-d", strtotime($date)));?>
                                 
                             </div>
                             <br>
