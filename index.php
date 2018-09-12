@@ -1,7 +1,5 @@
 <?php 
     session_start(); 
-    session_destroy();
-    session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +28,12 @@
         
         // set hall-to-be-booked
         $hall = "Wild Cats Hall";
-        if (isset($_GET['hall'])) { $hall = $_GET['hall']; }
-        elseif (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
+        if (isset($_GET['hall'])) { 
+            $hall = $_GET['hall']; 
+        }
+        elseif (isset($_SESSION['hall'])) { 
+            $hall = $_SESSION['hall']; 
+        }
         $_SESSION['hall'] = $hall;
         
         $_SESSION['date'] = new DateTime("today");
@@ -68,7 +70,7 @@
     <div class=container-fluid style=padding:0>
         <nav class="navbar white navbar-expand-lg navbar-light sticky-top">
             <a class="navbar-brand" href="/">
-                <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
+                <img src="images/SNS_Logo.png" id=header-logo style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                     height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"

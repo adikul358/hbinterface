@@ -965,6 +965,14 @@ pre code {
     margin-left: 91.666667%
 }
 
+#header-logo {
+    display: inline-block;
+    padding:2px;
+    margin-right: 5px;
+    border-right: 1px solid black;
+    padding-right: 10px;
+}
+
 @media (min-width:576px) {
     .col-sm {
         -ms-flex-preferred-size: 0;
@@ -1650,6 +1658,15 @@ pre code {
     }
     .offset-xl-11 {
         margin-left: 91.666667%
+    }
+}
+
+@media (max-width:377px) {
+    #header-logo {
+        display: none;
+    }
+    #controls_main {
+        margin-top: 15px;
     }
 }
 

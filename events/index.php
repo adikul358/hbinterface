@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Hall Booking Interface - Shiv Nadar School, Noida</title>
+    <title>View Events - Hall Booking Interface @SNSN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,15 +17,25 @@
         require '../php/functions.php';
 
         $hall = $_SESSION['hall'];
+        if (isset($_GET['hall'])) { $hall = $_GET['hall']; }
+        elseif (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
+        $_SESSION['hall'] = $hall;
+
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
         hall_active();
 
         $date = strtotime($_SESSION['date']);
         
-        $pd = array("", "");
-        // if ($prev_disable) {
-        //     $pd = array("style=cursor:default", "disabled");
-        // }
+        if ($date == strtotime("today")) {
+            $prev_disable = true;
+        } else {
+        $prev_disable = false;
+        }
+        
+        $pd = array("onclick=prevSessionDate('" . $_SESSION['date'] . "')",  "");
+        if ($prev_disable) {
+            $pd = array("style=cursor:default", "disabled");
+        }
 
         $bookings_query = "SELECT * FROM $hall_table WHERE date=" . "'" . date("Y-m-d", $date) . "'" . " ORDER BY slot_no";
         $result = mysqli_query($link, $bookings_query);
@@ -39,6 +49,9 @@
             $bookings[] = $row;
         }
 
+    ?>
+    <?php
+        $button_status = array();
         $event_status = array();
         
         $button_status['color'] = "btn-primary";
@@ -79,8 +92,7 @@
         <nav class="navbar white navbar-expand-lg navbar-light sticky-top">
 
             <a class="navbar-brand" href="/">
-                <img src="../images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
-                    height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
+                <img src="../images/SNS_Logo.png" id=header-logo height="30" class="align-top" alt=""> Hall Booking Interface
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -128,10 +140,12 @@
                             <?php echo $hall?>
                         </h4>
                         <div class="controls" style=width:100%>
-                            <h6 style=margin:0;letter-spacing:4px>
-                                <?php echo date("j F\, Y", $date)?>
-                            </h6>
-                            <div class="flex-center justify-content-center">
+                            <a href="/">
+                                <h6 style=margin:0;letter-spacing:4px>
+                                    <?php echo date("j F\, Y", $date)?>
+                                </h6>
+                            </a>
+                            <div id="controls_main" class="flex-center justify-content-center">
                                 <div style="width:100%" class="row">
                                     <div class="col-xs-auto">
                                         <a class=float-left id="prevd" <?php echo $pd[0]?>>
@@ -147,7 +161,7 @@
                                     </div>
                                     <div class="col-xs-auto">
                                         <a class=float-right id="nextn">
-                                            <div style=border-radius:50px class="btn btn-primary">Next</div>
+                                            <div style=border-radius:50px class="btn btn-primary" onclick=nextSessionDate(<?php echo "'" . $_SESSION['date'] . "'"?>)>Next</div>
                                         </a>
                                     </div>
                                 </div>
@@ -220,8 +234,10 @@
             </div>
         </div>
     </div>
+    <!-- successfully booked modal -->
 
     <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../cal/js/responsive-calendar.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>

@@ -4,6 +4,7 @@ body {
     background: linear-gradient(-135deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
     background-repeat: no-repeat no-repeat; */
     /* background: url(../favicon.png) */
+    min-width: 315px;
 }
 #float {
     min-width: 50px;
@@ -37,48 +38,4 @@ body {
     position: fixed;
     right: 24px;
     bottom: 24px;
-}
-
-.badge-1 {
-    background-color: #4CAF50;
-}
-
-.badge-2 {
-    background-color: #6FBB51;
-}
-
-.badge-3 {
-    background-color: #93C853;
-}
-
-.badge-4 {
-    background-color: #B7D454;
-}
-
-.badge-5 {
-    background-color: #DBE156;
-}
-
-.badge-6 {
-    background-color: #FFEE58;
-}
-
-.badge-7 {
-    background-color: #F3C64E;
-}
-
-.badge-8 {
-    background-color: #E89E44;
-}
-
-.badge-9 {
-    background-color: #DC773B;
-}
-
-.badge-10 {
-    background-color: #D14F31;
-}
-
-.badge-11 {
-    background-color: #C62828;
 }

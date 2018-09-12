@@ -47,7 +47,7 @@
         <nav class="navbar whitenavbar-expand-lg navbar-light sticky-top">
 
             <a class="navbar-brand" href="/">
-                <img src="../images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
+                <img src="../images/SNS_Logo.png" id=header-logo style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                     height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
             </a>
 
