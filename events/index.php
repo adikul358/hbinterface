@@ -17,8 +17,7 @@
         require '../php/functions.php';
 
         $hall = $_SESSION['hall'];
-        if (isset($_GET['hall'])) { $hall = $_GET['hall']; }
-        elseif (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
+        if (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
         $_SESSION['hall'] = $hall;
 
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
@@ -108,16 +107,12 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Halls</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item <?php echo $active['WCH']?>" href="?week=first">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" href="?hall=Conference Room">Conference
-                                Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" href="?hall=Meeting Room">Meeting
-                                Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" href="?hall=Gymnasium">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="?hall=Composite Lab">Composite
-                                Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" href="?hall=Senior Library">Senior
-                                Library</a>
+                            <a class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall',false)">Wild Cats Hall</a>
+                            <a class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room',false)">Conference Room</a>
+                            <a class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room',false)">Meeting Room</a>
+                            <a class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium',false)">Gymnasium</a>
+                            <a class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab',false)">Composite Lab</a>
+                            <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library',false)">Senior Library</a>
                         </div>
                     </li>
 
@@ -241,6 +236,7 @@
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
 
     <?php 
         if ($_SESSION['query_status'] == true) {

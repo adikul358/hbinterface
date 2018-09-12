@@ -3,6 +3,7 @@
     require "conn.php";
     date_default_timezone_set("Asia/Kolkata");
     
+    // fetch color array from strangeplanet.fr
     function set_colors($steps) {
         $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":4CAF50:FFEE58:C62828";
         $ch = curl_init();
@@ -11,30 +12,29 @@
         curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
         $html = curl_exec($ch);
         curl_close($ch);
-        
         libxml_use_internal_errors(true);
         $doc = new DOMDocument;
         $doc->loadHTML( $html);
         $xpath = new DOMXpath( $doc);
-
         $node = $xpath->query( '//textarea[@cols="80"]')->item(0);
-
+    
         $textContent = $node->textContent;
         $textContent = explode(");", explode("array(", explode(" = ", $textContent)[1])[1])[0];
         $textContent = str_replace('"', "", $textContent);
         $gradient = explode(",", $textContent);
-
+    
         $i = 0;
-        $css = "";
+        $css = "/*$steps*/\r\n\r\n";
         foreach ($gradient as $clr) {
             global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . "}\r\n";
         }
-        $css_file = fopen("../css/badge.css", "w");
-        fwrite($css_file, $css);
-        $css_file = fopen("../css/badge.css", "a");
-        fwrite($css_file, "/*$steps*/");
+        $css .= "\r\n/*$steps*/";
+        if (is_dir("css/badge.css")) {
+            $css_file = fopen("css/badge.css", "w");
+            fwrite($css_file, $css);
+        }
     };
 
     // make time slots
@@ -59,7 +59,7 @@
         set_colors($i);
     }
     
-    make_slots("08:00:00", "20:00:00", 58);
+    make_slots("08:00:00", "20:00:00", 60);
 
     // make selected hall active in dropdown
     function hall_active() {
