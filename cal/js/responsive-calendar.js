@@ -1,9 +1,18 @@
-(function() {
+var removeSlot;
+$.post(
+  "../php/get_last_slot.php"
+).done(function (data) {
+    removeSlot = data;
+    console.log(data);
+});
 
-  (function($) {
+if (removeSlot) {
+(function () {
+
+  (function ($) {
     "use strict";
     var Calendar, opts, spy;
-    Calendar = function(element, options) {
+    Calendar = function (element, options) {
       var time;
       this.$element = element;
       this.options = options;
@@ -19,33 +28,34 @@
       this.initialDraw();
       return null;
     };
+
     Calendar.prototype = {
-      addLeadingZero: function(num) {
+      addLeadingZero: function (num) {
         if (num < 10) {
           return "0" + num;
         } else {
           return "" + num;
         }
       },
-      applyTransition: function($el, transition) {
+      applyTransition: function ($el, transition) {
         $el.css('transition', transition);
         $el.css('-ms-transition', '-ms-' + transition);
         $el.css('-moz-transition', '-moz-' + transition);
         return $el.css('-webkit-transition', '-webkit-' + transition);
       },
-      applyBackfaceVisibility: function($el) {
+      applyBackfaceVisibility: function ($el) {
         $el.css('backface-visibility', 'hidden');
         $el.css('-ms-backface-visibility', 'hidden');
         $el.css('-moz-backface-visibility', 'hidden');
         return $el.css('-webkit-backface-visibility', 'hidden');
       },
-      applyTransform: function($el, transform) {
+      applyTransform: function ($el, transform) {
         $el.css('transform', transform);
         $el.css('-ms-transform', transform);
         $el.css('-moz-transform', transform);
         return $el.css('-webkit-transform', transform);
       },
-      splitDateString: function(dateString) {
+      splitDateString: function (dateString) {
         var day, month, time, year;
         time = dateString.split('-');
         year = parseInt(time[0]);
@@ -57,10 +67,10 @@
           day: day
         };
       },
-      initialDraw: function() {
+      initialDraw: function () {
         return this.drawDays(this.currentYear, this.currentMonth);
       },
-      editDays: function(events) {
+      editDays: function (events) {
         var dateString, day, dayEvents, time, _results;
         _results = [];
         for (dateString in events) {
@@ -79,7 +89,7 @@
         }
         return _results;
       },
-      clearDays: function(days) {
+      clearDays: function (days) {
         var dateString, day, time, _i, _len, _results;
         _results = [];
         for (_i = 0, _len = days.length; _i < _len; _i++) {
@@ -93,7 +103,7 @@
         }
         return _results;
       },
-      clearAll: function() {
+      clearAll: function () {
         var day, days, i, _i, _len, _results;
         this.options.events = {};
         days = this.$element.find('[data-group="days"] .day');
@@ -106,13 +116,13 @@
         }
         return _results;
       },
-      setMonthYear: function(dateString) {
+      setMonthYear: function (dateString) {
         var time;
         time = this.splitDateString(dateString);
         this.currentMonth = this.drawDays(time.year, time.month);
         return this.currentYear = time.year;
       },
-      prev: function() {
+      prev: function () {
         if (this.currentMonth - 1 < 0) {
           this.currentYear = this.currentYear - 1;
           this.currentMonth = 11;
@@ -125,7 +135,7 @@
         }
         return null;
       },
-      next: function() {
+      next: function () {
         if (this.currentMonth + 1 > 11) {
           this.currentYear = this.currentYear + 1;
           this.currentMonth = 0;
@@ -138,7 +148,7 @@
         }
         return null;
       },
-      curr: function() {
+      curr: function () {
         this.currentYear = this.time.getFullYear();
         this.currentMonth = this.time.getMonth();
         this.drawDays(this.currentYear, this.currentMonth);
@@ -147,7 +157,7 @@
         }
         return null;
       },
-      addOthers: function(day, dayEvents) {
+      addOthers: function (day, dayEvents) {
         var badge;
         if (typeof dayEvents === "object") {
           if (dayEvents.number != null) {
@@ -161,7 +171,7 @@
         }
         return day;
       },
-      makeActive: function(day, dayEvents) {
+      makeActive: function (day, dayEvents) {
         var classes, eventClass, i, _i, _len;
         if (dayEvents) {
           if (dayEvents["class"]) {
@@ -177,16 +187,20 @@
         }
         return day;
       },
-      
-      getDaysInMonth: function(year, month) {
+
+      getDaysInMonth: function (year, month) {
         return new Date(year, month + 1, 0).getDate();
       },
 
-      drawDay: function(lastDayOfMonth, yearNum, monthNum, dayNum, i) {
+      drawDay: function (lastDayOfMonth, yearNum, monthNum, dayNum, i) {
         var calcDate, dateNow, dateString, day, dayDate, pastFutureClass;
         day = $("<div></div>").addClass("day");
         dateNow = new Date();
-        dateNow.setHours(0, 0, 0, 0);
+        if (removeSlot == "true") {
+          dateNow.setHours(1, 0, 0, 0);
+        } else {
+          dateNow.setHours(0, 0, 0, 0);
+        }
         dayDate = new Date(yearNum, monthNum - 1, dayNum);
         if (dayDate.getTime() < dateNow.getTime()) {
           pastFutureClass = "past";
@@ -212,18 +226,18 @@
           this.applyTransform(day, 'rotateY(180deg)');
           this.applyBackfaceVisibility(day);
         }
-        if(pastFutureClass == "past") {
+        if (pastFutureClass == "past") {
           day.addClass("past").removeClass("not-current");
           day.find("a").removeAttr('href');
           day = this.makeActive(day, this.options.events[""]);
           return this.$element.find('[data-group="days"]').append(day);
         } else {
-        day = this.makeActive(day, this.options.events[dateString]);
-        return this.$element.find('[data-group="days"]').append(day);
+          day = this.makeActive(day, this.options.events[dateString]);
+          return this.$element.find('[data-group="days"]').append(day);
         }
       },
-      
-      drawDays: function(year, month) {
+
+      drawDays: function (year, month) {
         var currentMonth, day, dayBase, days, delay, draw, firstDayOfMonth, i, lastDayOfMonth, loopBase, monthNum, multiplier, thisRef, time, timeout, yearNum, _i, _len;
         thisRef = this;
         time = new Date(year, month);
@@ -255,7 +269,7 @@
         }
         this.$element.find("[data-head-month]").html(this.options.translateMonths[time.getMonth()]);
         this.$element.find("[data-head-year]").html(time.getFullYear());
-        draw = function() {
+        draw = function () {
           var dayNum, setEvents;
           thisRef.$element.find('[data-group="days"]').empty();
           dayNum = dayBase - firstDayOfMonth;
@@ -265,7 +279,7 @@
             dayNum = dayNum + 1;
             i = i + 1;
           }
-          setEvents = function() {
+          setEvents = function () {
             var _j, _len1;
             days = thisRef.$element.find('[data-group="days"] .day');
             for (i = _j = 0, _len1 = days.length; _j < _len1; i = ++_j) {
@@ -274,22 +288,22 @@
               thisRef.applyTransform($(day), 'rotateY(0deg)');
             }
             if (thisRef.options.onDayClick) {
-              thisRef.$element.find('[data-group="days"] .day a').click(function() {
+              thisRef.$element.find('[data-group="days"] .day a').click(function () {
                 return thisRef.options.onDayClick.call(this, thisRef.options.events);
               });
             }
             if (thisRef.options.onDayHover) {
-              thisRef.$element.find('[data-group="days"] .day a').hover(function() {
+              thisRef.$element.find('[data-group="days"] .day a').hover(function () {
                 return thisRef.options.onDayHover.call(this, thisRef.options.events);
               });
             }
             if (thisRef.options.onActiveDayClick) {
-              thisRef.$element.find('[data-group="days"] .day.active a').click(function() {
+              thisRef.$element.find('[data-group="days"] .day.active a').click(function () {
                 return thisRef.options.onActiveDayClick.call(this, thisRef.options.events);
               });
             }
             if (thisRef.options.onActiveDayHover) {
-              return thisRef.$element.find('[data-group="days"] .day.active a').hover(function() {
+              return thisRef.$element.find('[data-group="days"] .day.active a').hover(function () {
                 return thisRef.options.onActiveDayHover.call(this, thisRef.options.events);
               });
             }
@@ -300,7 +314,8 @@
         return currentMonth;
       }
     };
-    $.fn.responsiveCalendar = function(option, params) {
+
+    $.fn.responsiveCalendar = function (option, params) {
       var init, options, publicFunc;
       options = $.extend({}, $.fn.responsiveCalendar.defaults, typeof option === 'object' && option);
       publicFunc = {
@@ -313,14 +328,14 @@
         jump: 'jump',
         curr: 'curr'
       };
-      init = function($this) {
+      init = function ($this) {
         var data;
         options = $.metadata ? $.extend({}, options, $this.metadata()) : options;
         $this.data('calendar', (data = new Calendar($this, options)));
         if (options.onInit) {
           options.onInit.call(data);
         }
-                  return $this.find("[data-go]").click(function() {
+        return $this.find("[data-go]").click(function () {
           if ($(this).data("go") === "prev") {
             data.prev();
           }
@@ -329,7 +344,7 @@
           }
         });
       };
-      return this.each(function() {
+      return this.each(function () {
         var $this, data;
         $this = $(this);
         data = $this.data('calendar');
@@ -347,6 +362,7 @@
         return null;
       });
     };
+
     $.fn.responsiveCalendar.defaults = {
       translateMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       events: {},
@@ -362,6 +378,7 @@
       onActiveDayHover: void 0,
       onMonthChange: void 0
     };
+
     spy = $('[data-spy="responsive-calendar"]');
     if (spy.length) {
       opts = {};
@@ -388,3 +405,4 @@
   })(jQuery);
 
 }).call(this);
+}

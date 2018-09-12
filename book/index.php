@@ -12,8 +12,8 @@
     <link href="../css/mdb.min.css" rel="stylesheet">
     <link href="../cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
-        // require 'php/conn.php'; 
-        require '../php/conn.php'; 
+        require '../php/conn.php';
+        require '../php/functions.php';
         
         // reset submitted status
         $_SESSION['query_status'] = false;
@@ -62,12 +62,12 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Halls</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall',true)">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room',true)">Conference Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room',true)">Meeting Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium',true)">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab',true)">Composite Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library',true)">Senior Library</a>
+                        <a class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall','true')">Wild Cats Hall</a>
+                            <a class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room','true')">Conference Room</a>
+                            <a class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room','true')">Meeting Room</a>
+                            <a class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium','true')">Gymnasium</a>
+                            <a class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab','true')">Composite Lab</a>
+                            <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library','true')">Senior Library</a>
                         </div>
                     </li>
                 </ul>
@@ -99,7 +99,7 @@
                                 </div>
                             <div class=form-group>
                                 <label for=slots[]>Available Slots</label>
-                                <?php time_slots_display(date("Y-m-d", strtotime($date)));?>
+                                <?php time_slots_display(date("Y-m-d", strtotime($date)), true);?>
                                 
                             </div>
                             <br>

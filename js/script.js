@@ -15,7 +15,7 @@ function setSessionHall(hall, redirect) {
             redirect: redirect,
         }
     ).done(function (data) {
-        if (data === "redirect") {window.location.assign('/');}
+        if (data == "redirect") {window.location.assign('/');}
         else {window.location.reload();}
     });
 }

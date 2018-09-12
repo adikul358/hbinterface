@@ -5,7 +5,7 @@
     
     // fetch color array from strangeplanet.fr
     function set_colors($steps) {
-        $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":4CAF50:FFEE58:C62828";
+        $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":007E33:ff8800:C62828";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -28,10 +28,10 @@
         foreach ($gradient as $clr) {
             global $i;
             $i++;
-            $css .= ".badge-" . $i . " {background-color: #" . $clr . "}\r\n";
+            $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
         $css .= "\r\n/*$steps*/";
-        if (is_dir("css/badge.css")) {
+        if (is_dir("css")) {
             $css_file = fopen("css/badge.css", "w");
             fwrite($css_file, $css);
         }
@@ -59,7 +59,7 @@
         set_colors($i);
     }
     
-    make_slots("08:00:00", "20:00:00", 60);
+    make_slots("01:00:00", "2:00:00", 60);
 
     // make selected hall active in dropdown
     function hall_active() {
@@ -151,7 +151,7 @@
     }
     
     // display all time slots for checkbox selection
-    function time_slots_display($date) {
+    function time_slots_display($date, $print) {
         global $total_slts; 
         global $bookings;
         $counter = 1;
@@ -177,15 +177,19 @@
             $start->setDate($date[0], $date[1], $date[2]);
             if ($start > $now) { 
                 $avail_slts[] = $v;
+                global $outdated;
+                $outdated = false;
+            } else {
+                $outdated = true;
             }
         }
         
-        if (count($avail_slts) > 0)
+        if (count($avail_slts) > 0 && $print)
         foreach ($avail_slts as $slt) {
             $s = explode(" - ", $slt);
             $st = date("g:i A", strtotime($s[0])) . " - " . date("g:i A", strtotime($s[1])) ;
             
-            $html = '<body style=margin:none><div class="custom-control custom-checkbox" style=margin-bottom:5px>
+            $html = '<div class="custom-control custom-checkbox" style=margin-bottom:5px>
             <input type="checkbox" class="slots custom-control-input" name="slots[]" value="';
             $html .= $slt;
             $html .= '" id=timeslot';
@@ -197,6 +201,8 @@
             $html .= '</label></div>';
             echo $html;
             $counter++;
+        } elseif (!$print) {
+            return $outdated;
         }
     }
 
