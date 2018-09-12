@@ -59,7 +59,7 @@
         set_colors($i);
     }
     
-    make_slots("01:00:00", "2:00:00", 60);
+    make_slots("08:00:00", "18:00:00", 60);
 
     // make selected hall active in dropdown
     function hall_active() {
