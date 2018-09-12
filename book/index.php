@@ -1,43 +1,31 @@
-<?php 
-ob_start();
-$selected_date = new DateTime($_GET['date']);
-$current_date = new DateTime("today");
-$nexink = "date=" . $current_date->format("Y-m-d");
-include 'php/functions.php'; 
-$date = explode("-", $_GET['date']);
-$next_location = "location: book.php?" . $nexink;
-
-if ($selected_date < $current_date) {
-    header($next_location);
-} 
-session_start(); ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Hall Booking Interface - Shiv Nadar School, Noida</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <link href="cal/css/responsive-calendar.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/mdb.min.css" rel="stylesheet">
+    <link href="../cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
         // require 'php/conn.php'; 
-                
-        $_SESSION['query_status'] = false;
-
-        $events = array();
-        $dates_u = array();
+        require '../php/conn.php'; 
+        require '../php/functions.php'; 
         
-        $hall_table = "";
+        // reset submitted status
+        $_SESSION['query_status'] = false;
+        
         $hall = $_SESSION['hall'];
+        // array for dropdown hall list
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
+        // function to make selected hall active in dropdown
+        hall_active();
 
-        hall();
-
-        $date = $_GET['date'];
+        $date = $_SESSION['date'];
 
         $bookings_query = "SELECT * FROM $hall_table WHERE date='$date' ORDER BY date";
         $result = mysqli_query($link, $bookings_query);
@@ -56,10 +44,10 @@ session_start(); ?>
 
 <body style="overflow-x:hidden; min-height:100vh;">
     <div class=container-fluid style=padding:0>
-        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
+        <nav class="navbar whitenavbar-expand-lg navbar-light sticky-top">
 
             <a class="navbar-brand" href="/">
-                <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
+                <img src="../images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                     height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
             </a>
 
@@ -76,14 +64,14 @@ session_start(); ?>
                             aria-haspopup="true" aria-expanded="false">Halls</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item <?php echo $active['WCH']?>" href="/">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference
+                            <a class="dropdown-item <?php echo $active['CONR']?>" href="/?hall=Conference Room">Conference
                                 Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting
+                            <a class="dropdown-item <?php echo $active['MEER']?>" href="/?hall=Meeting Room">Meeting
                                 Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite
+                            <a class="dropdown-item <?php echo $active['GYM']?>" href="/?hall=Gymnasium">Gymnasium</a>
+                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="/?hall=Composite Lab">Composite
                                 Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior
+                            <a class="dropdown-item <?php echo $active['SENL']?>" href="/?hall=Senior Library">Senior
                                 Library</a>
                         </div>
                     </li>
@@ -96,10 +84,10 @@ session_start(); ?>
     <br>
 
     <div class="row justify-content-center">
-        <div class="col-sm-7">
-            <div class="card" style="background:rgba(255,255,255, 0.7)">
+        <div class="col-md-7">
+            <div class="card">
                 <div class="card-body">
-                    <div class="container text-center">
+                    <div class="text-center">
                         <h4 class=card-title>
                             <?php echo $hall?>
                         </h4>
@@ -109,8 +97,8 @@ session_start(); ?>
                     </div>
                     <br>
                     <div class=container>
-                        <form class="needs-validation" novalidate id=booking-form method=POST action="" style="width: 80%; margin:auto">
-                            <h5>Event Details</h5>
+                        <form class="needs-validation" novalidate id=booking-form method=POST action="" style="width: 100%; margin:auto">
+                            <h5 style="border-bottom:2.5px solid #ced4da;">Event Details</h5>
                             <div class="form-group">
                                 <label for="validationEventName">Event Name</label>
                                 <input id="validationEventName" required placeholder="Event Name" type="text" name=event class="form-control">
@@ -122,7 +110,7 @@ session_start(); ?>
                                 
                             </div>
                             <br>
-                            <h5>Contact Details</h5>
+                            <h5 style="border-bottom:2.5px solid #ced4da;">Contact Details</h5>
                             <div class="form-group">
                                 <label for="validateName">Name</label>
                                 <input required id=validateName type="text" name=name class="form-control">
@@ -171,18 +159,21 @@ session_start(); ?>
         }
     ?>
 
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
 
     <script>
+        // not allowing text input in phone field
         function AllowNumbersOnly(e) {
             var charCode = (e.which) ? e.which : e.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                 e.preventDefault();
             }
         }
+
+        // stoping validation
         (function () {
             'use strict';
             window.addEventListener('load', function () {

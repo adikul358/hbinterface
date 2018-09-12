@@ -1,11 +1,9 @@
 body {
-    background: -moz-linear-gradient(45deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
-    /* FF3.6-15 */
+    /* background: -moz-linear-gradient(45deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
     background: -webkit-linear-gradient(45deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3.0%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
-    /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(-135deg, transparent 0%, transparent 3%, rgba(30, 87, 153, 1) 3%, rgba(30, 87, 153, 1) 4.5%, transparent 4.5%, transparent 6%, rgba(48, 206, 0, 1) 6%, rgba(48, 206, 0, 1) 7.5%, transparent 7.5%, transparent 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat no-repeat; */
+    /* background: url(../favicon.png) */
 }
 #float {
     min-width: 50px;

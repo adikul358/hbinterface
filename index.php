@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    session_destroy();
+    session_start(); 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -25,10 +29,13 @@
         $dates_u = array();
         
         // set hall-to-be-booked
-        $hall_table = "wch";
         $hall = "Wild Cats Hall";
-        if (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
+        if (isset($_GET['hall'])) { $hall = $_GET['hall']; }
+        elseif (isset($_SESSION['hall'])) { $hall = $_SESSION['hall']; }
         $_SESSION['hall'] = $hall;
+        
+        $_SESSION['date'] = new DateTime("today");
+        $_SESSION['date'] = $_SESSION['date']->format("Y-m-d");
 
         // array for dropdown hall list
         $active = array("WCH"=>"", "CONR"=>"", "MEER"=>"", "GYM"=>"", "COTEL"=>"", "SENL"=>"");
@@ -59,7 +66,7 @@
 <body style="width:100vw; overflow-x:hidden; min-height:100vh;">
     <!-- Navbar -->
     <div class=container-fluid style=padding:0>
-        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background:rgba(255,255,255, 0.7)">
+        <nav class="navbar white navbar-expand-lg navbar-light sticky-top">
             <a class="navbar-brand" href="/">
                 <img src="images/SNS_Logo.png" style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
                     height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
@@ -75,14 +82,14 @@
                             aria-haspopup="true" aria-expanded="false">Halls</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item <?php echo $active['WCH']?>" href="/">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" href="index.php?hall=Conference Room">Conference
+                            <a class="dropdown-item <?php echo $active['CONR']?>" href="?hall=Conference Room">Conference
                                 Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" href="index.php?hall=Meeting Room">Meeting
+                            <a class="dropdown-item <?php echo $active['MEER']?>" href="?hall=Meeting Room">Meeting
                                 Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" href="index.php?hall=Gymnasium">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="index.php?hall=Composite Lab">Composite
+                            <a class="dropdown-item <?php echo $active['GYM']?>" href="?hall=Gymnasium">Gymnasium</a>
+                            <a class="dropdown-item <?php echo $active['COTEL']?>" href="?hall=Composite Lab">Composite
                                 Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" href="index.php?hall=Senior Library">Senior
+                            <a class="dropdown-item <?php echo $active['SENL']?>" href="?hall=Senior Library">Senior
                                 Library</a>
                         </div>
                     </li>
@@ -97,26 +104,36 @@
     <!-- Main Calendar -->
     <div class="row justify-content-center">
         <div class="col-xl-8">
-            <div class="card" style="background:rgba(255,255,255, 0.7)">
+            <div class="card">
                 <div class="card-body text-center ">
                     <h4 class=card-title>
                         <?php echo $hall?>
                     </h4>
                     <div class="responsive-calendar">
                         <div class="controls">
-                            <a class=float-left data-go="prev">
-                                <div class="btn btn-primary" style=border-radius:50px>Prev</div>
-                            </a>
-                            <div class=btn style=color:black;box-shadow:none;>
-                                <h5 style=margin:0>
-                                    <span data-head-month></span>
-                                    -
-                                    <span data-head-year></span>
-                                </h5>
+                            <div class="flex-center justify-content-center">
+                                <div style="width:100%" class="row">
+                                    <div class="col-xs-auto">
+                                        <a class=float-left data-go="prev">
+                                            <div class="btn btn-primary" style=border-radius:50px>Prev</div>
+                                        </a>
+                                    </div>
+                                    <div class="col" style=margin:auto;height:100%text-align:center>
+                                        <div style=color:black;box-shadow:none;>
+                                            <div class=btn style=color:black;box-shadow:none;>
+                                                <h5 style=margin:0>
+                                                    <span data-head-month></span> - <span data-head-year></span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-auto">
+                                        <a class=float-right data-go="next">
+                                            <div class="btn btn-primary" style=border-radius:50px>Next</div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <a class=float-right data-go="next">
-                                <div class="btn btn-primary" style=border-radius:50px>Next</div>
-                            </a>
                         </div>
                         <br>
                         <div class="day-headers">

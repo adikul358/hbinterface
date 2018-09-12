@@ -1,4 +1,5 @@
 <?php
+    
     require "conn.php";
     date_default_timezone_set("Asia/Kolkata");
 
@@ -194,7 +195,7 @@
         $link_date = "d=" . $link_date[2] . "&m=" . $link_date[1] . "&y=" . $link_date[0];
 
         $_SESSION['query_status'] = true;
-        echo "<script>window.location.href = 'view_events.php?" . $link_date . "';</script>";
+        echo "<script>window.location.href = '/events/';</script>";
     }   
-    
+
 ?>

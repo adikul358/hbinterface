@@ -1,9 +1,10 @@
 function setSessionDate(date) {
-  $.ajax({
-    type: "POST",
-    url: "../../php/functions.php",
-    data: date,
-    success: console.log(date)
+  $.post(
+    "../../php/set_session_date.php", {
+      date: date
+    }
+  ).done(function (data) {
+    window.location.assign("events/");
   });
 }
 
@@ -216,7 +217,7 @@ function setSessionDate(date) {
             dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
           }
         }
-        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum).attr("onclick", "setSessionDate('" + dayNum + "-" + monthNum + "-" + yearNum + "')"));
+        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum).attr("onclick", "setSessionDate('" + yearNum + "-" + monthNum + "-" + dayNum + "');"));
         if (this.options.monthChangeAnimation) {
           this.applyTransform(day, 'rotateY(180deg)');
           this.applyBackfaceVisibility(day);
