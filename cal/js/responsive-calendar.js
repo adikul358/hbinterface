@@ -1,3 +1,12 @@
+function setSessionDate(date) {
+  $.ajax({
+    type: "POST",
+    url: "../../php/functions.php",
+    data: date,
+    success: console.log(date)
+  });
+}
+
 (function() {
 
   (function($) {
@@ -157,7 +166,6 @@
               badge.addClass(dayEvents.badgeClass);
             }
             day.append(badge);
-            // day.addClass("badge-" + dayEvents.number);
           }
         }
         return day;
@@ -178,9 +186,11 @@
         }
         return day;
       },
+      
       getDaysInMonth: function(year, month) {
         return new Date(year, month + 1, 0).getDate();
       },
+
       drawDay: function(lastDayOfMonth, yearNum, monthNum, dayNum, i) {
         var calcDate, dateNow, dateString, day, dayDate, pastFutureClass;
         day = $("<div></div>").addClass("day");
@@ -206,7 +216,7 @@
             dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
           }
         }
-        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum).attr("href", "view_events.php?d=" + dayNum + "&m=" + monthNum + "&y=" + yearNum));
+        day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum).attr("onclick", "setSessionDate('" + dayNum + "-" + monthNum + "-" + yearNum + "')"));
         if (this.options.monthChangeAnimation) {
           this.applyTransform(day, 'rotateY(180deg)');
           this.applyBackfaceVisibility(day);
@@ -221,6 +231,7 @@
         return this.$element.find('[data-group="days"]').append(day);
         }
       },
+      
       drawDays: function(year, month) {
         var currentMonth, day, dayBase, days, delay, draw, firstDayOfMonth, i, lastDayOfMonth, loopBase, monthNum, multiplier, thisRef, time, timeout, yearNum, _i, _len;
         thisRef = this;

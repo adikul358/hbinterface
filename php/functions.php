@@ -2,6 +2,7 @@
     require "conn.php";
     date_default_timezone_set("Asia/Kolkata");
 
+    // make time slots
     function make_slots($start_time, $end_time, $gap) {
         global $total_slts;
         $start_time = strtotime($start_time);
@@ -18,107 +19,73 @@
             $input = date("H:i:s", $curr_start_time) . " - " . date("H:i:s", $curr_end_time);
             $total_slts[] = $input;
             $i++;
-            
         } while (strtotime($gap_i, $curr_end_time) < $end_time);
-
     }
     
     make_slots("08:00:00", "20:00:00", 58);
 
-    function hall() {
+    // make selected hall active in dropdown
+    function hall_active() {
         global $hall;
         global $hall_table;
         global $active;
 
-            switch ($hall) {
-                case 'Wild Cats Hall':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "WCH") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "wch";
-                    break;
-                case 'Conference Room':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "CONR") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "conr";
-                    break;
-                case 'Meeting Room':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "MEER") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "meer";
-                    break;
-                case 'Gymnasium':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "GYM") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "gym";
-                    break;
-                case 'Composite Lab':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "COTEL") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "cotel";
-                    break;
-                case 'Senior Library':
-                    foreach ($active as $key => $ac) {
-                        if ($key === "SENL") {
-                            $active[$key] = "active";
-                        }
-                    }
-                    $hall_table = "senl";
-                    break;
+        switch ($hall) {
+            case 'Wild Cats Hall':
+            foreach ($active as $key => $ac) {
+                if ($key === "WCH") { $active[$key] = "active"; }
             }
+            $hall_table = "wch";
+            break;
+
+            case 'Conference Room':
+            foreach ($active as $key => $ac) { 
+                if ($key === "CONR") { $active[$key] = "active"; }
+            }
+            $hall_table = "conr";
+            break;
+
+            case 'Meeting Room':
+            foreach ($active as $key => $ac) {
+                if ($key === "MEER") { $active[$key] = "active"; }
+            }
+            $hall_table = "meer";
+            break;
+
+            case 'Gymnasium':
+            foreach ($active as $key => $ac) {
+                if ($key === "GYM") { $active[$key] = "active"; }
+            }
+            $hall_table = "gym";
+            break;
+
+            case 'Composite Lab':
+            foreach ($active as $key => $ac) {
+                if ($key === "COTEL") { $active[$key] = "active"; }
+            }
+            $hall_table = "cotel";
+            break;
+
+            case 'Senior Library':
+            foreach ($active as $key => $ac) {
+                if ($key === "SENL") { $active[$key] = "active"; }
+            }
+            $hall_table = "senl";
+            break;
+        }
     }
 
-    function next_link($d,$m,$y, $format) {
-        $dn = $d+1; $mn = $m; $yn = $y;
+    // go to next date
+    function next_date($date) {
+        return strtotime("+1 day", $date);
+    }
 
-        $last_day = date("d", mktime(0,0,0, $m+1, 0, $y));
-        if ($dn > $last_day) {
-            $dn = 1;
-            $mn++;
-            if ($m >= 12) {
-                $mn = 1;
-                $yn++;
-            }
-        }
-
-        if ($format == "br") {
-            return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
-        } elseif ($format == "jn") {
-            return "date=" . $yn . "-" . $mn . "-" . $dn;
-        } else {
-            return "<strong>ERR: </strong>format not specified properly";
-        }
+    // go to prev date
+    function prev_date($date) {
+        return strtotime("-1 day", $date);
     }
     
-    function prev_link($d,$m,$y) {
-        $dn = $d-1; $mn = $m; $yn = $y;
-        
-        $last_day = date("d", mktime(0,0,0, $m, 0, $y));
-        if ($dn < 1) {
-            $dn = $last_day;
-            $mn--;
-            if ($m <= 1) {
-                $mn = 12;
-                $yn--;
-            }
-        }
-        return "d=" . $dn . "&m=" . $mn . "&y=" . $yn;
-    }
-    
+    // preview all events of selected date
     function event_display() {
         global $bookings;
         $counter = 1;
@@ -146,28 +113,31 @@
     
     }
     
+    // display all time slots for checkbox selection
     function time_slots_display($date) {
+        global $total_slts; 
         global $bookings;
         $counter = 1;
         $html = "";
-        global $total_slts; 
 
         $used_slts = array();
         $avail_slts = array();
         $ava_slts = array();
 
+        // filter out booked slots
         $bookings = array();
         foreach ($bookings as $slt) {
             $used_slts[] = ($slt['slot_no'] >  0) ? $total_slts[$slt['slot_no']-1] : "";
         }
+        
         $ava_slts = array_diff($total_slts, $used_slts);
         
+        // filter out out-of-time slots
         $date = explode("-", $date);
         $now  = new DateTime();
         foreach ($ava_slts as $v)  {
             $start = new DateTime(explode(" - ", $v)[0]);
             $start->setDate($date[0], $date[1], $date[2]);
-            
             if ($start > $now) { 
                 $avail_slts[] = $v;
             }
