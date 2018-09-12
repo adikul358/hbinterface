@@ -158,7 +158,7 @@
         // Add Badges to Days
         var removeSlot;
         $.ajax(
-            "../php/get_last_slot.php"
+            "../php/ajax/get_last_slot.php"
         ).done(function (data) {
             removeSlot = data;
             console.log(data);

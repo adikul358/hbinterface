@@ -1,6 +1,6 @@
 function setSessionDate(date) {
     $.post(
-        "../php/set_session_date.php", {
+        "../php/ajax/set_session_date.php", {
             date: date
         }
     ).done(function (data) {
@@ -10,7 +10,7 @@ function setSessionDate(date) {
 
 function setSessionHall(hall, redirect) {
     $.post(
-        "../php/set_session_hall.php", {
+        "../php/ajax/set_session_hall.php", {
             hall: hall,
             redirect: redirect,
         }
@@ -22,7 +22,7 @@ function setSessionHall(hall, redirect) {
 
 function nextSessionDate(date) {
     $.post(
-        "../php/next_session_date.php", {
+        "../php/ajax/next_session_date.php", {
             date: date
         }
     ).done(function (data) {
@@ -32,7 +32,7 @@ function nextSessionDate(date) {
 
 function prevSessionDate(date) {
     $.post(
-        "../php/prev_session_date.php", {
+        "../php/ajax/prev_session_date.php", {
             date: date
         }
     ).done(function (data) {
