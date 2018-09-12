@@ -1,12 +1,3 @@
-var removeSlot;
-$.post(
-  "../php/get_last_slot.php"
-).done(function (data) {
-    removeSlot = data;
-    console.log(data);
-});
-
-if (removeSlot) {
 (function () {
 
   (function ($) {
@@ -405,4 +396,3 @@ if (removeSlot) {
   })(jQuery);
 
 }).call(this);
-}

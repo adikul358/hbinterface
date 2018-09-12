@@ -156,7 +156,12 @@
 
     <script type="text/javascript">
         // Add Badges to Days
-        $(document).ready(function () {
+        var removeSlot;
+        $.ajax(
+            "../php/get_last_slot.php"
+        ).done(function (data) {
+            removeSlot = data;
+            console.log(data);
             $(".responsive-calendar").responsiveCalendar({
                 events: { <?php foreach ($events as $curr) { echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},'; } ?> }
             });
