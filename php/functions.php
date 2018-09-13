@@ -13,14 +13,18 @@
         // $html = curl_exec($ch);
         // curl_close($ch);
         // echo "<br>";
+        print_r("url: ");
         print_r($url);
         echo "<br>";
         libxml_use_internal_errors(true);
         $doc = new DOMDocument;
         $doc->loadHTMLFile($url);
+        print_r("doc: ");
+        print_r($doc);
         $xpath = new DOMXpath($doc);
         $node = $xpath->query('//textarea[@cols="80"]')->item(0);
-        print_r("node: " + $node);
+        print_r("node: ");
+        print_r($node);
         echo "<br>";
         
         $textContent = $node->textContent;
