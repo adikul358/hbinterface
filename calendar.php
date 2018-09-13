@@ -13,7 +13,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/mdb.min.css" rel="stylesheet">
-    <link href="css/badge.css" rel="stylesheet">
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
     <?php 
         require 'php/conn.php'; 
