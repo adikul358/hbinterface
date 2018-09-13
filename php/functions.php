@@ -14,6 +14,7 @@
         // curl_close($ch);
         // echo "<br>";
         $html = file_get_contents($url);
+        print_r($html);
         print_r("url: ");
         print_r($url);
         echo "<br>";
