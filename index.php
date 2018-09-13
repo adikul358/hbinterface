@@ -99,11 +99,9 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-        setInterval(function(){
-            $('.card').load("/calendar.php", function() {
-                $('#img').remove();
-            }
-        }, 500)
+        $('.card').load("/calendar.php", function() {
+            $('#img').remove();
+        })
     });
     </script>
 
