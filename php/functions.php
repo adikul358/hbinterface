@@ -14,9 +14,9 @@
         curl_close($ch);
         libxml_use_internal_errors(true);
         $doc = new DOMDocument;
-        $doc->loadHTML( $html);
-        $xpath = new DOMXpath( $doc);
-        $node = $xpath->query( '//textarea[@cols="80"]')->item(0);
+        $doc->loadHTML($html);
+        $xpath = new DOMXpath($doc);
+        $node = $xpath->query('//textarea[@cols="80"]')->item(0);
     
         $textContent = $node->textContent;
         $textContent = explode(");", explode("array(", explode(" = ", $textContent)[1])[1])[0];
@@ -24,17 +24,18 @@
         $gradient = explode(",", $textContent);
     
         $i = 0;
-        $css = "/*$steps*/\r\n\r\n";
+        $css = "<style>\r\n\r\n/*$steps*/\r\n\r\n";
         foreach ($gradient as $clr) {
             global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
-        $css .= "\r\n/*$steps*/";
-        if (is_dir("css")) {
-            $css_file = fopen("css/badge.css", "w");
-            fwrite($css_file, $css);
-        }
+        $css .= "\r\n/*$steps*/\r\n\r\n</style>";
+        // if (is_dir("css")) {
+        //     $css_file = fopen("css/badge.css", "w");
+        //     fwrite($css_file, $css);
+        // }
+        $_SESSION['badge_styles'] = $css;
     };
 
     // make time slots
