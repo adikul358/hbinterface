@@ -61,6 +61,7 @@
             $events[] = array("date"=>$d, 'no'=>$bno);
         }
     ?>
+    <?php echo $_SESSION['badge_styles'] ?>
 </head>
 
 <body style="width:100vw; overflow-x:hidden; min-height:100vh;">
