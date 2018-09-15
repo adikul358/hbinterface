@@ -78,12 +78,11 @@
     <!-- Navbar -->
 
     <br>
-
+    
     <!-- Main Calendar -->
     <div class="row justify-content-center">
         <div class="col-xl-8">
             <div class="card">
-                <div id=image class="text-center"><img style="margin-top: 50px; margin-bottom: 50px;height:80px" class=img-fluid src="/images/buffer-3.gif"></div>
             </div>
         </div>
     </div>
@@ -91,6 +90,11 @@
 
     <br>
 
+    <div id=loading-overlay class="flex-center flex-column container-fluid white">
+        <div id=image class="text-center">
+            <img style="margin-top: 50px; margin-bottom: 50px;height:80px" class=img-fluid src="/images/buffer-3.gif">
+        </div>
+    </div>
 
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/popper.min.js"></script>
@@ -100,7 +104,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
         $('.card').load("/calendar.php", function() {
-            $('#img').remove();
+            $('#loading-overlay').remove();
         })
     });
     </script>
