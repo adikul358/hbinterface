@@ -4,40 +4,9 @@
     date_default_timezone_set("Asia/Kolkata");
     
     // fetch color array from strangeplanet.fr
-    function set_colors($steps) {
-        $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":007E33:ff8800:C62828";
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $url);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-        // $html = curl_exec($ch);
-        // curl_close($ch);
-        // echo "<br>";
-        // $html = file_get_contents($url);
-        // print_r($html);
-        // print_r("url: ");
-        // print_r($url);
-        // echo "<br>";
-        // libxml_use_internal_errors(true);
-        // $doc = new DOMDocument;
-        // $doc->loadHTML($html);
-        // $xpath = new DOMXpath($doc);
-        // $node = $xpath->query('//textarea[@cols="80"]')->item(0);
-        // print_r("node: ");
-        // print_r($node);
-        // echo "<br>";
-        
-        // $textContent = $node->textContent;
-        // print_r($textContent);
-        // echo "<br>";
-        // $textContent = explode(");", explode("array(", explode(" = ", $textContent)[1])[1])[0];
-        // $textContent = str_replace('"', "", $textContent);
-        // $gradient = explode(",", $textContent);
-        // print_r($gradient);
-        // echo "<br>";
-
+    function set_colors() {
+        // $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":007E33:ff8800:C62828";
         $gradient = array("007E33","3F8026","7F8319","BF850C","FF8800","F0700A","E25814","D4401E","C62828");
-    
         $i = 0;
         $css = "<style>\r\n\r\n/*$steps*/\r\n\r\n";
         foreach ($gradient as $clr) {
@@ -46,10 +15,6 @@
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
         $css .= "\r\n/*$steps*/\r\n\r\n</style>";
-        // if (is_dir("css")) {
-        //     $css_file = fopen("css/badge.css", "w");
-        //     fwrite($css_file, $css);
-        // }
         $_SESSION['badge_styles'] = $css;
     };
 

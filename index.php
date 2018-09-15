@@ -43,8 +43,10 @@
     <?php echo $_SESSION['badge_styles'] ?>
 </head>
 
-<body style="width:100vw; overflow:hidden; min-height:100vh;">
-    <div id=loading-overlay style="height:100vh; z-index:1" class="flex-center flex-column container-fluid white">
+<body style="overflow-x:hidden; min-height:100vh;">
+    
+    <!-- Loading Screen -->
+    <div id=loading-overlay style="height:100vh" class="flex-center flex-column container-fluid white">
         <div id=image class="text-center">
             <img style="height:80px" class=img-fluid src="/images/buffer-3.gif">
             <br>
@@ -52,16 +54,21 @@
             <h1 class=h3-responsive>Hall Booking Interface</h1>
         </div>
     </div>
+    <!-- Loading Screen -->
+
     <!-- Navbar -->
-    <div id=top-nav class=container-fluid style=padding:0>
+    <div class=container-fluid style=padding:0>
         <nav class="navbar white navbar-expand-lg navbar-light sticky-top">
-        <a class="navbar-brand" href="/">
-                <img src="images/SNS_Logo.png" id=header-logo height="30" class="align-top" alt=""> Hall Booking Interface
+
+            <a class="navbar-brand" href="/">
+                <img src="../images/SNS_Logo.png" id=header-logo height="30" class="align-top" alt=""> Hall Booking Interface
             </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                 aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="basicExampleNav">
 
                 <ul class="navbar-nav mr-auto">
@@ -78,9 +85,7 @@
                             <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library','false')">Senior Library</a>
                         </div>
                     </li>
-
                 </ul>
-
             </div>
         </nav>
     </div>
@@ -103,13 +108,13 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.card').load("/calendar.php", function () {
-                setInterval(function () {
-                    $("#loading-overlay").slideUp("slow")
-                }, 500);
+        // $(document).ready(function () {
+            $('.card').load("calendar.php", function () {
+                // setInterval(function () {
+                //     $("#loading-overlay").slideUp("slow")
+                // }, 500);
             })
-        });
+        // });
     </script>
 
 </body>
