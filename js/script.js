@@ -39,3 +39,11 @@ function prevSessionDate(date) {
         window.location.reload();
     });
 }
+
+function prevPage(url) {
+    var pdata;
+    $.get(url, function(data) {
+        pdata = data;
+    });
+    return pdata;
+}
