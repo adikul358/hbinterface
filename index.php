@@ -108,13 +108,13 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script>
-        // $(document).ready(function () {
+        $(document).ready(function () {
             $('.card').load("calendar.php", function () {
-                // setInterval(function () {
-                //     $("#loading-overlay").slideUp("slow")
-                // }, 500);
+                setInterval(function () {
+                    $("#loading-overlay").slideUp("slow")
+                }, 500);
             })
-        // });
+        });
     </script>
 
 </body>
