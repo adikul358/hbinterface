@@ -65,8 +65,7 @@
 
 <body>
 
-<!-- Main Calendar -->
-<div class="card">
+    <!-- Main Calendar -->
     <div class="card-body text-center ">
         <h4 class=card-title>
             <?php echo $hall?>
@@ -110,27 +109,25 @@
             </div>
         </div>
     </div>
-</div>
-<!-- Main Calendar -->
+    <!-- Main Calendar -->
 
-<script src="cal/js/jquery.js"></script>
-<script src="cal/js/responsive-calendar.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript">
-    // Add Badges to Days
-    var removeSlot;
-    $.ajax(
-        "../php/ajax/get_last_slot.php"
-    ).done(function (data) {
-        removeSlot = data;
-        console.log(data);
-        $(".responsive-calendar").responsiveCalendar({
-            events: {
-                <?php foreach ($events as $curr) { echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},'; } ?>
-            }
+    <script src="cal/js/jquery.js"></script>
+    <script src="cal/js/responsive-calendar.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        // Add Badges to Days
+        var removeSlot;
+        $.ajax(
+            "../php/ajax/get_last_slot.php"
+        ).done(function (data) {
+            removeSlot = data;
+            $(".responsive-calendar").responsiveCalendar({
+                events: {
+                    <?php foreach ($events as $curr) { echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},'; } ?>
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 

@@ -1202,8 +1202,7 @@ pre code {
     .col-md-9 {
         -ms-flex: 0 0 75%;
         flex: 0 0 75%;
-        max-width: 75%;
-        padding:0;
+        max-width: 75%
     }
     .col-md-10 {
         -ms-flex: 0 0 83.333333%;
@@ -1892,9 +1891,6 @@ pre code {
     }
     .table-responsive-md>.table-bordered {
         border: 0
-    }
-    .col-md-9 {
-        padding:0;
     }
 }
 

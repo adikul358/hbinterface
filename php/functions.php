@@ -8,13 +8,13 @@
         // $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":007E33:ff8800:C62828";
         $gradient = array("007E33","3F8026","7F8319","BF850C","FF8800","F0700A","E25814","D4401E","C62828");
         $i = 0;
-        $css = "<style>\r\n\r\n/*$steps*/\r\n\r\n";
+        $css = "<style>\r\n\r\n/*11*/\r\n\r\n";
         foreach ($gradient as $clr) {
             global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
-        $css .= "\r\n/*$steps*/\r\n\r\n</style>";
+        $css .= "\r\n/*11*/\r\n\r\n</style>";
         $_SESSION['badge_styles'] = $css;
     };
 

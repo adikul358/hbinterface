@@ -12,6 +12,11 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/mdb.min.css" rel="stylesheet">
     <link href="cal/css/responsive-calendar.css" rel="stylesheet">
+    <style>
+        #loading-overlay {
+            height: 100vh;
+        }
+    </style>
     <?php 
         require 'php/conn.php'; 
         require 'php/functions.php'; 
@@ -43,18 +48,22 @@
     <?php echo $_SESSION['badge_styles'] ?>
 </head>
 
-<body style="overflow-x:hidden; min-height:100vh;">
+<body style="max-width:100vw; overflow-x:hidden; min-height:100vh;">
     
-    <!-- Loading Screen -->
-    <div id=loading-overlay style="height:100vh" class="flex-center flex-column container-fluid white">
-        <div id=image class="text-center">
-            <img style="height:80px" class=img-fluid src="/images/buffer-3.gif">
-            <br>
-            <br>
-            <h1 class=h3-responsive>Hall Booking Interface</h1>
+    <!-- Loading Screen --
+    <div id=launch>
+        <div id=loading-overlay class="flex-center flex-column container-fluid white">
+            <div id=image class="text-center">
+                <br>
+                <img style="height:80px" class=img-fluid src="/images/buffer-3.gif">
+                <br>
+                <br>
+                <h1 class=h3-responsive>Hall Booking Interface</h1>
+                <br>    
+            </div>
         </div>
     </div>
-    <!-- Loading Screen -->
+    <!- Loading Screen -->
 
     <!-- Navbar -->
     <div class=container-fluid style=padding:0>
@@ -77,12 +86,12 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Halls</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall','false')">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room','false')">Conference Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room','false')">Meeting Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium','false')">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab','false')">Composite Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library','false')">Senior Library</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall')">Wild Cats Hall</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room')">Conference Room</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room')">Meeting Room</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium')">Gymnasium</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab')">Composite Lab</a>
+                            <a href="/calendar.php" class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library')">Senior Library</a>
                         </div>
                     </li>
                 </ul>
@@ -96,7 +105,8 @@
     <!-- Main Calendar -->
     <div class="row justify-content-center">
         <div class="col-xl-8">
-            <div class="card">
+            <div class="card" style="width:100%">
+                <iframe id=califrame onload="resizeHeight()" src="/calendar.php" style="border:none" width="100%"></iframe>
             </div>
         </div>
     </div>
@@ -108,13 +118,12 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.card').load("calendar.php", function () {
-                setInterval(function () {
-                    $("#loading-overlay").slideUp("slow")
-                }, 500);
-            })
-        });
+        $(document).ready(
+                $("#califrame").load(function() {
+                    resizeHeight();
+                    console.log("When I met her in the Club, I asked her who she felt");
+                })
+        );
     </script>
 
 </body>

@@ -83,6 +83,11 @@
         }
 
     ?>
+    <style>
+        #float:hover span {
+            max-width: <?php echo $button_status['len']?>rem;
+        }
+    </style>
 </head>
 
 <body style="overflow-x:hidden; min-height:100vh;">
@@ -121,9 +126,8 @@
             </div>
         </nav>
     </div>
-    <!-- Navbar -->
-
     <br>
+    <!-- Navbar -->
 
     <!-- Main Card -->
     <div class="row justify-content-center">
@@ -135,7 +139,7 @@
                             <?php echo $hall?>
                         </h4>
                         <div class="controls" style=width:100%>
-                            <a href="/">
+                            <a href="/" role=button data-toggle="modal" data-target="#calendarModal">
                                 <h6 style=margin:0;letter-spacing:4px>
                                     <?php echo date("j F\, Y", $date)?>
                                 </h6>
@@ -191,15 +195,7 @@
     </div>
     <!-- Main Card -->
 
-    <br>
-
-    <style>
-        #float:hover span {
-            max-width: <?php echo $button_status['len']?>rem;
-        }
-    </style>
-
-    <!-- add button -->
+    <!-- book button -->
     <div class=fixed-button>
         <button id=float type=button class="btn <?php echo $button_status['color']?>" <?php echo
             $button_status['link']?>>
@@ -207,10 +203,10 @@
                 <?php echo $button_status['text']?></span>
         </button>
     </div>
+    <!-- book button -->
 
     <!-- successfully booked modal -->
-    <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-notify modal-success" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -231,19 +227,44 @@
     </div>
     <!-- successfully booked modal -->
 
+    <!-- calendar modal -->
+    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- calendar modal -->
+
     <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../cal/js/responsive-calendar.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/mdb.min.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
+    <script>
+    </script>
 
     <?php 
         if ($_SESSION['query_status'] == true) {
             echo "<script>$('#centralModalSuccess').modal('show');</script>";
         }
         $_SESSION['query_status'] = false;
-        ?>
+    ?>
 
 </body>
 

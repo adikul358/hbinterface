@@ -8,15 +8,14 @@ function setSessionDate(date) {
     });
 }
 
-function setSessionHall(hall, redirect) {
+function setSessionHall(hall) {
     $.post(
         "../php/ajax/set_session_hall.php", {
             hall: hall,
             redirect: redirect,
         }
     ).done(function (data) {
-        if (data == "redirect") {window.location.assign('/');}
-        else {window.location.reload();}
+
     });
 }
 
@@ -46,4 +45,9 @@ function prevPage(url) {
         pdata = data;
     });
     return pdata;
+}
+
+function resizeHeight() {
+    var iFrameID = document.getElementById('califrame');
+    iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
 }
