@@ -1,5 +1,0 @@
-Load Element for Calendar
-iFrame confing on index
-iFrame modal on Events
-iFrame modal on Book
-Index Events
