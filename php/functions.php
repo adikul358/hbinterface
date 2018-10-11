@@ -4,37 +4,22 @@
     date_default_timezone_set("Asia/Kolkata");
     
     // fetch color array from strangeplanet.fr
-    function set_colors($steps) {
-        $url="https://www.strangeplanet.fr/work/gradient-generator/?c=" . $steps . ":007E33:ff8800:C62828";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-        $html = curl_exec($ch);
-        curl_close($ch);
-        libxml_use_internal_errors(true);
-        $doc = new DOMDocument;
-        $doc->loadHTML( $html);
-        $xpath = new DOMXpath( $doc);
-        $node = $xpath->query( '//textarea[@cols="80"]')->item(0);
-    
-        $textContent = $node->textContent;
+    function set_colors() {
+        $textContent = '$gradient = array("007E33","338028","66821E","998414","CC860A","FF8800","F37408","E86110","DC4E18","D13B20","C62828");';
+        $textContent = "$node->textContent";
         $textContent = explode(");", explode("array(", explode(" = ", $textContent)[1])[1])[0];
         $textContent = str_replace('"', "", $textContent);
         $gradient = explode(",", $textContent);
     
         $i = 0;
-        $css = "/*$steps*/\r\n\r\n";
+        $css = "<style>\r\n/*$steps*/\r\n\r\n";
         foreach ($gradient as $clr) {
             global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
-        $css .= "\r\n/*$steps*/";
-        if (is_dir("css")) {
-            $css_file = fopen("css/badge.css", "w");
-            fwrite($css_file, $css);
-        }
+        $css .= "\r\n/*$steps*/\r\n</style>";
+        return $css;
     };
 
     // make time slots

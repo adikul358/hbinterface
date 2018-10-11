@@ -18,6 +18,7 @@
     <?php 
         require 'php/conn.php'; 
         require 'php/functions.php'; 
+        echo set_colors();
         
         // reset submitted status
         $_SESSION['query_status'] = false;
