@@ -6,19 +6,18 @@
     // fetch color array from strangeplanet.fr
     function set_colors() {
         $textContent = '$gradient = array("007E33","338028","66821E","998414","CC860A","FF8800","F37408","E86110","DC4E18","D13B20","C62828");';
-        $textContent = "$node->textContent";
         $textContent = explode(");", explode("array(", explode(" = ", $textContent)[1])[1])[0];
         $textContent = str_replace('"', "", $textContent);
         $gradient = explode(",", $textContent);
     
         $i = 0;
-        $css = "<style>\r\n/*$steps*/\r\n\r\n";
+        $css = "<style>\r\n\r\n";
         foreach ($gradient as $clr) {
             global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
-        $css .= "\r\n/*$steps*/\r\n</style>";
+        $css .= "\r\n\r\n</style>\n";
         return $css;
     };
 
@@ -44,7 +43,7 @@
         set_colors($i);
     }
     
-    make_slots("01:00:00", "2:00:00", 60);
+    make_slots("08:00:00", "19:00:00", 60);
 
     // make selected hall active in dropdown
     function hall_active() {
@@ -198,6 +197,7 @@
         $name = mysqli_real_escape_string($link, $data['name']);
         $email = mysqli_real_escape_string($link, $data['email']);
         $phone = $data['phone'];
+        $slots = count($data['slots']);
 
         global $total_slts;
         foreach ($data['slots'] as $time) {
@@ -212,12 +212,17 @@
             $insert_query .= " VALUES ('$event', '$date', '$start', '$end', '$name', '$email', '$phone', $slot_no)";
             $insert_query .= "; ";
 
-            echo $insert_query;
-
             $result = mysqli_query($link, $insert_query);
 
             if (!$result) {die(mysqli_error($link));}
+
         }
+        $insert_query = "INSERT INTO index (date, no)";
+        $insert_query .= " VALUES ('$date', $slots)";
+
+        $result = mysqli_query($link, $insert_query);
+
+        if (!$result) {die(mysqli_error($link));}
         $link_date = explode("-", $date);
         $link_date = "d=" . $link_date[2] . "&m=" . $link_date[1] . "&y=" . $link_date[0];
 
