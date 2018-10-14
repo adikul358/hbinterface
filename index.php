@@ -83,9 +83,7 @@
 
                     <div class="tab-pane fade show active" id="wch" role="tabpanel" aria-labelledby="wch-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Wild Cats Hall</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -129,9 +127,7 @@
 
                     <div class="tab-pane fade" id="conr" role="tabpanel" aria-labelledby="conr-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Conference Room</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -175,9 +171,7 @@
 
                     <div class="tab-pane fade" id="cotel" role="tabpanel" aria-labelledby="cotel-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Composite Lab</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -221,9 +215,7 @@
 
                     <div class="tab-pane fade" id="gym" role="tabpanel" aria-labelledby="gym-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Gymnasium</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -267,9 +259,7 @@
 
                     <div class="tab-pane fade" id="meer" role="tabpanel" aria-labelledby="meer-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Meeting Room</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -313,9 +303,7 @@
 
                     <div class="tab-pane fade" id="senl" role="tabpanel" aria-labelledby="senl-tab">
                         <div class="card-body text-center ">
-                            <h4 class=card-title>
-                                <?php echo $hall?>
-                            </h4>
+                            <h4 class=card-title>Senior Library</h4>
                             <div class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
@@ -378,16 +366,21 @@
             console.log(data);
             $(".responsive-calendar").responsiveCalendar({
                 events: {
-                    <?php foreach ($events as $curr) { echo '"' . $curr['date'] . '": {"number":' . $curr['no'] . '},'; } ?>
                 }
             });
         });
+
     </script>
 
     <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script>
+        var x = window.matchMedia("(max-width: 982px)");
+        justifyTabs(x);
+        x.addListener(justifyTabs);
+    </script>
 
 </body>
 

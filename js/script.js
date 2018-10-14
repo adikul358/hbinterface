@@ -39,3 +39,11 @@ function prevSessionDate(date) {
         window.location.reload();
     });
 }
+
+function justifyTabs(x) {
+    if (x.matches) { // If media query matches
+        $("#myTab").removeClass("nav-justified");
+    } else {
+        $("#myTab").addClass("nav-justified");
+    }
+}

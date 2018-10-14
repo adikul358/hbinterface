@@ -217,8 +217,8 @@
             if (!$result) {die(mysqli_error($link));}
 
         }
-        $insert_query = "INSERT INTO index (date, no)";
-        $insert_query .= " VALUES ('$date', $slots)";
+        $insert_query = "INSERT INTO index (date, no, hall)";
+        $insert_query .= " VALUES ('$date', $slots, " . $data['table'] . ")";
 
         $result = mysqli_query($link, $insert_query);
 
