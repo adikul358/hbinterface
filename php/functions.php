@@ -13,7 +13,6 @@
         $i = 0;
         $css = "<style>\r\n\r\n";
         foreach ($gradient as $clr) {
-            global $i;
             $i++;
             $css .= ".badge-" . $i . " {background-color: #" . $clr . " !important}\r\n";
         }
@@ -53,43 +52,43 @@
 
         switch ($hall) {
             case 'Wild Cats Hall':
-            foreach ($active as $key => $ac) {
-                if ($key === "WCH") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) {
+                if ($key === "WCH") { $ac = "active"; }
             }
             $hall_table = "wch";
             break;
 
             case 'Conference Room':
-            foreach ($active as $key => $ac) { 
-                if ($key === "CONR") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) { 
+                if ($key === "CONR") { $ac = "active"; }
             }
             $hall_table = "conr";
             break;
 
             case 'Meeting Room':
-            foreach ($active as $key => $ac) {
-                if ($key === "MEER") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) {
+                if ($key === "MEER") { $ac = "active"; }
             }
             $hall_table = "meer";
             break;
 
             case 'Gymnasium':
-            foreach ($active as $key => $ac) {
-                if ($key === "GYM") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) {
+                if ($key === "GYM") { $ac = "active"; }
             }
             $hall_table = "gym";
             break;
 
             case 'Composite Lab':
-            foreach ($active as $key => $ac) {
-                if ($key === "COTEL") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) {
+                if ($key === "COTEL") { $ac = "active"; }
             }
             $hall_table = "cotel";
             break;
 
             case 'Senior Library':
-            foreach ($active as $key => $ac) {
-                if ($key === "SENL") { $active[$key] = "active"; }
+            foreach ($active as $key => &$ac) {
+                if ($key === "SENL") { $ac = "active"; }
             }
             $hall_table = "senl";
             break;
@@ -229,5 +228,39 @@
         $_SESSION['query_status'] = true;
         echo "<script>window.location.href = '/events/';</script>";
     }   
+
+    function fetch_events() {
+        require 'conn.php';
+        $sql ="";
+        $halls = ["conr", "cotel", "gym", "meer", "senl", "wch"];
+        foreach ($halls as $hall) { $sql .= "SELECT * FROM event_index WHERE hall='$hall' ORDER BY date;"; }
+        
+        if (mysqli_multi_query($link, $sql)) {
+            do {
+                if ($result = mysqli_store_result($link)) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $array = $row['hall'];
+                        $_GLOBAL['$array'][$row['date']] = $row['no'];
+                    }
+                    mysqli_free_result($result);
+                }
+            } 
+            while (mysqli_next_result($link));
+        }
+    }
+
+    fetch_events();
+
+    function calendar_events($hall) {
+        $event_text = "";
+        $r = $_GLOBAL['$hall'];
+        foreach ($r as $date => $no) {
+            $event_text .= '"' . $date . '": {"number":' . $no . '},' . "\n";
+        }
+
+        echo $event_text;
+    }
+
+    calendar_events("gym");
 
 ?>

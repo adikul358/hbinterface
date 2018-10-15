@@ -84,7 +84,7 @@
                     <div class="tab-pane fade show active" id="wch" role="tabpanel" aria-labelledby="wch-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Wild Cats Hall</h4>
-                            <div class="responsive-calendar">
+                            <div id=wch_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -128,7 +128,7 @@
                     <div class="tab-pane fade" id="conr" role="tabpanel" aria-labelledby="conr-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Conference Room</h4>
-                            <div class="responsive-calendar">
+                            <div id=conr_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -172,7 +172,7 @@
                     <div class="tab-pane fade" id="cotel" role="tabpanel" aria-labelledby="cotel-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Composite Lab</h4>
-                            <div class="responsive-calendar">
+                            <div id=cotel_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -216,7 +216,7 @@
                     <div class="tab-pane fade" id="gym" role="tabpanel" aria-labelledby="gym-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Gymnasium</h4>
-                            <div class="responsive-calendar">
+                            <div id=gym_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -260,7 +260,7 @@
                     <div class="tab-pane fade" id="meer" role="tabpanel" aria-labelledby="meer-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Meeting Room</h4>
-                            <div class="responsive-calendar">
+                            <div id=meer_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -304,7 +304,7 @@
                     <div class="tab-pane fade" id="senl" role="tabpanel" aria-labelledby="senl-tab">
                         <div class="card-body text-center ">
                             <h4 class=card-title>Senior Library</h4>
-                            <div class="responsive-calendar">
+                            <div id=senl_calendar class="responsive-calendar">
                                 <div class="controls">
                                     <div class="flex-center justify-content-center">
                                         <div style="width:100%" class="row">
@@ -355,7 +355,6 @@
 
     <script src="cal/js/jquery.js"></script>
     <script src="cal/js/responsive-calendar.js"></script>
-
     <script type="text/javascript">
         // Add Badges to Days
         var removeSlot;
@@ -364,8 +363,34 @@
         ).done(function (data) {
             removeSlot = data;
             console.log(data);
-            $(".responsive-calendar").responsiveCalendar({
+            $("#wch_calendar").responsiveCalendar({
                 events: {
+                    <?php calendar_events("wch");?>
+                }
+            });
+            $("#conr_calendar").responsiveCalendar({
+                events: {
+                    <?php calendar_events("conr");?>
+                }
+            });
+            $("#cotel_calendar").responsiveCalendar({
+                events: {
+                    <?php calendar_events("cotel");?>
+                }
+            });
+            $("#senl_calendar").responsiveCalendar({
+                events: {
+                    <?php calendar_events("senl");?>
+                }
+            });
+            $("#meer_calendar").responsiveCalendar({
+                events: {
+                    <?php calendar_events("meer");?>
+                }
+            });
+            $("#gym_calendar").responsiveCalendar({
+                events: {
+                    <?php calendar_events("gym");?>
                 }
             });
         });
