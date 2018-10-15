@@ -42,38 +42,7 @@
 </head>
 
 <body style="overflow-x:hidden; min-height:100vh;">
-    <div class=container-fluid style=padding:0>
-        <nav class="navbar white navbar-expand-lg navbar-light sticky-top">
-
-            <a class="navbar-brand" href="/">
-                <img src="../images/SNS_Logo.png" id=header-logo style="padding:2px; margin-right: 5px; border-right: 1px solid black; padding-right: 10px;"
-                    height="30" class="d-inline-block align-top" alt=""> Hall Booking Interface
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="basicExampleNav">
-
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Halls</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item <?php echo $active['WCH']?>" onclick="setSessionHall('Wild Cats Hall','true')">Wild Cats Hall</a>
-                            <a class="dropdown-item <?php echo $active['CONR']?>" onclick="setSessionHall('Conference Room','true')">Conference Room</a>
-                            <a class="dropdown-item <?php echo $active['MEER']?>" onclick="setSessionHall('Meeting Room','true')">Meeting Room</a>
-                            <a class="dropdown-item <?php echo $active['GYM']?>" onclick="setSessionHall('Gymnasium','true')">Gymnasium</a>
-                            <a class="dropdown-item <?php echo $active['COTEL']?>" onclick="setSessionHall('Composite Lab','true')">Composite Lab</a>
-                            <a class="dropdown-item <?php echo $active['SENL']?>" onclick="setSessionHall('Senior Library','true')">Senior Library</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <?php require "../navbar.html";?>
     <br>
 
     <div class="row justify-content-center">

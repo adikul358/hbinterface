@@ -1,4 +1,4 @@
-<?php
+    <?php
     
     require "conn.php";
     date_default_timezone_set("Asia/Kolkata");
@@ -41,10 +41,8 @@
 
         set_colors($i);
     }
-    
     make_slots("08:00:00", "19:00:00", 60);
 
-    // make selected hall active in dropdown
     function hall_active() {
         global $hall;
         global $hall_table;
@@ -95,19 +93,15 @@
         }
     }
 
-    // go to next date
     function next_date($date) {
         return strtotime("+1 day", $date);
     }
 
-    // go to prev date
     function prev_date($date) {
         return strtotime("-1 day", $date);
     }
     
-    // preview all events of selected date
-    function event_display() {
-        global $bookings;
+    function event_display($bookings) {
         $counter = 1;
         $html = "";
         
@@ -133,7 +127,6 @@
     
     }
     
-    // display all time slots for checkbox selection
     function time_slots_display($date, $print) {
         global $total_slts; 
         global $bookings;
@@ -228,7 +221,8 @@
         $_SESSION['query_status'] = true;
         echo "<script>window.location.href = '/events/';</script>";
     }   
-
+    
+    $halls_events = array();
     function fetch_events() {
         require 'conn.php';
         $sql ="";
@@ -240,27 +234,58 @@
                 if ($result = mysqli_store_result($link)) {
                     while ($row = mysqli_fetch_array($result)) {
                         $array = $row['hall'];
-                        $_GLOBAL['$array'][$row['date']] = $row['no'];
+                        $$array[$row['date']] = $row['no'];
                     }
                     mysqli_free_result($result);
                 }
             } 
             while (mysqli_next_result($link));
         }
-    }
 
+        global $halls_events;
+        foreach ($halls as $h) {
+            $halls_events[$h] = $$h;
+        }
+    }
     fetch_events();
+
+    $halls_date_events =  array();
+    function fetch_date_events($date) {
+        require 'conn.php';
+        $sql ="";
+        $counter = 0;
+        $halls = ["conr", "cotel", "gym", "meer", "senl", "wch"];
+        foreach ($halls as $hall) { $sql .= "SELECT * FROM $hall WHERE date='$date' ORDER BY slot_no;"; }
+        
+        if (mysqli_multi_query($link, $sql)) {
+            do {
+                if ($result = mysqli_store_result($link)) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $array = $halls[$counter];
+                        $$array[] = $row;
+                    }
+                    $counter++;
+                    mysqli_free_result($result);
+                }
+            } 
+            while (mysqli_next_result($link));
+        }
+
+        global $halls_date_events;
+        foreach ($halls as $h) {
+            $halls_date_events[$h] = $$h;
+        }
+    }
+    fetch_date_events('2018-10-15');
 
     function calendar_events($hall) {
         $event_text = "";
-        $r = $_GLOBAL['$hall'];
+        global $halls_events;
+        $r = $halls_events[$hall];
         foreach ($r as $date => $no) {
             $event_text .= '"' . $date . '": {"number":' . $no . '},' . "\n";
         }
 
         echo $event_text;
     }
-
-    calendar_events("gym");
-
 ?>
