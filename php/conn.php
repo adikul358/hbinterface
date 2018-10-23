@@ -6,6 +6,9 @@
     $db = "calendarmain";
 
     $link = mysqli_connect($host, $user, $password, $db);
+    if (!$link) {
+        echo "<script>window.location.href = '/error/'</script>";
+    }
 
 
 ?>
