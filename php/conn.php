@@ -1,9 +1,9 @@
 <?php
 
-    $host="den1.mysql4.gear.host";
-    $user="calendarmain";
-    $password="sns_N_14_870";
-    $db = "calendarmain";
+    $host="den1.mysql6.gear.host";
+    $user="hbinterfacecal";
+    $password="	Gq3T163qQw--";
+    $db = "hbinterfacecal";
 
     $link = mysqli_connect($host, $user, $password, $db);
     if (!$link) {
